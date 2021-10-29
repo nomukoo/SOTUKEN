@@ -15,6 +15,10 @@ input[type="number" i] {
 
 }
 
+.form{
+  display:inline-flex;
+}
+
 /*表*/
 table tr:nth-child(odd) td {
 	background: rgb(185, 240, 223);
@@ -50,6 +54,7 @@ th{
     width: 90%;
     margin: 40px auto;
     text-align: center;
+    
   }
   button {
     margin: 20px;
@@ -82,7 +87,7 @@ th{
     border-radius:50px;
     -webkit-border-radius:50px;
     -moz-border-radius:50px;
-    margin-right:100px;
+    
 }
 .btn-1:hover{
     background:#19CBE0;
@@ -101,14 +106,14 @@ th{
   border-radius:50px;
   -webkit-border-radius:50px;
   -moz-border-radius:50px;
-  margin-right:100px;
+  
 }
 .btn-2:hover{
   background:#e00b83;
   color:#FFFFFF;
   box-shadow:none;
 }
-/*確認、登録*/
+/*確認*/
 .btn-3{
   height:100%;
   text-decoration: none;
@@ -123,6 +128,26 @@ th{
   
 }
 .btn-3:hover{
+  background:#33EB2C;
+  color:#FFFFFF;
+  box-shadow:none;
+}
+/*登録*/
+.btn-4{
+  height:100%;
+  text-decoration: none;
+  background:#2EBA1F;
+  text-align:center;
+  color:#FFFFFF;
+  font-size:30px;
+  font-weight:bold;
+  border-radius:50px;
+  -webkit-border-radius:50px;
+  -moz-border-radius:50px;
+  
+
+}
+.btn-4:hover{
   background:#33EB2C;
   color:#FFFFFF;
   box-shadow:none;
