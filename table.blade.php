@@ -4,18 +4,18 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="{{  asset('css/table.css') }}" />
         
-        <title>情報出力画面(仮)</title>
+        <title>情報出力画面(入庫)</title>
     </head>
     <h2>情報出力</h2>
     <body>
-    <form id="frm" name="frm" method="GET" action="">
+    <form id="frm" name="frm" method="get" action="">
     <!--<div>新しい行を追加：<input type="button" id="add" name="add" value="追加" onclick="appendRow()"></div>-->
     <table border="1" id="tbl">
     <tr>
         <th style="text-align:right; width:70px;">入庫ID</th>
         <th style="">ワクチンID</th>
         <th style="">注射器ID</th>
-        <th style="">数量</th>
+        <th style="">数量/本</th>
         <th style="">製造元</th>
         <th style="">有効期限</th>
         <th style=" width:40px;"> </th>
@@ -25,9 +25,9 @@
         <td style="text-align:right; width:40px;"><span class="seqno">1</span></td>
         <td value="" size="30" style="border:1px solid #888;">・・・</td>
         <td value="" size="30" style="border:1px solid #888;">・・・</td>
-        <td style=""><input class="inpval" type="text" id="txt1" name="txt1"   value="" size="30" style="border:1px solid #888;"　min="5" max="5" readonly></td>
-        <td style=""><input class="inpval" type="text" id="txt1" name="txt1"   value="" size="30" style="border:1px solid #888;" pattern="[ぁ-ヺ]"　title="ひらがな・カタカナで入力" readonly></td>
-        <td style=""><input class="inpval" type="date" id="txt1" name="txt1"   value="" size="30" style="border:1px solid #888;" min="2021-11-1" ></td>
+        <td style=""><input class="inpval" type="text" id="a1" name="a1"   value="" size="30" style="border:1px solid #888;"　min="5" max="5" readonly></td>
+        <td style=""><input class="inpval" type="text" id="b1" name="b1"   value="" size="30" style="border:1px solid #888;" pattern="[ぁ-ヺ]"　title="ひらがな・カタカナで入力" readonly></td>
+        <td style=""><input class="inpval" type="date" id="c1" name="c1"   value="" size="30" style="border:1px solid #888;" min="2021-11-1" ></td>
         <td><input class="edtbtn" type="button" id="edtBtn1" value="編集" onclick="editRow(this)"></td>
         <td><input class="delbtn" type="button" id="delBtn1" value="削除" onclick="deleteRow(this)"></td>
     </tr>
@@ -35,11 +35,11 @@
    
 </form>
 <br>
-<form action="{{action('App\Http\Controllers\deleteController@move')}}" method="POST"  class="form"> 
+<form action="{{action('App\Http\Controllers\del_outController@move')}}" method="post"  class="form"> 
     @csrf
 <input type="submit"  name="submit" value="全削除" class="custom-btn btn-2"　/>
 </form>
-<form action="{{action('App\Http\Controllers\checkController@move')}}" method="POST"  class="form"> 
+<form action="{{action('App\Http\Controllers\check_outController@move')}}" method="post"  class="form"> 
     @csrf
     <input type="submit" name="submit" value="確認" class="custom-btn btn-3"/>
 </form>
@@ -87,14 +87,14 @@ function appendRow()
     c1.innerHTML = '<span class="seqno" size="30">' + count + '</span>';
     c2.innerHTML = '<p>・・・</p>';
     c3.innerHTML = '<p>・・・</p>';
-    c4.innerHTML = '<input class="inpval" type="text"   id="txt' + count + '" name="txt' + count + '" value="" size="30" style="border:1px solid #888;"　min="5" max="5" readonly>';
-    c5.innerHTML = '<input class="inpval" type="text"   id="txt' + count + '" name="txt' + count + '" value="" size="30" style="border:1px solid #888;"　pattern="[ぁ-ヺ]"　title="ひらがな・カタカナで入力" readonly>';
-    c6.innerHTML = '<input class="inpval" type="date"   id="txt' + count + '" name="txt' + count + '" value="" size="30" style="border:1px solid #888;" >';
+    c4.innerHTML = '<input class="inpval" type="text"   id="a' + count + '" name="a' + count + '" value="" size="30" style="border:1px solid #888;"　min="5" max="5" readonly>';
+    c5.innerHTML = '<input class="inpval" type="text"   id="b' + count + '" name="b' + count + '" value="" size="30" style="border:1px solid #888;"　pattern="[ぁ-ヺ]"　title="ひらがな・カタカナで入力" readonly>';
+    c6.innerHTML = '<input class="inpval" type="date"   id="c' + count + '" name="c' + count + '" value="" size="30" style="border:1px solid #888;" >';
     c7.innerHTML = '<input class="edtbtn" type="button" id="edtBtn' + count + '" value="編集" onclick="editRow(this)">';
     c8.innerHTML = '<input class="delbtn" type="button" id="delBtn' + count + '" value="削除" onclick="deleteRow(this)">';
     
     // 追加した行の入力フィールドへフォーカスを設定
-    var objInp = document.getElementById("txt" + count);
+    var objInp = document.getElementById("a" + count);
     if (objInp)
         objInp.focus();
 }
@@ -140,8 +140,12 @@ function deleteRow(obj)
     {
         if (tagElements[i].className.match("inpval"))
         {
-            tagElements[i].setAttribute("id", "txt" + seq);
-            tagElements[i].setAttribute("name", "txt" + seq);
+            tagElements[i].setAttribute("id", "a" + seq);
+            tagElements[i].setAttribute("name", "a" + seq);
+            tagElements[i].setAttribute("id", "b" + seq);
+            tagElements[i].setAttribute("name", "b" + seq);
+            tagElements[i].setAttribute("id", "c" + seq);
+            tagElements[i].setAttribute("name", "c" + seq);
             ++seq;
         }
     }
@@ -176,23 +180,29 @@ function editRow(obj)
 {
     var objTR = obj.parentNode.parentNode;
     var rowId = objTR.sectionRowIndex;
-    var objInp = document.getElementById("txt" + rowId);
+    var objInp_a = document.getElementById("a" + rowId);
+    var objInp_b = document.getElementById("b" + rowId);
+    var objInp_c = document.getElementById("c" + rowId);
     var objBtn = document.getElementById("edtBtn" + rowId);
 
-    if (!objInp || !objBtn)
+    if (!objInp_a || !objInp_b || !objInp_c || !objBtn)
         return;
     
     // モードの切り替えはボタンの値で判定   
     if (objBtn.value == "編集")
     {
-        objInp.style.cssText = "border:1px solid #888;"
-        objInp.readOnly = false;
-        objInp.focus();
+        objInp_a.style.cssText = "border:1px solid #888;"
+        objInp_a.readOnly = false;
+        objInp_b.readOnly = false;
+        objInp_c.readOnly = false;
+        objInp_a.focus();
         objBtn.value = "確定";
     }
     else
     {
-        objInp.readOnly = true;
+        objInp_a.readOnly = true;
+        objInp_b.readOnly = true;
+        objInp_c.readOnly = true;
         objBtn.value = "編集";
     }
 }
