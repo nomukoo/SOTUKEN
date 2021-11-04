@@ -2,22 +2,19 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>入庫受付画面</title>
+  <title>>読み取り画面</title>
+  <link rel="stylesheet" href="{{  asset('css/read.css') }}" />
 </head>
 <body>
-<h1>入庫受付画面</h1>
-  <h2>バーコードを読み取ってください
-  </h2>
-  <div style="display:inline-flex">
-  <form  action="{{action('vaccineTableController@vaccineTable')}}" method="POST">
-  @csrf
-  <input type="submit" name="go" value="確認">
-  </form>
-  
-  <form  action="{{action('vaccineTableController@vaccineEdit')}}" method="POST">
-  @csrf
-  <input type="submit" name="go" value="編集">
-  </form>
+<h2>バーコードリーダで<br>バーコードを読み取ってください</h2>
+<div class="img">
+<img src="{{ asset('img/QR.png') }}" class="img-1">
+</div>
+<form action="{{action('vaccineTableController@vaccineTable')}}" method="POST">
+            @csrf
+             <input type="submit" name="submit" value="->" />
+        </form>
+
 </div>
 </body>
 </html>
