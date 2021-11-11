@@ -1,4 +1,4 @@
-#import win32api
+import win32api
 import sys
 import os
 import time
@@ -12,10 +12,15 @@ from reportlab.lib.units import mm
 from reportlab.platypus import Table, TableStyle
 from reportlab.lib import colors
 
-js_dta = json.loads(message)
-dictionary = {'a': 'Apple', 'b': 'Banana', 'c': 'Cherries', 'd': 'Dragon Fruit'}
+#js_dta = json.loads(message)
+dictionary = {1:{'a': 'Apple', 'b': 'Banana', 'c': 'Cherries', 'd': 'Dragon Fruit'}}
 list1 = list(dictionary.keys())
 list2 = list(dictionary.values())
+list3 =list(list2[0].keys())
+list4 = list(list2[0].values())
+
+
+
 # 縦型A4のCanvasを準備
 cv = canvas.Canvas('test.pdf', pagesize=portrait(A4))
 
@@ -23,9 +28,7 @@ cv = canvas.Canvas('test.pdf', pagesize=portrait(A4))
 pdfmetrics.registerFont(UnicodeCIDFont('HeiseiKakuGo-W5'))
 
 # 入力データをリストで指定
-data =[ list1,list2 ]
-print(list1)
-print(data)
+data = list4,list3 
 table = Table(data, colWidths=20*mm, rowHeights=20*mm)
 # tableの装飾
 table.setStyle(TableStyle([                              
