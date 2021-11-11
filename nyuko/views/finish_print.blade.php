@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>印刷が完了しました。</h1>
-<form  action="{{action('vaccineTableController@finishStock')}}" method="POST">
+<form  >
   @csrf
   <input type="submit" name="back" value="確認">
 </form>

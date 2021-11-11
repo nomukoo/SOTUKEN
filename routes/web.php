@@ -1,61 +1,18 @@
 <?php
 use Illuminate\Support\Facades\Route;
-
+/* topページ */
 Route::get('/', function () {
-    return view('welcome');
+    return view('top');
 });
 
-Route::get('inputForm', 'postTestController@inputForm');// 入力フォーム画面(inputForm)のURL割当、起動コントローラ・関数指定
-Route::post('formPost', 'postTestController@formPost');
+Route::get('barcoderead', 'WarehousingController@disp_read');
 
-Route::get('vaccineOut', 'vaccineTableController@vaccineOut');
-Route::post('vaccineOut', 'vaccineTableController@vaccineOut');
+Route::post('warehousing_ajax', 'WarehousingAjaxController@getJson');
 
-Route::get('table', 'vaccineTableController@vaccineTable');
-Route::post('table', 'vaccineTableController@vaccineTable');
+Route::get('warehousing_confirm', 'WarehousingController@disp_confirm');
 
-Route::get('vaccinestockDelete', 'vaccineTableController@vaccinestockDelete');
-Route::post('vaccinestockDelete', 'vaccineTableController@vaccinestockDelete');
+Route::post('warehousing_register', 'WarehousingController@register');
 
-Route::get('deleteConfilm', 'vaccineTableController@deleteConfilm');
-Route::post('deleteConfilm', 'vaccineTableController@deleteConfilm');
+Route::get('warehousing_ajax', 'WarehousingAjaxController@sendJson');
 
-Route::get('vaccinePrinter', 'vaccineTableController@vaccinePrinter');
-Route::post('vaccinePrinter', 'vaccineTableController@vaccinePrinter');
-
-Route::get('finishPrint', 'vaccineTableController@finishPrint');
-Route::post('finishPrint', 'vaccineTableController@finishPrint');
-
-Route::get('finishStock', 'vaccineTableController@finishStock');
-Route::post('finishStock', 'vaccineTableController@finishStock');
-
-Route::get('errorStock', 'vaccineTableController@errorStock');
-Route::post('errorStock', 'vaccineTableController@errorStock');
-
-Route::get('errorPrint', 'vaccineTableController@errorPrint');
-Route::post('errorPrint', 'vaccineTableController@errorPrint');
-
-Route::get('vaccineEdit', 'vaccineTableController@vaccineEdit');
-Route::post('vaccineEdit', 'vaccineTableController@vaccineEdit');
-
-Route::get('editConfilm', 'vaccineTableController@editConfilm');
-Route::post('editConfilm', 'vaccineTableController@editConfilm');
-
-Route::get('vaccinefinishEdit', 'vaccineTableController@vaccinefinishEdit');
-Route::post('vaccinefinishEdit', 'vaccineTableController@vaccinefinishEdit');
-
-Route::get('dialog', 'vaccineTableController@dialog');
-Route::post('dialog', 'vaccineTableController@dialog');
-
-Route::get('menuTop', 'vaccineTableController@menuTop');
-Route::post('menuTop', 'vaccineTableController@menuTop');
-
-Route::get('register', 'NyukoController@register');
-Route::post('register', 'NyukoController@register');
-
-Route::get('warehousingConfirm', 'vaccineTableController@warehousingConfirm');
-Route::post('warehousingConfirm', 'vaccineTableController@warehousingConfirm');
-
-Route::post('/warehousingAjax', 'warehousingAjaxController@getJson');
-Route::get('/warehousingAjax', 'warehousingAjaxController@getJson');
-
+Route::get('finish_print', 'WarehousingController@disp_finish_print');

@@ -13,7 +13,7 @@
 <br>
  <div class="frame">
         
-        <form action="{{action('App\Http\Controllers\ReadController@move')}}" method="POST"  class="form"> 
+        <form action="{{action('WarehousingController@disp_read')}}" method="GET"  class="form"> 
             @csrf
             <input type="submit" name="submit" value="入庫" class="btn pushright btn-1"/>
         </form>
