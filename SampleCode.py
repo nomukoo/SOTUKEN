@@ -13,11 +13,13 @@ from reportlab.platypus import Table, TableStyle
 from reportlab.lib import colors
 
 #js_dta = json.loads(message)
-dictionary = {1:{'a': 'Apple', 'b': 'Banana', 'c': 'Cherries', 'd': 'Dragon Fruit'}}
+dictionary = {1:{'a': 'Apple', 'b': 'Banana', 'c': 'Cherries', 'd': 'Dragon Fruit', 'length': 0}}
 list1 = list(dictionary.keys())
 list2 = list(dictionary.values())
+list2.pop('length')
 list3 =list(list2[0].keys())
 list4 = list(list2[0].values())
+
 
 
 

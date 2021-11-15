@@ -15,10 +15,14 @@ input[type="url"] {
 <table border="1">
 　<thead>
     <tr>
-        <th>ワクチン名</th>
-        <th>数量</th>
-        <th>製造企業</th>
-        <th>有効期限</th>
+        <th>入庫ID</th>
+        <th>ワクチンID</th>
+        <th>注射器ID</th>
+        <th>入庫日</th>
+	    <th>製造元</th>
+	    <th>有効期限</th>
+	    <th>入庫量</th>
+	    <th>従業員ID</th>
     </tr>
   </thead>
 　<tbody>
@@ -29,9 +33,9 @@ document.getElementById("i").onchange = function(){
  var text = document.getElementById("i").value;
  var kugiri = /[^\s]+/g;
  var c1 = text.match(kugiri);
- 	 if(c1.length > 4){
+ 	 if(c1.length > 8){
     		alert("もう一度読み取るボタンを押してください");
-		exit;
+		
  	}else if(text.match(/[^\x01-\x7E\uFF61-\uFF9F]/)){
 		alert("半角入力にしてください");
 		clearText();

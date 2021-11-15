@@ -11,4 +11,9 @@ class WarehousingController extends Controller
         
         return view('aaaaa', $message);
     }
+
+    public function testdelete(){
+        
+        return view('testdelete');
+    }
 }
