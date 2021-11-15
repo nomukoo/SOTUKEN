@@ -1,0 +1,16 @@
+body{
+    text-align: center;
+}
+
+img{
+    height: 100px;
+}
+.img-1{
+    width: 400px;
+    height: 300px;
+}
+
+p{
+    font-size: 50px;
+    height: 15px;
+}
