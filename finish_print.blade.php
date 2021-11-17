@@ -6,11 +6,11 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.79.0">
-    <title>印刷画面（入庫）</title>
+    <title>印刷完了画面（入庫）</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
   　<link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
-　　<link rel="stylesheet" href="{{  asset('css/load.css') }}" />
+　　<link rel="stylesheet" href="{{  asset('css/delete.css') }}" />
   　<link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
     
 
@@ -54,10 +54,10 @@
   <ul class="nav pull-right">
   <li class="nav-item">
       <a class="nav-link text-white" href="#">
-      <form action="{{action('App\Http\Controllers\topController@move')}}" method="get"  class="form"> 
+	<form action="{{action('App\Http\Controllers\topController@move')}}" method="get"  class="form"> 
                      @csrf
             <input type="submit" name="submit" value="ホーム" class="btn1" />
-            </form>    
+            </form>
       </a>
     </li>
     <li class="nav-item">
@@ -119,25 +119,19 @@
             </a>
           </li>
         </ul>
-
-       
-        
-         
-         
-        </ul>
       </div>
     </nav>
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
        
 <div id="smartwizard" class="sw-theme-arrows">
   <ul class="nav nav-tabs step-anchor">
     <li><a href="#step-1">読取<br><small></small></a></li>
     <li><a href="#step-2">出力<br><small></small></a></li>
     <li><a href="#step-3">確認<br><small></small></a></li>
-    <li class="active"><a href="#step-4">印刷<br><small></small></a></li>
-    <li><a href="#step-5">完了<br><small></small></a></li>
+    <li><a href="#step-4">印刷<br><small></small></a></li>
+    <li class="active"><a href="#step-5">完了<br><small></small></a></li>
   </ul>
 </div>
         <div class="btn-toolbar mb-2 mb-md-0">
@@ -145,22 +139,16 @@
         </div>
 <br>
 <br>
-<p style="color:#08cbcb;">Now Printing...</p>
+<br>
+<h2>印刷が完了しました。</h2>
 <br>
 <br>
-
-<div class="img">
-<img src="{{ asset('img/loading.gif') }}" >
-</div>
-<br>
-<form action="{{action('App\Http\Controllers\finish_printController@move')}}" method="post"  class="form"> 
+<form action="{{action('App\Http\Controllers\topController@move')}}" method="get"  class="form"> 
             @csrf
-  <input type="submit" name="submit" value="次へ" class="custom-btn btn-3"/>
+  <input type="submit" name="submit" value="ホームに戻る" class="custom-btn btn-3"/>
 </form>
 
-
-
-<!--------------------------------------------------------------------------------------------->
+<!------------------------------------------------------------------------------------------>
       <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 
      
