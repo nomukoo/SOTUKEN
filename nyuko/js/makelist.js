@@ -1,10 +1,10 @@
 
 /* 画面表示のための連想配列作成用 */
-let iteminfolists = {};
+let iteminfolists = {};//レコードを複数格納する連想配列、入れ子の外側
 function makelist(inputarray){
     console.log(inputarray);
-    let association = {};
-    let cnt = 0;
+    let association = {};　//1レコード分のデータが入る連想配列、入れ子の内側
+    let cnt = 0; 
     let listrowcnt = 0;
     for(let i = 0; i < inputarray.length; i++){
         switch(cnt){

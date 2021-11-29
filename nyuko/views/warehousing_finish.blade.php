@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>入庫が完了しました。</h1>
-<form  action="{{action('vaccineTableController@menuTop')}}" method="POST">
+<form  action="{{ url('/') }}" method="get">
   @csrf
   <input type="submit" name="back" value="トップページ">
 </form>

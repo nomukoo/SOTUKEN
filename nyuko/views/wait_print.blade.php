@@ -10,7 +10,8 @@
       $json = json_encode($lists);
   ?>
   let array = <?php echo $json; ?>;
-</script>
+  </script>
+  <!-- 印刷処理プログラムと通信用JS読み込み -->
   <script src="{{ asset('js/print_websocketclient.js') }}"></script>
   <title>Loading画面</title>
 </head>
