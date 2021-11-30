@@ -1,3 +1,4 @@
+<<<<<<< HEAD:check.blade.php
 <!doctype html>
 <html lang="ja">
   <head>
@@ -158,6 +159,38 @@
         <td style=""><input class="inpval" type="date" id="c1" name="c1"   value=""  style="border:1px solid #888;" min="2021-11-1" readonly></td>
        
     </tr>
+=======
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{{  asset('css/table.css') }}" />
+        <title>読み取り画面</title>
+    </head>
+    <h2>情報出力</h2>
+    <body>
+        <br> 
+    <table >
+        <tr>
+            <th>ワクチンID</th>
+            <th>注射器ID</th>
+            <th>数量/本</th>
+            <th>製造元</th>
+            <th>有効期限</th>  
+        </tr>
+        <?php $lists = session()->get('list'); ?>
+        
+            @foreach($lists as $list)
+            <tr>
+                @foreach($list as $key => $value)
+                    @if($key != 'length')
+                    <td>{{$value}}</td>
+                    @endif
+                @endforeach
+            </tr>
+            @endforeach
+        
+>>>>>>> 5534303f6da078a574c1d202e6850d794be59b3f:nyuko/views/warehousing_confirm.blade.php
     </table>
    
 </form>
@@ -173,16 +206,34 @@
 </form>
 
 
+<<<<<<< HEAD:check.blade.php
+=======
+<div class='frame'>
+<form  action="{{ url('/warehousing_register')}}" method="POST"> 
+@csrf
+<input type="submit" name="submit" value="登録" class="custom-btn btn-4"/>
+</form>
+<input type="submit" name="submit" value="戻る" class="custom-btn btn-1"/>
+<input type="submit" name="submit" value="取消" class="custom-btn btn-2"/>
+
+</div>
+>>>>>>> 5534303f6da078a574c1d202e6850d794be59b3f:nyuko/views/warehousing_confirm.blade.php
 
 <!------------------------------------------------------------------------------------------------>
       <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 
      
 
+<<<<<<< HEAD:check.blade.php
 
     <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
     <script src="{{ asset('/js/dashbord.js') }}"></script>
 
       <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
   </body>
+=======
+        
+    <body>
+  
+>>>>>>> 5534303f6da078a574c1d202e6850d794be59b3f:nyuko/views/warehousing_confirm.blade.php
 </html>
