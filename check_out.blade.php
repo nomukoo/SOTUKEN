@@ -6,11 +6,12 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.79.0">
-    <title>削除完了画面（入庫）</title>
+    <title>確認画面（出庫）</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
   　<link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
-    <link rel="stylesheet" href="{{  asset('css/delete.css') }}" />
+  　<link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
+    <link rel="stylesheet" href="{{  asset('css/table.css') }}" />
 
     <!-- Bootstrap core CSS -->
 <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -123,22 +124,54 @@
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
        
-
+<div id="smartwizard" class="sw-theme-arrows">
+  <ul class="nav nav-tabs step-anchor">
+    <li><a href="#step-1">読取<br><small></small></a></li>
+    <li><a href="#step-2">出力<br><small></small></a></li>
+    <li class="active"><a href="#step-3">確認<br><small></small></a></li>
+    <li><a href="#step-4">完了<br><small></small></a></li>
+  </ul>
+</div>
         <div class="btn-toolbar mb-2 mb-md-0">
           
         </div>
 <br>
-  <br>
-  <h2>削除しました。</h2>
-  <br>
-  <br>
-  <form action="{{action('App\Http\Controllers\topController@move')}}" method="get"  class="form"> 
-            @csrf
-  <input type="submit" name="submit" value="ホームに戻る" class="custom-btn btn-3"/>
-</form>
-l
 
-<!-------------------------------------------------------------------------------->
+    <form id="frm" name="frm" method="get" action="">
+    <!--<div>新しい行を追加：<input type="button" id="add" name="add" value="追加" onclick="appendRow()"></div>-->
+    <table border="1" id="tbl">
+    <tr>
+        <th style=" width:90px;">入庫ID</th>
+        <th style="width:90px;">ワクチンID</th>
+        <th style="width:90px;">注射器ID</th>
+        <th>数量/本</th>
+        <th>製造元</th>
+        <th style="">有効期限</th>
+    </tr>
+    <tr>
+        <td style=" width:40px;"><span class="seqno">1</span></td>
+        <td value="" size="30" style="border:1px solid #888;">・・・</td>
+        <td value="" size="30" style="border:1px solid #888;">・・・</td>
+        <td style=""><input class="inpval" type="number" id="a1" name="a1"   value=""  style="border:1px solid #888;"　min="1" max="5" readonly></td>
+        <td style=""><input class="inpval" type="text" id="b1" name="b1"   value=""  style="border:1px solid #888;" pattern="[ぁ-ヺ]"　title="ひらがな・カタカナで入力" readonly></td>
+        <td style=""><input class="inpval" type="date" id="c1" name="c1"   value=""  style="border:1px solid #888;" min="2021-11-1" readonly></td> 
+    </tr>
+    </table>
+    </form>
+<br>
+<input type="submit" name="submit" value="戻る" class="custom-btn btn-1" onClick="history.back()"/>
+<form action="{{action('App\Http\Controllers\del_outController@move')}}" method="post"  class="form"> 
+    @csrf
+<input type="submit"  name="submit" value="削除" class="custom-btn btn-2"　/>
+</form>
+<form action="{{action('App\Http\Controllers\conp_outController@move')}}" method="post"  class="form"> 
+    @csrf
+    <input type="submit" name="submit" value="登録" class="custom-btn btn-3"/>
+</form>
+
+
+
+<!-------------------------------------------------------------------------------------------------------->
       <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 
      

@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.79.0">
-    <title>削除完了画面（入庫）</title>
+    <title>印刷エラー画面</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
   　<link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
@@ -127,18 +127,16 @@
         <div class="btn-toolbar mb-2 mb-md-0">
           
         </div>
+
+<h1>エラーになりました。</h1>
 <br>
-  <br>
-  <h2>削除しました。</h2>
-  <br>
-  <br>
-  <form action="{{action('App\Http\Controllers\topController@move')}}" method="get"  class="form"> 
+<br>
+<form action="{{action('App\Http\Controllers\topController@move')}}" method="get"  class="form"> 
             @csrf
   <input type="submit" name="submit" value="ホームに戻る" class="custom-btn btn-3"/>
 </form>
-l
 
-<!-------------------------------------------------------------------------------->
+<!-------------------------------------------------------------------------------------------------->
       <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 
      
