@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.79.0">
-    <title>削除完了画面（入庫）</title>
+    <title>削除画面（入庫）</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
   　<link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
@@ -129,16 +129,16 @@
         </div>
 <br>
   <br>
-  <h2>削除しました。</h2>
+  <h2>本当に削除しますか？</h2>
   <br>
-  <br>
-  <form action="{{action('App\Http\Controllers\topController@move')}}" method="get"  class="form"> 
-            @csrf
-  <input type="submit" name="submit" value="ホームに戻る" class="custom-btn btn-3"/>
+  <input type="submit" name="submit" value="いいえ" class="custom-btn btn-2" onClick="history.back()"/>
+  <form action="{{action('App\Http\Controllers\deleteConpController@move')}}" method="POST"  class="form"> 
+    @csrf
+  <input type="submit" name="submit" value="はい" class="custom-btn btn-1"/>
 </form>
-l
 
-<!-------------------------------------------------------------------------------->
+
+<!------------------------------------------------------------------------------------------------------>
       <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 
      

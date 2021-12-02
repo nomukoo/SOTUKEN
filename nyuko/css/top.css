@@ -1,120 +1,76 @@
-.frame{
-    text-align: center;
+
+
+ .img-1{
+  height: 700px;
+  width: 1000px;
 }
 
-.form{
-  display: inline;
-}
 
-
-
-/* ボタン共通設定 */
-.btn{
-    width:200px;
-    height:80px;
-    line-height:80px;
-    font-size:30px;
-    font-weight: 800;
-    color: #08cbcb;
-    
-    /*影の基点とするためrelativeを指定*/
-    position: relative;
-    /*ボタンの形状*/
-  text-decoration: none;
-  display: inline-block;
-  
-    text-align: center;
-    background: transparent;
-  border-radius: 25px;
-  border: solid 1px rgb(0, 0, 0);
-
-    outline: none;
-    /*アニメーションの指定*/
-    transition: all 0.2s ease;
-}
-
-/*hoverをした後のボタンの形状*/
-.btn:hover{
-  border-color:#333; 
-}
-
-/*ボタンの中のテキスト*/
-.btn span {
-  position: relative;
-  z-index: 2;/*z-indexの数値をあげて文字を背景よりも手前に表示*/
-    /*テキストの形状*/
-  display: block;
-    padding: 10px 30px;
-  background:#fff;
-  border-radius: 25px;
-  color:#333;
-    /*アニメーションの指定*/
-    transition: all 0.3s ease;
-}
-
-/*== 右下に押し込まれる（立体が平面に） */
-
-/*影の設定*/
-.pushright:before {
-    content: "";
-    /*絶対配置で影の位置を決める*/
-    position: absolute;
-  z-index: -1;
-    top: 4px;
-    left: 4px;
-    /*影の形状*/
+   /* バナー本体 */
+   .news-banner {
+    display: block;
+    height: 50px;
     width: 100%;
-    height: 100%;
-  border-radius: 25px;
-    background-color: #333;
-}
+    background-color: orange;
+    overflow: hidden;
+  }
+  
+  /* バナー内コンテンツ */
+  .news-banner__content {
+    display: inline-block;
+    color: #fff;
+    padding-left: 100%;
+    white-space: nowrap;
+    animation: animate-banner 20s linear infinite;
+    font-size: 30px;
+  }
+  
+  /* バナー内の要素をすべて選択 */
+  .news-banner__content > * {
+    display: inline-block;
+  }
+  
+  /* 横にスクロールさせるアニメーション */
+  @keyframes animate-banner {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
 
-/*hoverの際にX・Y軸に4pxずらす*/
-.pushright:hover span {
-  background-color: #333;
-  color: rgb(255, 255, 255);
-  transform: translate(4px, 4px);
-}
-
-    .btn-1{
-        border: solid rgb(0, 0, 0);
+ 
+/*画像*/
+  .slider_fade > li {
+    position: absolute;
+    list-style: none;
+    visibility: hidden;
+    animation: anime_slider_fade 12s 0s infinite;
+  }
+  .slider_fade > li:nth-of-type(2) {
+    animation-delay: 4s;
+  }
+  .slider_fade > li:nth-of-type(3) {
+    animation-delay: 8s;
+  }
+  
+  @keyframes anime_slider_fade {
+    0% {
+        visibility: visible;
+        opacity: 0;
     }
-    .btn-1:hover{
-      border-color:rgb(255, 0, 0); 
-      
+    15% {
+        opacity: 1;
     }
-
-    .btn-2{
-        border: solid  rgb(0, 0, 0);
+    33.3% {
+        opacity: 1;
     }
-    .btn-2:hover{
-      border-color:rgb(255, 238, 0); 
+    48.3% {
+        opacity: 0;
     }
-
-    .btn-3{
-        border: solid rgb(0, 0, 0);
+    100% {
+        opacity: 0;
     }
-    .btn-3:hover{
-         border-color:rgb(0, 255, 34); 
-    }
-    
-    .btn-4{
-         border: solid rgb(0, 0, 0);
-     }
-    .btn-4:hover{
-          border-color:rgb(0, 195, 255); 
-     }
-    
-    .btn-5{
-         border: solid  rgb(0, 0, 0);
-     }
-     .btn-5:hover{
-          border-color:rgb(17, 0, 255); 
-     }
-
-    .btn-6{
-         border: solid  rgb(0, 0, 0);
-    }
-     .btn-6:hover{
-        border-color:rgb(255, 0, 242); 
-    }
+  }
+  
