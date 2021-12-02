@@ -168,7 +168,7 @@
    
 </form>
 <br>
-<form action="{{action('App\Http\Controllers\del_outController@move')}}" method="post"  class="form"> 
+<form action="{{action('App\Http\Controllers\deleteController@move')}}" method="post"  class="form"> 
     @csrf
 <input type="submit"  name="submit" value="全削除" class="custom-btn btn-2"　/>
 </form>
