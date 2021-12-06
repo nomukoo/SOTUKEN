@@ -16,3 +16,5 @@ Route::post('warehousing_register', 'WarehousingController@register');
 Route::get('warehousing_ajax', 'WarehousingAjaxController@sendJson');
 
 Route::get('finish_print', 'WarehousingController@disp_finish_print');
+
+Route::get('/get_vaccinedata','WarehousingAjaxController@getVaccineData');

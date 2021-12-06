@@ -1,4 +1,3 @@
-<<<<<<< HEAD:table.blade.php
 <!doctype html>
 <html lang="ja">
   <head>
@@ -169,7 +168,7 @@
    
 </form>
 <br>
-<form action="{{action('App\Http\Controllers\del_outController@move')}}" method="post"  class="form"> 
+<form action="{{action('App\Http\Controllers\deleteController@move')}}" method="post"  class="form"> 
     @csrf
 <input type="submit"  name="submit" value="全削除" class="custom-btn btn-2"　/>
 </form>
@@ -179,13 +178,9 @@
 </form>
 
 <script>
-=======
->>>>>>> 5534303f6da078a574c1d202e6850d794be59b3f:nyuko/js/edit.js
 /*
  * editRow: 編集ボタン該当行の内容を入力・編集またモード切り替え
  */
-
-
 /*
  * appendRow: テーブルに行を追加
  */
@@ -314,7 +309,6 @@ function deleteRow(obj)
 /*
  * editRow: 編集ボタン該当行の内容を入力・編集またモード切り替え
  */
-
 function editRow(obj)
 {
     var objTR = obj.parentNode.parentNode;
@@ -345,7 +339,6 @@ function editRow(obj)
         objBtn.value = "編集";
     }
 }
-<<<<<<< HEAD:table.blade.php
 	
 </script>
 
@@ -361,5 +354,3 @@ function editRow(obj)
       <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
   </body>
 </html>
-=======
->>>>>>> 5534303f6da078a574c1d202e6850d794be59b3f:nyuko/js/edit.js

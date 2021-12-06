@@ -1,8 +1,5 @@
 
-body{
-  text-align: center;
-  font-size: 20px;
-}
+
 h2{
   text-align: center;
   color: #fcfcfc;
@@ -11,6 +8,7 @@ h2{
 }
 input[type="number" i] {
   padding: 3px 2px;
+  height:34px;
   
 
 }
@@ -21,33 +19,42 @@ input[type="number" i] {
 
 /*表*/
 table tr:nth-child(odd) td {
-	background: rgb(185, 240, 223);
+	background: rgb(192, 192, 192);
 }
-table, td, th { border: 1px #000000 solid; }
+
 table {
   
   margin-left: auto;
   margin-right: auto;
   background-color: #fff;
+  border-width: 1px;
+  font-size: 20px;
 }
 th{
-    background: #08cbcb;
+    background: #000000;
+    color:#fff;
+}
+tr{
+  border-color: #fff;
+    border-style: solid;
+    border-width: 3px;
+}
+.inpval{
+  width:100%;
 }
 
 
-/*編集ボタン*/
-.button{
-    display       : inline-block;
-    border-radius : 5%;          /* 角丸       */
-    font-size     : 10pt;        /* 文字サイズ */
-    text-align    : center;      /* 文字位置   */
-    cursor        : pointer;     /* カーソル   */
-    padding       : 10px 10px;   /* 余白       */
-    background    : #ffffff;     /* 背景色     */
-    color         : #08cbcb;     /* 文字色     */
-    line-height   : 1em;         /* 1行の高さ  */
-    transition    : .3s;         /* なめらか変化 */
+/*編集、削除ボタン*/
+.edtbtn{
+  color: blue;
+  background-color: #fff;
+  border: 1px solid;
     
+  }
+  .delbtn{
+    color: red;
+    background-color: #fff;
+    border: 1px solid;
   }
   /*戻る、取消、確認、登録ボタン*/
   .frame {
@@ -77,7 +84,8 @@ th{
   }
   /*戻る*/
   .btn-1{
-    height:100%;
+    width:124px;
+    height:50px;
     text-decoration: none;
     background:#0DA7BA;
     text-align:center;

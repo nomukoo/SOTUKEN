@@ -18,6 +18,10 @@ class WarehousingController extends Controller
     public function disp_finish_print(){
         return view("finish_print");
     }
+
+    public function disp_finish(){
+        return view("warehousing_finish");
+    }
    
     public function register(Request $request){
         

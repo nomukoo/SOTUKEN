@@ -1,4 +1,3 @@
-<<<<<<< HEAD:table.blade.php
 <!doctype html>
 <html lang="ja">
   <head>
@@ -7,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.79.0">
-    <title>情報出力画面（入庫）</title>
+    <title>情報出力画面（出庫）</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
   　<link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
@@ -132,23 +131,22 @@
     <li><a href="#step-1">読取<br><small></small></a></li>
     <li class="active"><a href="#step-2">出力<br><small></small></a></li>
     <li><a href="#step-3">確認<br><small></small></a></li>
-    <li><a href="#step-4">印刷<br><small></small></a></li>
-    <li><a href="#step-5">完了<br><small></small></a></li>
+    <li><a href="#step-4">完了<br><small></small></a></li>
   </ul>
 </div>     
 
         <div class="btn-toolbar mb-2 mb-md-0">
           
         </div>
-<br>
+ <br>     
 <h2>情報出力</h2>
     <form id="frm" name="frm" method="get" action="">
     <!--<div>新しい行を追加：<input type="button" id="add" name="add" value="追加" onclick="appendRow()"></div>-->
     <table border="1" id="tbl">
     <tr>
         <th style=" width:90px;">入庫ID</th>
-        <th style=" width:90px;">ワクチンID</th>
-        <th style=" width:90px;">注射器ID</th>
+        <th style="width:90px;">ワクチンID</th>
+        <th style="width:90px;">注射器ID</th>
         <th>数量/本</th>
         <th>製造元</th>
         <th>有効期限</th>
@@ -156,14 +154,14 @@
         <th style=" width:40px;"> </th>
     </tr>
     <tr>
-        <td><span class="seqno">1</span></td>
-        <td>・・・</td>
-        <td>・・・</td>
-        <td style=""><input class="inpval" type="number" id="a1" name="a1"   value="" height:34px; style="border:1px solid #888;"　min="1" max="5" readonly></td>
+        <td style="width:40px;"><span class="seqno">1</span></td>
+        <td value="" size="30" style="border:1px solid #888;">・・・</td>
+        <td value="" size="30" style="border:1px solid #888;">・・・</td>
+        <td style=""><input class="inpval" type="number" id="a1" name="a1"   value=""  style="border:1px solid #888;"　min="1" max="5" readonly></td>
         <td style=""><input class="inpval" type="text" id="b1" name="b1"   value=""  style="border:1px solid #888;" pattern="[ぁ-ヺ]"　title="ひらがな・カタカナで入力" readonly></td>
-        <td style=""><input class="inpval" type="date" id="c1" name="c1"   value=""  style="border:1px solid #888;" min="2021-11-1" readonly></td>
-        <td><input class="edtbtn" type="button" id="edtBtn1" value="編集" onclick="editRow(this)" ></td>
-        <td><input class="delbtn" type="button" id="delBtn1" value="削除" onclick="deleteRow(this)" ></td>
+        <td style=""><input class="inpval" type="date" id="c1" name="c1"   value=""  style="border:1px solid #888;" min="2021-11-1" ></td>
+        <td><input class="edtbtn" type="button" id="edtBtn1" value="編集" onclick="editRow(this)"></td>
+        <td><input class="delbtn" type="button" id="delBtn1" value="削除" onclick="deleteRow(this)"></td>
     </tr>
     </table>
    
@@ -173,19 +171,15 @@
     @csrf
 <input type="submit"  name="submit" value="全削除" class="custom-btn btn-2"　/>
 </form>
-<form action="{{action('App\Http\Controllers\checkController@move')}}" method="post"  class="form"> 
+<form action="{{action('App\Http\Controllers\check_outController@move')}}" method="post"  class="form"> 
     @csrf
     <input type="submit" name="submit" value="確認" class="custom-btn btn-3"/>
 </form>
 
 <script>
-=======
->>>>>>> 5534303f6da078a574c1d202e6850d794be59b3f:nyuko/js/edit.js
 /*
  * editRow: 編集ボタン該当行の内容を入力・編集またモード切り替え
  */
-
-
 /*
  * appendRow: テーブルに行を追加
  */
@@ -212,9 +206,9 @@ function appendRow()
     
 
     // 各列にスタイルを設定
-    c1.style.cssText = "width:90px;";
-    c2.style.cssText = " width:90px;";
-    c3.style.cssText = " width:90px;";
+    c1.style.cssText = "text-align:right; width:40px;";
+    c2.style.cssText = "";
+    c3.style.cssText = "";
     c4.style.cssText = "";
     c5.style.cssText = "";
     c6.style.cssText = "";
@@ -223,12 +217,12 @@ function appendRow()
     
     // 各列に表示内容を設定
     c1.innerHTML = '<span class="seqno" size="30">' + count + '</span>';
-    c2.innerHTML = '・・・';
-    c3.innerHTML = '・・・';
-    c4.innerHTML = '<input class="inpval" type="number"   id="a' + count + '" name="a' + count + '" value="" style="border:1px solid #888;"　min="1" max="5" readonly>';
+    c2.innerHTML = '<p>・・・</p>';
+    c3.innerHTML = '<p>・・・</p>';
+    c4.innerHTML = '<input class="inpval" type="text"   id="a' + count + '" name="a' + count + '" value=""  style="border:1px solid #888;"　min="1" max="5" readonly>';
     c5.innerHTML = '<input class="inpval" type="text"   id="b' + count + '" name="b' + count + '" value=""  style="border:1px solid #888;"　pattern="[ぁ-ヺ]"　title="ひらがな・カタカナで入力" readonly>';
-    c6.innerHTML = '<input class="inpval" type="date"   id="c' + count + '" name="c' + count + '" value=""  style="border:1px solid #888;" readonly>';
-    c7.innerHTML = '<input class="edtbtn" type="button" id="edtBtn' + count + '" value="編集" onclick="editRow(this)"> ';
+    c6.innerHTML = '<input class="inpval" type="date"   id="c' + count + '" name="c' + count + '" value=""  style="border:1px solid #888;" >';
+    c7.innerHTML = '<input class="edtbtn" type="button" id="edtBtn' + count + '" value="編集" onclick="editRow(this)">';
     c8.innerHTML = '<input class="delbtn" type="button" id="delBtn' + count + '" value="削除" onclick="deleteRow(this)">';
     
     // 追加した行の入力フィールドへフォーカスを設定
@@ -314,7 +308,6 @@ function deleteRow(obj)
 /*
  * editRow: 編集ボタン該当行の内容を入力・編集またモード切り替え
  */
-
 function editRow(obj)
 {
     var objTR = obj.parentNode.parentNode;
@@ -345,11 +338,10 @@ function editRow(obj)
         objBtn.value = "編集";
     }
 }
-<<<<<<< HEAD:table.blade.php
 	
 </script>
 
-<!---------------------------------------------------------------------------------------->
+<!------------------------------------------------------------------------------------>
       <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 
      
@@ -361,5 +353,3 @@ function editRow(obj)
       <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
   </body>
 </html>
-=======
->>>>>>> 5534303f6da078a574c1d202e6850d794be59b3f:nyuko/js/edit.js
