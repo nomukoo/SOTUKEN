@@ -1,0 +1,68 @@
+
+  
+  
+  .wrapper {
+  margin: 0 auto;
+  width: 100%;
+  display: table;
+}
+
+.print-page {
+  display: table-cell;
+  padding: 0 5px;
+}
+.area {
+    width: 100%;
+  border: 1px solid #999;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+}
+
+.area-ttl {
+  margin: 10px;
+  padding: 5px;
+  font-weight: bold;
+  border-bottom: 1px solid #666;
+}
+
+.area-txt {
+  margin: 10px;
+  padding: 0;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.print-btn,
+.print-all {
+    margin: 20px auto;
+    padding: 10px;
+    color: #FFF;
+    font-size: 12px;
+    text-align: center;
+    background-color: #666;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    cursor: pointer;
+}
+
+.print-btn {
+  width: 80%;
+}
+.print-all {
+  width: 50%;
+}
+.print-off {
+    display: none;
+}
+
+/*プリント用のCSS*/
+@media print {
+  .area {
+    width: 100%;
+  }
+  .print-btn,.print-all {
+    display: none;
+  }
+}
