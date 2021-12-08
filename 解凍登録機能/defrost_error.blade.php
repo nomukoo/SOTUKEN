@@ -39,7 +39,7 @@
     </style>
 
     
-    <!-- Custom styles for this template -->
+    <!-- Custom1  styles for this template -->
     <link href="/css/defrost.css" rel="stylesheet">
   </head>
   <body>
