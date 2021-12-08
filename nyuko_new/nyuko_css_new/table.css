@@ -1,0 +1,165 @@
+
+
+h2{
+  text-align: center;
+  color: #fcfcfc;
+  background: #08cbcb;
+  font-size: 40px;
+}
+input[type="number" i] {
+  padding: 3px 2px;
+  height:34px;
+  
+
+}
+
+.form{
+  display:inline-flex;
+}
+
+/*表*/
+table tr:nth-child(odd) td {
+	background: rgb(192, 192, 192);
+}
+
+table {
+  
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #fff;
+  border-width: 1px;
+  font-size: 20px;
+}
+th{
+    background: #000000;
+    color:#fff;
+}
+tr{
+  border-color: #fff;
+    border-style: solid;
+    border-width: 3px;
+}
+.inpval{
+  width:100%;
+}
+
+
+/*編集、削除ボタン*/
+.edtbtn{
+  color: blue;
+  background-color: #fff;
+  border: 1px solid;
+    
+  }
+  .delbtn{
+    color: red;
+    background-color: #fff;
+    border: 1px solid;
+  }
+  /*戻る、取消、確認、登録ボタン*/
+  .frame {
+    width: 90%;
+    margin: 40px auto;
+    text-align: center;
+    
+  }
+  button {
+    margin: 20px;
+  }
+  .custom-btn {
+    width: 130px;
+    height: 40px;
+    color: #fff;
+    border-radius: 5px;
+    
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+     
+    outline: none;
+  }
+  /*戻る*/
+  .btn-1{
+    width:124px;
+    height:50px;
+    text-decoration: none;
+    background:#0DA7BA;
+    text-align:center;
+    color:#FFFFFF;
+    font-size:30px;
+    font-weight:bold;
+    border-radius:50px;
+    -webkit-border-radius:50px;
+    -moz-border-radius:50px;
+    
+}
+.btn-1:hover{
+    background:#19CBE0;
+    color:#FFFFFF;
+    box-shadow:none;
+}
+/*取消*/
+.btn-2{
+  height:100%;
+  text-decoration: none;
+  background:#ba0d11;
+  text-align:center;
+  color:#FFFFFF;
+  font-size:30px;
+  font-weight:bold;
+  border-radius:50px;
+  -webkit-border-radius:50px;
+  -moz-border-radius:50px;
+  
+}
+.btn-2:hover{
+  background:#e00b83;
+  color:#FFFFFF;
+  box-shadow:none;
+}
+/*確認*/
+.btn-3{
+  height:100%;
+  text-decoration: none;
+  background:#2EBA1F;
+  text-align:center;
+  color:#FFFFFF;
+  font-size:30px;
+  font-weight:bold;
+  border-radius:50px;
+  -webkit-border-radius:50px;
+  -moz-border-radius:50px;
+  
+}
+.btn-3:hover{
+  background:#33EB2C;
+  color:#FFFFFF;
+  box-shadow:none;
+}
+/*登録*/
+.btn-4{
+  height:100%;
+  text-decoration: none;
+  background:#2EBA1F;
+  text-align:center;
+  color:#FFFFFF;
+  font-size:30px;
+  font-weight:bold;
+  border-radius:50px;
+  -webkit-border-radius:50px;
+  -moz-border-radius:50px;
+  
+
+}
+.btn-4:hover{
+  background:#33EB2C;
+  color:#FFFFFF;
+  box-shadow:none;
+}
+
+
+
