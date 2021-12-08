@@ -7,12 +7,16 @@ function setLocation(pos) {
     console.log(lat);
     console.log(lng);
 
-    // welcomeの中からlat_inputのclassを見つけて、そのvalueに、定数latを代入
-    $(".lat_input").val(lat);
-    //welcomeの中からlng_inputのclassを見つけて、そのvalueに、定数lngを代入
-    $(".lng_input").val(lng);
+     // welcomeの中からlat_inputのclassを見つけて、そのvalueに、定数latを代入
+     $(".lat_input").val(lat);
+     //welcomeの中からlng_inputのclassを見つけて、そのvalueに、定数lngを代入
+     $(".lng_input").val(lng);
 
 }
+
+
+
+
 
 // エラー時に呼び出される関数
 function showErr(err) {
