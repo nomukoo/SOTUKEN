@@ -6,22 +6,18 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.79.0">
-    <title>解凍登録確認画面</title>
+    <title>希釈一覧画面</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-    
-  
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+   
+
+
     <!-- Bootstrap core CSS -->
 <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.js" integrity="sha256-tcqPYPyxU+Fsv5sVdvnxLYJ7Jq9wWpi4twZbtZ0ubY8=" crossorigin="anonymous"></script> 
 
-
+  
 <meta name="theme-color" content="#7952b3">
 
 
@@ -43,13 +39,9 @@
 
     
     <!-- Custom styles for this template -->
-    <link href="/css/defrost.css" rel="stylesheet">
-
-
+    <link href="/css/dilution.css" rel="stylesheet">
   </head>
   <body>
-  
-
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -67,6 +59,7 @@
     </li>
   </ul>
 </header>
+
 
 
 <div class="container-fluid">
@@ -129,24 +122,21 @@
   病院登録
 </a>
 </li>
-       
         
       </div>
     </nav>
 
-
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h1">解凍登録確認</h1>
+        <h1 class="h1">希釈一覧画面</h1>
         <div id="smartwizard" class="sw-theme-arrows">
         <ul class="nav nav-tabs step-anchor">
-        <li><a>解凍一覧<br><small></small></a></li>
-        <li ><a>解凍数登録<br><small></small></a></li>
-         <li  class="active"><a>解凍登録確認<br><small></small></a></li>
-         <li><a>解凍登録完了<br><small></small></a></li>
+        <li class="active"><a>希釈一覧<br><small></small></a></li>
+        <li ><a>希釈数登録<br><small></small></a></li>
+         <li ><a>希釈登録確認<br><small></small></a></li>
+         <li ><a>希釈登録完了<br><small></small></a></li>
         </ul>
       </div>
-
         
         <div class="btn-toolbar mb-2 mb-md-0">
           
@@ -154,54 +144,88 @@
     </div>
 
 
+    <script>
+
+$(function(){
+
+    //印刷
+$('.print-btn').on('click', function(){
+    var printPage = $(this).closest('.print-page').html();
+    $('body').append('<div id="print"></div>');
+    $('#print').append(printPage);
+    $('body > :not(#print)').addClass('print-off');
+    window.print();
+    $('#print').remove();
+    $('.print-off').removeClass('print-off');
+});
+
+   
+
+});
+</script>
+
+    
     <div class="m-5">
     </div>
+ 
+    <div class="m-5">
     <div class="text-center">
-    <table class="table table-bordered border-dark" > 
+<div class="d-flex justify-content-center">
+    <div class="wrapper">
+<div class="print-page">
+    <table class="table table-bordered border-dark"  > 
     
     <tbody >
     <tr>
-      <th scope="col"class="table-dark border-dark">品名</th>
+      <th scope="col"class="table-dark border-dark" >品名</th>
       <th scope="col"class="table-dark border-dark">ロット番号</th>
-      <th scope="col"class="table-dark border-dark">数量(バイアル)</th>
-     
-     
+      <th scope="col"class="table-dark border-dark">解凍日</th>
+      <th scope="col"class="table-dark border-dark">解凍数(バイアル)</th>
     </tr>
   <tr>
   <td scope="row" class="table-white border-dark" >コミナティ筋注</td>
   <td scope="row" class="table-white border-dark" >FK123456</td>
-  <td scope="row" class="table-white border-dark" >例：10</td>
- 
- 
-
-  
-
+  <td scope="row" class="table-white border-dark" >11/25</td>
+  <td scope="row" class="table-white border-dark" >10</td>
+    </tr>
+    <tr>
+  <td scope="row" class="table-white border-dark" >コミナティ筋注</td>
+  <td scope="row" class="table-white border-dark" >FK124567</td>
+  <td scope="row" class="table-white border-dark" >11/28</td>
+  <td scope="row" class="table-white border-dark" >30</td>
+<tr>
+  <td scope="row" class="table-white border-dark" >コミナティ筋注2</td>
+  <td scope="row" class="table-white border-dark" >FK124567</td>
+  <td scope="row" class="table-white border-dark" >11/29</td>
+  <td scope="row" class="table-white border-dark" >30</td>
+    </tr>
     </tbody>
-</table>
+    </table>
+    <div class="text-center">
+    <div class="text-danger">
+    <h4>※必ずリストで指定された解凍日、数量のバイアルを希釈してください</h4>
+    </div>
+    </div>
+    <div class="print-btn btn-info rounded-pill" style="width:200px" >印刷</div>
 
 </div>
+</div>
+</div>
+</div>
+
 
 <div class="m-5">
-    </div>
-
-
-<form class="row g-4 needs-validation" novalidate>
-<div class="text-center">
-  <div class="d-flex justify-content-md-center">
-    <div class="col-1">
-
     
 
-
-
-<button type="button" class="btn btn-danger rounded-pill " style="width:90px" onclick="history.back(-1)"><h4>戻る</h4></button></div>
-<div class="col-2">
-<button class="btn btn-success rounded-pill" type="submit" style="width:90px" formaction="/defrost_finish"> <h4>確定</h4></button>
-    </div>
-    </div>
+<form class="row g-15 needs-validation" novalidate>
+<div class="text-center">
+<div class="d-flex justify-content-center">
+<button class="btn btn-success rounded-pill" type="submit" style="width:200px" formaction="/dilution_read" > <h4>希釈登録</h4></button>
+  </div>
+</div>
     </form>
     </div>
-  
+    
 
   </body>
 </html>
