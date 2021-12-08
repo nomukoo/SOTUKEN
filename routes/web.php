@@ -1,9 +1,5 @@
 <?php
 use Illuminate\Support\Facades\Route;
-/* topページ */
-Route::get('/', function () {
-    return view('top');
-});
 
 Route::get('barcoderead', 'WarehousingController@disp_read');
 
@@ -18,3 +14,10 @@ Route::get('warehousing_ajax', 'WarehousingAjaxController@sendJson');
 Route::get('finish_print', 'WarehousingController@disp_finish_print');
 
 Route::get('/get_vaccinedata','WarehousingAjaxController@getVaccineData');
+
+Route::get('/', 'TopController@disp_top');
+
+Route::get('ship_read', 'ShipController@disp_read');
+
+Route::get('log', 'LogController@disp_log');
+
