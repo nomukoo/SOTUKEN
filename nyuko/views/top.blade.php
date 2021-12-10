@@ -126,11 +126,9 @@
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 <!--バナー-->       
 <?php
-
 $today = date("Y/m/d");
 $target_day = "2021/11/08";
 if(strtotime($today) === strtotime($target_day)){
-
 ?>
 
     <div class="news-banner">
@@ -151,7 +149,6 @@ if(strtotime($today) === strtotime($target_day)){
 
 <?php
  }
-
 ?>
         <div class="btn-toolbar mb-2 mb-md-0">
           
@@ -165,33 +162,7 @@ if(strtotime($today) === strtotime($target_day)){
     <li><img src="{{ asset('img/待合室.jpg') }}" class="img-1"  align="left"></li>
     <li><img src="{{ asset('img/聴診器.jpg') }}" class="img-1"  align="left"></li>
   </ul>
-=======
-<head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="{{  asset('css/read.css') }}" />
-  <link rel="stylesheet" href="{{  asset('css/top.css') }}" />
-  <title>トップページ</title>
-</head>
-<body>
- <h2>トップページ</h2>
- <br>
-<br>
-<br>
- <div class="frame">
-        
-        <form action="{{action('WarehousingController@disp_read')}}" method="GET"  class="form"> 
-            @csrf
-            <input type="submit" name="submit" value="入庫" class="btn pushright btn-1"/>
-        </form>
 
- <input type="submit" name="submit" value="出庫" class="btn pushright btn-2"/>
- <input type="submit" name="submit" value="履歴" class="btn pushright btn-3"/>
- <br>
- <br>
- <input type="submit" name="submit" value="受付" class="btn pushright btn-4"/>
- <input type="submit" name="submit" value="在庫閲覧" class="btn pushright btn-5"/>
- <input type="submit" name="submit" value="システム管理" class="btn pushright btn-6"/>
->>>>>>> 5534303f6da078a574c1d202e6850d794be59b3f:nyuko/views/top.blade.php
 </div>
 <!--カレンダー-->
 <div class="container-calendar" align="right">

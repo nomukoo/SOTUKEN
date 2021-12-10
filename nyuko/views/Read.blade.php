@@ -6,11 +6,12 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.79.0">
-    <title>履歴一覧</title>
-aaaaaaaaaaaaa
-    <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>読み取り画面(入庫)</title>
 
+    <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
+  　<link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
+　　<link rel="stylesheet" href="{{  asset('css/read.css') }}" />
+  　<link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
     
 
     <!-- Bootstrap core CSS -->
@@ -34,7 +35,6 @@ aaaaaaaaaaaaa
         -moz-user-select: none;
         user-select: none;
       }
-
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
@@ -47,16 +47,18 @@ aaaaaaaaaaaaa
     <link href="/css/dashboard.css" rel="stylesheet">
   </head>
   <body>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
+    
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3">管理者画面</a>
+  <a class="navbar-brand1 col-md-3 col-lg-2 me-0 px-3 a1">○○病院</a>
   
   <ul class="nav pull-right">
   <li class="nav-item">
-      <a class="nav-link text-white" href="#">ホーム</a>
+      <a class="nav-link text-white" href="#">
+      <form action="{{action('App\Http\Controllers\topController@move')}}" method="get"  class="form"> 
+                     @csrf
+            <input type="submit" name="submit" value="ホーム" class="btn1" />
+            </form>
+      </a>
     </li>
     <li class="nav-item">
       <a class="nav-link text-white"href="#">サインアウト</a>
@@ -64,149 +66,97 @@ aaaaaaaaaaaaa
   </ul>
 </header>
 
-
-
 <div class="container-fluid">
   <div class="row">
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3">
+        <br>
+        <br>
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page">
-              <span data-feather="home"></span>
-              メニュー
-            </a>
-          </li>
-          <li class="nav-item">
-
-            <a class="nav-link" href="/test/errorPrint">
+            <a class="nav-link" href="#">
               <span data-feather="file"></span>
-              入庫
+              <form action="{{action('App\Http\Controllers\ReadController@move')}}" method="POST"  class="form"> 
+                     @csrf
+            <input type="submit" name="submit" value="入庫" class="btn2" />
+            </form>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
-              
-              出庫
+              <form action="{{action('App\Http\Controllers\read_outController@move')}}" method="POST"  class="form"> 
+                     @csrf
+                    <input type="submit" name="submit" value="出庫" class="btn2"/>
+            </form>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="users"></span>
-              履歴
+              <form action="{{action('App\Http\Controllers\logController@move')}}" method="POST"  class="form"> 
+                     @csrf
+                    <input type="submit" name="submit" value="履歴" class="btn2"/>
+            </form>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="bar-chart-2"></span>
-              受付
+              <form action="{{action('App\Http\Controllers\topController@move')}}" method="get"  class="form"> 
+                     @csrf
+                    <input type="submit" name="submit" value="受付" class="btn2"/>
+            </form>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="layers"></span>
-              在庫閲覧
+              <form action="{{action('App\Http\Controllers\topController@move')}}" method="get"  class="form"> 
+                     @csrf
+                    <input type="submit" name="submit" value="在庫閲覧" class="btn2"/>
+            </form>
             </a>
           </li>
-        </ul>
-
-       
-        <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              システム管理
-            </a>
-          </li>
-         
-         
         </ul>
       </div>
     </nav>
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h1">履歴一覧</h1>
-        
+      <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+       
+      <div id="smartwizard" class="sw-theme-arrows">
+    <ul class="nav nav-tabs step-anchor">
+    <li class="active"><a href="#step-1">読取<br><small></small></a></li>
+    <li><a href="#step-2">出力<br><small></small></a></li>
+    <li><a href="#step-3">確認<br><small></small></a></li>
+    <li><a href="#step-4">印刷<br><small></small></a></li>
+    <li><a href="#step-5">完了<br><small></small></a></li>
+  </ul>
+</div>
+
         <div class="btn-toolbar mb-2 mb-md-0">
           
         </div>
+<br>      
+<h2>バーコードリーダで<br>バーコードを読み取ってください</h2>
+    <div class="img">
+        <img src="{{ asset('img/QR.png') }}" class="img-2">
     </div>
-    
+    <form action="{{action('App\Http\Controllers\TableController@move')}}" method="POST">
+            @csrf
+             <input type="submit" name="submit" value="次へ" />
+    </form>
 
-    <div class="box2">
-    <div class="container">
-    
-    <canvas id="myBarChart" ></canvas>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+<!--------------------------------------------------------------------------------------------->
+      <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 
-  <script>
-  var ctx = document.getElementById("myBarChart");
-  var myBarChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['10代', '20代', '30代', '40代', '50代', '60代', '70代','80代以上'],
-      datasets: [
-        {
-          label: 'ワクチン接種人数',
-          data: [72, 73, 75, 81, 88, 89, 89, 94],
-          backgroundColor: "rgba(127,255,143,0.6)"
-        }
-      ]
-    },
-    options: {
-      title: {
-        display: true,
-        text: 'ワクチン接種年齢別'
-      },
-      scales: {
-        yAxes: [{
-          ticks: {
-            suggestedMax: 100,
-            suggestedMin: 0,
-            stepSize: 10,
-            callback: function(value, index, values){
-              return  value +  '人'
-            }
-          }
-        }]
-      },
-    }
-  });
-  </script>
- 
-    <div class="v_line_fix"></div>
-
-<div class="container container-wrap">
-  <div class="font-small">少なくとも1回接種</div>
-
-  <div class="font-large">9867万1017人</div>
-<div class="dotted"> </div>
-
-  <div class="font-small">少なくとも2回接種</div>
-  <div class="font-large">9414万4252人</div>
-
-  <div class="font-small">累計接種回数</div>
-  <div class="font-large">1億9309万5269回</div>
-</div>
-<style>
-#myBarChart {max-width:840px;max-height:580px;}
-</style>   
-
-
-</div>
-</div>
-<div class="box">
-<button type="button" class="btn btn-danger" onclick="history.back(-1)">戻る</button>
-</div>
-  
+     
 
 
     <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
     <script src="{{ asset('/js/dashbord.js') }}"></script>
 
       <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
-
   </body>
 </html>

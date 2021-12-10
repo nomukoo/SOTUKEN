@@ -1,67 +1,86 @@
 from websocket_server import WebsocketServer
-from reportlab.pdfgen import canvas
-from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.cidfonts import UnicodeCIDFont
-from reportlab.lib.pagesizes import A4,A5, portrait
-from reportlab.lib.units import mm
-from reportlab.platypus import Table, TableStyle
-from reportlab.lib import colors
-import json
+import win32api
 import sys
 import os
 import time
-import win32api
+import openpyxl
+import json
 
+repeat = []
+#プリント実行関数
 def auto_print(path):
-   if __name__ == '__main__':
-    win32api.ShellExecute(0,"print",path,None,".",0)
-    print("Printed:"+path)
- 
+    print(path)
+    return_value = win32api.ShellExecute(0,"print",path,None,".",0)
+    print("result_code" + str(return_value))
+    print("printed:" + path)
+
+#印刷用フォルダ中のファイルを検索
 def file_check(path):
     if os.path.isdir(path):
         files = os.listdir(path)
         for file in files:
             file_check(path+"\\"+file)
     else:
-        auto_print(path)
-        time.sleep(3)
+        for i in range(repeat[0]):
+            auto_print(path)
+            time.sleep(3)
+        del repeat[0]
+
+def write_excel(dict):
+    cnt = 0
+    template_wb = openpyxl.load_workbook(r"./template/template.xlsx")
+    header = dict["nyuko_header"]
+    del dict["nyuko_header"]
+    for key, rec in dict.items():
+        template_wb.save(r"./print/print" + str(cnt) + ".xlsx")
+        print_wb = openpyxl.load_workbook(r"./print/print" + str(cnt) + ".xlsx")
+        ws = print_wb.worksheets[0]
+        C2 = ws["C2"]
+        C3 = ws["C3"]
+        E5 = ws["E5"]
+        E6 = ws["E6"]
+        E7 = ws["E7"]
+        E8 = ws["E8"]
+        E9 = ws["E9"]
+        C2.value = header["staff_ID"]
+        C3.value = header["hospital_ID"]
+        E5.value = rec["code"]
+        E6.value = rec["wakuchin_name"]
+        E7.value = rec["expair"]
+        E8.value = rec["lot"]
+        if rec["wakuchin_name"] == "コミナティ筋注":
+            E9.value = int(rec["amount"]/195)
+            repeat.append(int(rec["amount"]/195))
+        elif rec["wakuchin_name"] == "バキスゼブリア筋注":
+            E9.value = int(rec["amount"]/2)
+            repeat.append(int(rec["amount"]/2))
+        else:
+            E9.value = int(rec["amount"]/10)
+            repeat.append(int(rec["amount"]/10))
+        ws.print_area = "A1:H39"
+        ws.oddHeader.center.text = "ワクチン管理帳票"
+        wps = ws.page_setup
+        wps.paperSize = ws.PAPERSIZE_A4
+        print_wb.save(r"./print/print" + str(cnt) + ".xlsx")
+        cnt += 1
+        
+            
+            
+
+
 
 def receivedMessage(client, server, message):
-    
-    dec = json.loads(message)
-    list1 = list(dec.keys())
-    list2 = list(dec.values())
-    pdfmetrics.registerFont(UnicodeCIDFont('HeiseiKakuGo-W5'))
-    pdf_name = 'test.pdf'
-    cnt = 1
-    for rec in list2:
-        pdf_name = str(cnt) + pdf_name  
-        print(pdf_name)
-        rec.pop('length')
-        list3 = list(rec.keys())
-        list4 = list(rec.values())
-        cv = canvas.Canvas(pdf_name, pagesize=portrait(A4))
-        data =[ list3,list4 ]
-        table = Table(data, colWidths=10*mm, rowHeights=10*mm)
-        table.setStyle(TableStyle([                              
-        ('FONT', (0, 0), (-1, -1), 'HeiseiKakuGo-W5', 8), # フォント
-        ('GRID', (0, 0), (-1, -1), 1, colors.black), 
-        ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'), 
-        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),       # 罫線
-        ]))
-        table.wrapOn(cv, 10*mm, 230*mm) # table位置
-        table.drawOn(cv, 10*mm, 230*mm)
-        cv.save()
-        cnt += 1
-
-    print_path = r"C:\Users\196001\AppData\Local\Programs\Python\Python310\pdf"
-    
+    print_path = r"./print"
+    nyuko_records = json.loads(message)
+    print(nyuko_records)
+    write_excel(nyuko_records)
     file_check(print_path)
+    print("Process finished")
     server.send_message_to_all("complete")
-
+    
     
 def new_client(client, server):
-    print("クライアント接続！")
+    print("クライアント接続")
     
 print("サーバー起動")
 server = WebsocketServer(host="127.0.0.1", port=9999)
