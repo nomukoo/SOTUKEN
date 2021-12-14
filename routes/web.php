@@ -7,7 +7,7 @@ Route::post('warehousing_ajax', 'WarehousingAjaxController@getJson');
 
 Route::get('warehousing_confirm', 'WarehousingController@disp_confirm');
 
-Route::post('warehousing_register', 'WarehousingController@register');
+Route::post('/warehousing_register', 'WarehousingController@register');
 
 Route::get('warehousing_ajax', 'WarehousingAjaxController@sendJson');
 
@@ -20,4 +20,8 @@ Route::get('/', 'TopController@disp_top');
 Route::get('ship_read', 'ShipController@disp_read');
 
 Route::get('log', 'LogController@disp_log');
+
+Route::get('test', function(){
+    return view('table');
+});
 

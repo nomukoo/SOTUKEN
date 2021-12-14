@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
   <head>
     <meta charset="utf-8">
@@ -9,9 +9,9 @@
     <title>情報出力画面（入庫）</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
-  　<link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
-　　<link rel="stylesheet" href="{{  asset('css/table.css') }}" />
-  　<link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
+    <link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
+    <link rel="stylesheet" href="{{  asset('css/table.css') }}" />
+    <link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
     
 
     <!-- Bootstrap core CSS -->
@@ -47,8 +47,8 @@
     <link href="/css/dashboard.css" rel="stylesheet">
 
     <!-- バーコード読み取りスクリプト -->
-    <script src="{{ asset('js/barcode_read.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="{{ asset('js/barcode_read.js') }}"></script>
   </head>
   <body>
     
@@ -75,8 +75,6 @@
   <div class="row">
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3">
-          <br>
-          <br>
         <ul class="nav flex-column">
           <li class="nav-item">
             <a class="nav-link" href="#">
@@ -132,11 +130,10 @@
 
    <div id="smartwizard" class="sw-theme-arrows">
     <ul class="nav nav-tabs step-anchor">
-    <li><a href="#step-1">読取<br><small></small></a></li>
-    <li class="active"><a href="#step-2">出力<br><small></small></a></li>
-    <li><a href="#step-3">確認<br><small></small></a></li>
-    <li><a href="#step-4">印刷<br><small></small></a></li>
-    <li><a href="#step-5">完了<br><small></small></a></li>
+    <li class="active"><a href="#step-1">読取<br><small></small></a></li>
+    <li><a href="#step-2">確認<br><small></small></a></li>
+    <li><a href="#step-3">印刷<br><small></small></a></li>
+    <li><a href="#step-4">完了<br><small></small></a></li>
   </ul>
 </div>     
 
@@ -144,9 +141,9 @@
           
         </div>
 <br>
-<h2>情報出力</h2>
-    <br>
-    <select name="selecter" 
+<h2>読み取り画面</h2>
+<h4>＊バイアル箱のバーコードをスキャンしてください</h4>
+    <br> 
     <form id="frm" name="frm" method="get" action="">
     <!--<div>新しい行を追加：<input type="button" id="add" name="add" value="追加" onclick="appendRow()"></div>-->
     <table border="1" id="tbl">
@@ -156,194 +153,36 @@
         <th style="width:200px;">名称</th>
         <th style="width:100px;">有効期限</th>
         <th style="width:100px;">ロット番号</th>
-        <th style="width:120px">数量(バイアル数)</th>
+        <th style="width:150px">数量(バイアル数)</th>
         
     </tr>
     </thread>
     <tbody id='tbody1'>
     </tbody>
     </table>
-   
-</form>
+
 <br>
-<form action="{{action('TopController@disp_top')}}" method="post"  class="form"> 
     
-<input type="submit"  name="submit" value="全削除" class="custom-btn btn-2"　/>
-</form>
+<input type="button"  name="del" value="取消" class="custom-btn btn-2" id="del"/>
+
     
-<input type="button" name="submit" value="確認" class="custom-btn btn-3" id="send" />
+<input type="button" name="confirm" value="確認" class="custom-btn btn-3" id="send" />
+<br>
+<br>
+<p>*全ての商品のスキャンが完了したら確認ボタンを押下してください</p>
+<p>*取消ボタンを押すことで最後のスキャンを取り消すことができます</p>
 
-<script>
-/*
- * editRow: 編集ボタン該当行の内容を入力・編集またモード切り替え
- */
-/*
- * appendRow: テーブルに行を追加
- */
-function appendRow()
-{
-    var objTBL = document.getElementById("tbl");
-    if (!objTBL)
-        return;
-    
-    var count = objTBL.rows.length;
-    
-    // 最終行に新しい行を追加
-    var row = objTBL.insertRow(count);
 
-    // 列の追加
-    var c1 = row.insertCell(0);
-    var c2 = row.insertCell(1);
-    var c3 = row.insertCell(2);
-    var c4 = row.insertCell(3);
-    var c5 = row.insertCell(4);
-    var c6 = row.insertCell(5);
-    var c7 = row.insertCell(6);
-    var c8 = row.insertCell(7);
-    
-
-    // 各列にスタイルを設定
-    c1.style.cssText = "width:90px;";
-    c2.style.cssText = " width:90px;";
-    c3.style.cssText = " width:90px;";
-    c4.style.cssText = "";
-    c5.style.cssText = "";
-    c6.style.cssText = "";
-    c7.style.cssText = " width:40px;";
-    c8.style.cssText = " width:40px;";
-    
-    // 各列に表示内容を設定
-    c1.innerHTML = '<span class="seqno" size="30">' + count + '</span>';
-    c2.innerHTML = '・・・';
-    c3.innerHTML = '・・・';
-    c4.innerHTML = '<input class="inpval" type="number"   id="a' + count + '" name="a' + count + '" value="" style="border:1px solid #888;"　min="1" max="5" readonly>';
-    c5.innerHTML = '<input class="inpval" type="text"   id="b' + count + '" name="b' + count + '" value=""  style="border:1px solid #888;"　pattern="[ぁ-ヺ]"　title="ひらがな・カタカナで入力" readonly>';
-    c6.innerHTML = '<input class="inpval" type="date"   id="c' + count + '" name="c' + count + '" value=""  style="border:1px solid #888;" readonly>';
-    c7.innerHTML = '<input class="edtbtn" type="button" id="edtBtn' + count + '" value="編集" onclick="editRow(this)"> ';
-    c8.innerHTML = '<input class="delbtn" type="button" id="delBtn' + count + '" value="削除" onclick="deleteRow(this)">';
-    
-    // 追加した行の入力フィールドへフォーカスを設定
-    var objInp = document.getElementById("a" + count);
-    if (objInp)
-        objInp.focus();
-}
-
-/*
- * deleteRow: 削除ボタン該当行を削除
- */
-function deleteRow(obj)
-{
-    // 確認
-    if (!confirm("この行を削除しますか？"))
-        return;
-
-    if (!obj)
-        return;
-
-    var objTR = obj.parentNode.parentNode;
-    var objTBL = objTR.parentNode;
-    
-    if (objTBL)
-        objTBL.deleteRow(objTR.sectionRowIndex);
-    
-    // <span> 行番号ふり直し
-    var tagElements = document.getElementsByTagName("span");
-    if (!tagElements)
-        return false;
-
-    var seq = 1;
-    for (var i = 0; i < tagElements.length; i++)
-    {
-        if (tagElements[i].className.match("seqno"))
-            tagElements[i].innerHTML = seq++;
-    }
-
-    // id/name ふり直し
-    var tagElements = document.getElementsByTagName("input");
-    if (!tagElements)
-        return false;
-
-    // <input type="text" id="txtN">
-    var seq = 1;
-    for (var i = 0; i < tagElements.length; i++)
-    {
-        if (tagElements[i].className.match("inpval"))
-        {
-            tagElements[i].setAttribute("id", "a" + seq);
-            tagElements[i].setAttribute("name", "a" + seq);
-            tagElements[i].setAttribute("id", "b" + seq);
-            tagElements[i].setAttribute("name", "b" + seq);
-            tagElements[i].setAttribute("id", "c" + seq);
-            tagElements[i].setAttribute("name", "c" + seq);
-            ++seq;
-        }
-    }
-
-    // <input type="button" id="edtBtnN">
-    seq = 1;
-    for (var i = 0; i < tagElements.length; i++)
-    {
-        if (tagElements[i].className.match("edtbtn"))
-        {
-            tagElements[i].setAttribute("id", "edtBtn" + seq);
-            ++seq;
-        }
-    }
-
-    // <input type="button" id="delBtnN">
-    seq = 1;
-    for (var i = 0; i < tagElements.length; i++)
-    {
-        if (tagElements[i].className.match("delbtn"))
-        {
-            tagElements[i].setAttribute("id", "delBtn" + seq);
-            ++seq;
-        }
-    }
-}
-
-/*
- * editRow: 編集ボタン該当行の内容を入力・編集またモード切り替え
- */
-function editRow(obj)
-{
-    var objTR = obj.parentNode.parentNode;
-    var rowId = objTR.sectionRowIndex;
-    var objInp_a = document.getElementById("a" + rowId);
-    var objInp_b = document.getElementById("b" + rowId);
-    var objInp_c = document.getElementById("c" + rowId);
-    var objBtn = document.getElementById("edtBtn" + rowId);
-
-    if (!objInp_a || !objInp_b || !objInp_c || !objBtn)
-        return;
-    
-    // モードの切り替えはボタンの値で判定   
-    if (objBtn.value == "編集")
-    {
-        objInp_a.style.cssText = "border:1px solid #888;"
-        objInp_a.readOnly = false;
-        objInp_b.readOnly = false;
-        objInp_c.readOnly = false;
-        objInp_a.focus();
-        objBtn.value = "確定";
-    }
-    else
-    {
-        objInp_a.readOnly = true;
-        objInp_b.readOnly = true;
-        objInp_c.readOnly = true;
-        objBtn.value = "編集";
-    }
-}
-	
-</script>
 <script>
         /* サーバに入力データをajaxでPOST */
 
 $(function(){
     $("#send").click(function(){
+      if(isEmpty(records)){
+        alert('エラー:商品が読み込まれていません');
+      } else {
         let today = new Date();
-        date_txt = today.getFullYear() + "/" +  today.getMonth() + 1 + "/"+ today.getDate();
+        date_txt = today.getFullYear() + "/" +  (today.getMonth() + 1) + "/"+ today.getDate();
         let header = {'staff_ID': 'hogehoge','hospital_ID': 'hugahuga','date': date_txt};
         records['nyuko_header'] = header;
         let jsonObj = JSON.stringify(records);
@@ -366,8 +205,32 @@ $(function(){
             //エラー
             alert(e);
         });
+      }
     });
 });
+
+$('#del').on('click', function(){
+      if(isEmpty(records)){
+
+      } else {
+        var last_command = command_log_array[command_log_array.length - 1];
+        command_log_array.pop();
+        if(last_command['duplicate'] == 0){
+            delete records[last_command['cnt']];
+            cnt = cnt - 1;
+            print_rec(records);
+        } else {
+            let tmp = records[last_command['cnt']];
+            tmp['amount'] -= last_command['amount'];
+            records[last_command['cnt']] = tmp;
+            print_rec(records);
+        }
+      }
+    });
+
+    function isEmpty(obj){
+      return !Object.keys(obj).length;
+    }
     </script>
 <!---------------------------------------------------------------------------------------->
       <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>

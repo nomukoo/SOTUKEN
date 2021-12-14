@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="ja">
-<<<<<<< HEAD:top.blade.php
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,10 +11,10 @@
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
     <link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
     <link rel="stylesheet" href="{{  asset('css/calendar.css') }}" />
-　　<link rel="stylesheet" href="{{  asset('css/top.css') }}" />
+    <link rel="stylesheet" href="{{  asset('css/top.css') }}" />
 
     <!-- Bootstrap core CSS -->
-<link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" >
 
     <!-- Favicons -->
 <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
@@ -42,19 +41,19 @@
       }
     </style>
 
-    
+
     <!-- Custom styles for this template -->
-    
+
   </head>
   <body>
-    
+
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
   <a class="navbar-brand1 col-md-3 col-lg-2 me-0 px-3 a1">○○病院</a>
-  
+
   <ul class="nav pull-right">
   <li class="nav-item">
       <a class="nav-link text-white" href="#">
-      <form action="{{action('App\Http\Controllers\topController@move')}}" method="get"  class="form"> 
+      <form action="{{url('/login')}}" method="get"  class="form">
                      @csrf
             <input type="submit" name="submit" value="ホーム" class="btn1" />
       </form>
@@ -76,7 +75,7 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="file"></span>
-              <form action="{{action('App\Http\Controllers\ReadController@move')}}" method="POST"  class="form"> 
+              <form action="{{action('WarehousingController@disp_read')}}" method="GET"  class="form">
                      @csrf
             <input type="submit" name="submit" value="入庫" class="btn2" />
             </form>
@@ -85,7 +84,7 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
-              <form action="{{action('App\Http\Controllers\read_outController@move')}}" method="POST"  class="form"> 
+              <form action="{{url('/login')}}" method="POST"  class="form">
                      @csrf
                     <input type="submit" name="submit" value="出庫" class="btn2"/>
             </form>
@@ -94,7 +93,7 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="users"></span>
-              <form action="{{action('App\Http\Controllers\logController@move')}}" method="POST"  class="form"> 
+              <form action="{{url('/login')}}" method="POST"  class="form">
                      @csrf
                     <input type="submit" name="submit" value="履歴" class="btn2"/>
             </form>
@@ -103,7 +102,7 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="bar-chart-2"></span>
-              <form action="{{action('App\Http\Controllers\topController@move')}}" method="get"  class="form"> 
+              <form action="{{url('/login')}}" method="get"  class="form">
                      @csrf
                     <input type="submit" name="submit" value="受付" class="btn2"/>
             </form>
@@ -112,7 +111,7 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="layers"></span>
-              <form action="{{action('App\Http\Controllers\topController@move')}}" method="get"  class="form"> 
+              <form action="{{url('/login')}}" method="get"  class="form">
                      @csrf
                     <input type="submit" name="submit" value="在庫閲覧" class="btn2"/>
             </form>
@@ -124,11 +123,13 @@
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-<!--バナー-->       
+<!--バナー-->
 <?php
+
 $today = date("Y/m/d");
 $target_day = "2021/11/08";
 if(strtotime($today) === strtotime($target_day)){
+
 ?>
 
     <div class="news-banner">
@@ -149,21 +150,25 @@ if(strtotime($today) === strtotime($target_day)){
 
 <?php
  }
+
 ?>
         <div class="btn-toolbar mb-2 mb-md-0">
-          
+
         </div>
       </div>
 
 <!--画像-->
 <div class="img">
   <ul class="slider_fade">
-    <li><img src="{{ asset('img/診察室.jpg') }}" class="img-1"　align="left"></li>
+    <li><img src="{{ asset('img/診察室.jpg') }}" class="img-1"  align="left"></li>
     <li><img src="{{ asset('img/待合室.jpg') }}" class="img-1"  align="left"></li>
     <li><img src="{{ asset('img/聴診器.jpg') }}" class="img-1"  align="left"></li>
   </ul>
-
 </div>
+
+
+
+
 <!--カレンダー-->
 <div class="container-calendar" align="right">
           <h4 id="monthAndYear"></h4>
@@ -171,12 +176,12 @@ if(strtotime($today) === strtotime($target_day)){
               <button id="previous" onclick="previous()">‹</button>
               <button id="next" onclick="next()">›</button>
           </div>
-          
+
           <table class="table-calendar" id="calendar" data-lang="ja">
               <thead id="thead-month"></thead>
               <tbody id="calendar-body"></tbody>
           </table>
-          
+
           <div class="footer-container-calendar">
               <label for="month">日付指定：</label>
               <select id="month" onchange="jump()">
@@ -203,7 +208,7 @@ if(strtotime($today) === strtotime($target_day)){
 <!------------------------------------------------------------------------------------------>
       <canvas  id="myChart" width="900" height="280"></canvas>
 
-     
+
 
 
     <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>

@@ -1,14 +1,16 @@
-    let records = {};　
+    let records = {};
     let cnt = 0;
     let txt = '';
     let quantity = {};
+    let command_log_array = [];
     //バーコード読み取りメイン処理
     document.onkeydown = function(e) {
         
-    　　if(e.key != 'Enter') {
-            txt += e.key;　//読んだ文字をtxtに蓄積
+        if(e.key != 'Enter') {
+            txt += e.key;//読んだ文字をtxtに蓄積
         } else {
             var rec = {};
+            let command_log = {};
             /*分割*/
             rec['code'] = txt.substr(2,14);
             rec['wakuchin_name'] = 'none';
@@ -23,6 +25,9 @@
                     rec['amount'] = tmp['quantity'];
                     quantity[rec['code']] = tmp['quantity'];
                     records[cnt] = rec;
+                    command_log['cnt'] = cnt;
+                    command_log['duplicate'] = 0;
+                    command_log_array.push(command_log);
                     cnt++;
                     print_rec(records);
                 });
@@ -36,17 +41,24 @@
     //同一商品コード、ロット番号のものであれば数量を累積していく関数
     function duplicateCodeCheck(rec){
         var flag = true;
+        let command_log = {};
+        let local_cnt = 0;
         Object.keys(records).forEach(function(key){
             var tmp = records[key];
             if(tmp['code'] == rec['code'] && tmp['lot'] == rec['lot']){
                 Object.keys(quantity).forEach(function(key){
                     if(key == tmp['code']){
                         tmp['amount'] += quantity[key];
+                        command_log['cnt'] = local_cnt;
+                        command_log['amount'] = quantity[key];
+                        command_log['duplicate'] = 1;
+                        command_log_array.push(command_log);
                     }
                 })
                 records[key] = tmp;
                 flag = false;
             }
+            local_cnt++;
         });
         return flag;
     }
@@ -64,6 +76,7 @@
     }
     //バーコードで読みっとったデータの画面表示用関数
     function print_rec(records){
+        delete records['nyuko_header'];
         $('#tbody1').empty();
         for(key in records){
             let insertText = '';
@@ -84,4 +97,6 @@
         const yymmdd = (yy + '-' + mm + '-' + dd);
         return yymmdd;
     }
+  
+   
     
