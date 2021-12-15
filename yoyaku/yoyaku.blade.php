@@ -104,6 +104,15 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
+              <form action="{{action('App\Http\Controllers\m_editController@move')}}" method="POST"  class="form"> 
+           	 @csrf
+    		<input type="submit" name="submit" value="問診票編集" class="btn2"/>
+	      </form>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="shopping-cart"></span>
               <form action="{{action('App\Http\Controllers\mailController@move')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="お知らせ" class="btn2"/>

@@ -6,15 +6,14 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.79.0">
-    <title>地図</title>
+    <title>病院選択</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
   　<link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
-  <link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
-  <link rel="stylesheet" href="{{  asset('css/yoyaku.css') }}" />
+    <link rel="stylesheet" href="{{  asset('css/yoyaku.css') }}" />
+    <link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
 
     <!-- Bootstrap core CSS -->
-<link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
     <!-- Favicons -->
 <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
@@ -44,6 +43,8 @@
     
     <!-- Custom styles for this template -->
     <link href="/css/dashboard.css" rel="stylesheet">
+    <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
   </head>
   <body>
     
@@ -56,14 +57,11 @@
       <form action="{{action('App\Http\Controllers\top2Controller@move')}}" method="get"  class="form"> 
                      @csrf
             <input type="submit" name="submit" value="ホーム" class="btn1" />
-            </form>
-        </a>
+      </form>
+      </a>
     </li>
-    <li class="nav-link text-white" href="#">
-    <form action="{{action('App\Http\Controllers\userloginController@move')}}" method="get"  class="form"> 
-                     @csrf
-            <input type="submit" name="submit" value="サインアウト" class="btn1" />
-            </form>
+    <li class="nav-item">
+      <a class="nav-link text-white"href="#">サインアウト</a>
     </li>
   </ul>
 </header>
@@ -104,6 +102,15 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
+              <form action="{{action('App\Http\Controllers\m_editController@move')}}" method="POST"  class="form"> 
+           	 @csrf
+    		<input type="submit" name="submit" value="問診票編集" class="btn2"/>
+	      </form>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="shopping-cart"></span>
               <form action="{{action('App\Http\Controllers\mailController@move')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="お知らせ" class="btn2"/>
@@ -125,14 +132,17 @@
 　<br>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2  border-bottom"> <!--mb-3  進行状況の下のライン-->
+
+
       <div id="smartwizard" class="sw-theme-arrows">
         <ul class="nav nav-tabs step-anchor">
          <li><a href="#step-1">1<br><small></small></a></li>
          <li><a href="#step-2">2<br><small></small></a></li>
-         <li><a href="#step-3">3<br><small></small></a></li>
-        <li><a href="#step-4">4<br><small></small></a></li>
-        <li class="active"><a href="#step-5">5<br><small></small></a></li>
-        <li><a href="#step-6">6<br><small></small></a></li>
+         <li class="active"><a href="#step-3">3<br><small></small></a></li>
+         <li><a href="#step-4">4<br><small></small></a></li>
+         <li><a href="#step-5">5<br><small></small></a></li>
+         <li><a href="#step-6">6<br><small></small></a></li>
+         <li><a href="#step-6">7<br><small></small></a></li>
         </ul>
       </div>
 
@@ -140,39 +150,80 @@
           
         </div> 
 　　　</div>
+
+<h2>病院選択</h2>
 <br>
-<p>以下の予定でよろしいですか？</P>
-    <br>
-    <div class="clskwe7b4eq">
-    <div class="tbl">
-      <table align="center">
-        <tr>
-          <th>指定日</th>
-          <td>{{ Session::get('day') }}</td>
-        </tr>
-        <tr>
-          <th>指定場所</th>
-          <td>{{ Session::get('hospital') }}</td>
-        </tr>
-        <tr>
-          <th>指定時間</th>
-          <td>{{ Session::get('time') }}</td>
-        </tr>
-      </table>
-    </div>
-  </div>
-    
-<br>
-<br>
-<input type="submit" name="submit" value="戻る" class="custom-btn btn-2" onClick="history.back()"/>
-<form action="{{action('App\Http\Controllers\y_conpController@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="submit" value="予約する" class="custom-btn btn-4_1"/>
-</form>
+<p>指定日：oo/oo/oo</p>
+<div class="hospital">
+<dl><dt><form action="{{action('App\Http\Controllers\yoyaku_time2Controller@move')}}" method="POST" > 
+           	 @csrf
+    		<input type="submit" name="submit" value="○○病院" />
+	      </form></dd></dl>
+<dl><dt><form action="{{action('App\Http\Controllers\yoyaku_time2Controller@move')}}" method="POST" > 
+           	 @csrf
+    		<input type="submit" name="submit" value="○○病院" />
+	      </form></dd></dl>
+<dl><dt><form action="{{action('App\Http\Controllers\yoyaku_time2Controller@move')}}" method="POST" > 
+           	 @csrf
+    		<input type="submit" name="submit" value="○○病院" />
+	      </form></dd></dl>
+<dl><dt><form action="{{action('App\Http\Controllers\yoyaku_time2Controller@move')}}" method="POST" > 
+           	 @csrf
+    		<input type="submit" name="submit" value="○○病院" />
+	      </form></dd></dl>
+<dl><dt><form action="{{action('App\Http\Controllers\yoyaku_time2Controller@move')}}" method="POST" > 
+           	 @csrf
+    		<input type="submit" name="submit" value="○○病院" />
+	      </form></dd></dl>
+<dl><dt><form action="{{action('App\Http\Controllers\yoyaku_time2Controller@move')}}" method="POST" > 
+           	 @csrf
+    		<input type="submit" name="submit" value="○○病院" />
+	      </form></dd></dl>
+</div>
+
+
+
+
+<?php
+/*$dsn = "mysql:host=localhost;dbname=zemi";
+    $username = "root";
+    $password = "password";
+    $db = new PDO($dsn, $username, $password);
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);*/
+?>
+<?php
+  phpinfo();
+  ?>
+<?php
+// defineの値は環境によって変えてください。
+define('HOSTNAME', 'localhost');
+define('DATABASE', 'zemi');
+define('USERNAME', 'root');
+define('PASSWORD', 'password');
+
+try {
+  /// DB接続を試みる
+  $db  = new PDO('mysql:host=' . HOSTNAME . ';dbname=' . DATABASE, USERNAME, PASSWORD);
+  $msg = "MySQL への接続確認が取れました。";
+} catch (PDOException $e) {
+  $isConnect = false;
+  $msg       = "MySQL への接続に失敗しました。<br>(" . $e->getMessage() . ")";
+}
+?>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>MySQL接続確認</title>
+  </head>
+  <body>
+    <h1>MySQL接続確認</h1>
+    <p><?php echo $msg; ?></p>
+  </body>
+</html>
 
 
 <!------------------------------------------------------------------------------------------------------------------->
-      <!--<canvas id="myChart" width="900" height="380"></canvas>class="my-4 w-100"  少し下にスクロールできる-->
+      
 
      
 

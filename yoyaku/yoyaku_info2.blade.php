@@ -116,6 +116,15 @@ $(function() {
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
+              <form action="{{action('App\Http\Controllers\m_editController@move')}}" method="POST"  class="form"> 
+           	 @csrf
+    		<input type="submit" name="submit" value="問診票編集" class="btn2"/>
+	      </form>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="shopping-cart"></span>
               <form action="{{action('App\Http\Controllers\mailController@move')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="お知らせ" class="btn2"/>
@@ -143,76 +152,59 @@ $(function() {
             <li><a href="#step-1">1<br><small></small></a></li>
             <li><a href="#step-2">2<br><small></small></a></li>
             <li><a href="#step-3">3<br><small></small></a></li>
-            <li class="active"><a href="#step-4">4<br><small></small></a></li>
-            <li><a href="#step-5">5<br><small></small></a></li>
+            <li><a href="#step-4">4<br><small></small></a></li>
+            <li class="active"><a href="#step-5">5<br><small></small></a></li>
             <li><a href="#step-6">6<br><small></small></a></li>
+            <li><a href="#step-7">7<br><small></small></a></li>
         </ul>
     </div>
 
         <div class="btn-toolbar mb-2 mb-md-0">
           
         </div> 
-      </div>
+　　　</div>
 <h2>予約者情報</h2>
-<br>
-
-<form action="{{action('App\Http\Controllers\y_checkController@move')}}" method="post" > 
-  @csrf
- 
-
-<p><span align="center">指定日：</span><input type="text" name="day" value="<?php echo date('Y/m/d');?>" readonly style="border:none; outline: none; width: 12%; text-align: center;"></p>
-<p>指定場所：{{ Session::get('hospital') }}</p>
-<p>指定時間：{{ Session::get('time') }}</p>
-
-
 <div class="clskwfslejl" align="center">
     <div class="tbl">
     <table>
     <tr>
-      <th>接種券番号<span style="color:red">(必須)</span></th>
-      <td colspan="2"><input type="text" name="ticketnumber" placeholder="0123456789" maxlength="10" required></td>
-    </tr>
-    <tr>
-      <th rowspan="2">お名前<span style="color:red">(必須)</span></th>
-      <td><input type="text" name="sei" style="width: 100%" placeholder="姓" required></td>
-      <td><input type="text" name="mei" style="width: 100%" placeholder="名" required></td>
-    </tr>
-    <tr>
-      <td><input type="text" name="seikana" style="width: 100%" placeholder="セイ" required></td>
-      <td><input type="text" name="meikana" style="width: 100%" placeholder="メイ" required></td>
-    </tr>
-    <tr>
-      <th>生年月日<span style="color:red">(必須)</span></th>
-      <td colspan="2"><input type="text" name="year">
-      </td>
-    </tr>
-    <tr>
-      <th rowspan="2">住所<span style="color:red">(必須)</span></th>
-      <td colspan="2">〒<input type="text" name="address_num" style="width: 30%"  placeholder="000-0000" required></td>
-    </tr>
-    <tr>
-      <td colspan="2"><input type="text" name="address" >
-      </td>
-    </tr>
-    
-    <tr>
-      <th>電話番号<span style="color:red">(必須)</span></th>
-      <td colspan="2"><input type="tel" name="tel" placeholder="000-0000-0000" style="width: 100%" required ></td>
-    </tr>
-    
+  <th>接種券番号<span style="color:red">(必須)</span></th><td colspan="2"><input type="text" name="ticketnumber" placeholder="0123456789" maxlength="10" required></td>
+</tr>
+<tr>
+  <th rowspan="2">お名前<span style="color:red">(必須)</span></th><td><input type="text" name="seikana" style="width: 100%" placeholder="セイ"></td><td><input type="text" name="meikana" style="width: 100%" placeholder="メイ"></td>
+</tr>
+<tr>
+    <td><input type="text" name="sei" style="width: 100%" placeholder="姓" required></td><td><input type="text" name="mei" style="width: 100%" placeholder="名" required></td>
+</tr>
+<tr>
+  <th>生年月日<span style="color:red">(必須)</span></th><td colspan="2"><input type="radio" name="generation" >大<input type="radio" name="generation">昭<input type="radio" name="generation">平<input type="radio" name="generation">令<input type="text" style="width: 50px" required>年<input type="text" style="width: 50px" required>月<input type="text" style="width: 50px" required>日</td>
+</tr>
+<tr>
+  <th rowspan="3">住所<span style="color:red">(必須)</span></th><td colspan="2">〒<input type="text" name="address_num" style="width: 30%"  placeholder="000-0000" required></td>
+</tr>
+<tr>
+  <td colspan="2"><input type="text" name="address" style="width: 20%"><input type="radio" name="address">都<input type="radio" name="address">道<input type="radio" name="address">府<input type="radio" name="address">県</td></td>
+</tr>
+<tr>
+  <td colspan="2"><input type="text" style="width:100%" required></td>
+</tr>
+<tr>
+  <th>電話番号<span style="color:red">(必須)</span></th><td colspan="2"><input type="tel" name="tel" placeholder="000-0000-0000" style="width: 100%" required ></td>
+</tr>
+<tr>
+  <th>メールアドレス<span style="color:red">(必須)</span></th><td colspan="2"><input type="email" name="email" placeholder="xxxx@example.com" style="width: 100%" required></td>
+</tr>
     </table>
-    </div>
+  </div>
 </div>
-<!--<input type="submit" name="submit" value="戻る" class="custom-btn btn-2" onClick="history.back()"/>-->
-
+<br>
+<br>
+<input type="submit" name="submit" value="戻る" class="custom-btn btn-2" onClick="history.back()"/>
+<form action="{{action('App\Http\Controllers\y_checkController@move')}}" method="post"  class="form"> 
+        @csrf
         <input type="submit" name="submit" value="次へ" class="custom-btn btn-2"/>
 </form>
 
-
-
-
-
-  
 <!------------------------------------------------------------------------------------------------------------------->
       
 

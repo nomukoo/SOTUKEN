@@ -6,12 +6,12 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.79.0">
-    <title>時間指定</title>
+    <title>地図</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
   　<link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
-    <link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
-    <link rel="stylesheet" href="{{  asset('css/yoyaku.css') }}" />
+  <link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
+    <link rel="stylesheet" href="{{  asset('css/map.css') }}" />
 
     <!-- Bootstrap core CSS -->
 <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -104,6 +104,15 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
+              <form action="{{action('App\Http\Controllers\m_editController@move')}}" method="POST"  class="form"> 
+           	 @csrf
+    		<input type="submit" name="submit" value="問診票編集" class="btn2"/>
+	      </form>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="shopping-cart"></span>
               <form action="{{action('App\Http\Controllers\mailController@move')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="お知らせ" class="btn2"/>
@@ -128,9 +137,9 @@
       <div id="smartwizard" class="sw-theme-arrows">
         <ul class="nav nav-tabs step-anchor">
          <li><a href="#step-1">1<br><small></small></a></li>
-         <li><a href="#step-2">2<br><small></small></a></li>
+         <li class="active"><a href="#step-2">2<br><small></small></a></li>
          <li><a href="#step-3">3<br><small></small></a></li>
-        <li class="active"><a href="#step-4">4<br><small></small></a></li>
+        <li><a href="#step-4">4<br><small></small></a></li>
         <li><a href="#step-5">5<br><small></small></a></li>
         <li><a href="#step-6">6<br><small></small></a></li>
         <li><a href="#step-7">7<br><small></small></a></li>
@@ -142,62 +151,34 @@
         </div> 
 　　　</div>
 <br>
-
-
-
-<p>指定日：
-{{ Session::get('date_val') }}
-</p>
-<p>指定場所：{{ Session::get('hospital_name') }}</p>
-
-
+<p>接種を希望する病院をお選びください。</p>
 <br>
-<p>ご希望の時間帯をお選びください。</p>
-<br>
-<form action="{{action('App\Http\Controllers\yoyaku_info2Controller@move')}}" method="post"  class="form"> 
+<!-- ローディング画面 -->
+<div id="loading">
+  <div class="spinner"></div>
+</div>
+ 
+<!-- コンテンツ部分 -->
+<div class="gallery">
+  <div class="item">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d210550.6462640296!2d132.2968747288369!3d34.45585771728846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x355a9908eef34fbb%3A0x7e4ce50cfc1f772!2z5bqD5bO255yM5bqD5bO25biC!5e0!3m2!1sja!2sjp!4v1636425161366!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  </div>
+</div>
+  <br>
+  <br>
+    <input type="submit" name="submit" value="戻る" class="custom-btn btn-1" onClick="history.back()"/>
+<form action="{{action('App\Http\Controllers\yoyaku_timeController@move')}}" method="post"  class="form"> 
         @csrf
-        <input type="submit" name="time" value="9:00~" class="time "/>
-        </form>
-<form action="{{action('App\Http\Controllers\yoyaku_info2Controller@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="time" value="10:00~" class="time "/>
-        </form>
-<form action="{{action('App\Http\Controllers\yoyaku_info2Controller@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="time" value="11:00~" class="time " />
-        </form>
-<form action="{{action('App\Http\Controllers\yoyaku_info2Controller@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="time" value="12:00~" class="time "/>
-        </form>
-<form action="{{action('App\Http\Controllers\yoyaku_info2Controller@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="time" value="13:00~" class="time "/>
-        </form>
-<form action="{{action('App\Http\Controllers\yoyaku_info2Controller@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="time" value="14:00~" class="time "/>
-        </form>
-<form action="{{action('App\Http\Controllers\yoyaku_info2Controller@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="time" value="15:00~" class="time "/>
-        </form>
-<form action="{{action('App\Http\Controllers\yoyaku_info2Controller@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="time" value="16:00~" class="time "/>
-        </form>
-<form action="{{action('App\Http\Controllers\yoyaku_info2Controller@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="time" value="17:00~" class="time "/>
-        </form>
-<br>
-<br>
-<br>
-<!--<input type="submit" name="submit" value="戻る"  class="custom-btn btn-2" onClick="history.back()"/>-->
+        <input type="submit" name="submit" value="次へ" />
+</form>
+    
 
-
-
-
+<script>
+window.onload = function() {
+  const spinner = document.getElementById('loading');
+  spinner.classList.add('loaded');
+}
+</script>
 
 
 

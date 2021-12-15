@@ -1,6 +1,3 @@
-
-
-
 <!doctype html>
 <html lang="ja">
   <head>
@@ -12,8 +9,8 @@
     <title>予約完了</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
-    <link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
-    <link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
+  　<link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
+  　<link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
     <link rel="stylesheet" href="{{  asset('css/delete.css') }}" />
 
     <!-- Bootstrap core CSS -->
@@ -107,6 +104,15 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
+              <form action="{{action('App\Http\Controllers\m_editController@move')}}" method="POST"  class="form"> 
+           	 @csrf
+    		<input type="submit" name="submit" value="問診票編集" class="btn2"/>
+	      </form>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="shopping-cart"></span>
               <form action="{{action('App\Http\Controllers\mailController@move')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="お知らせ" class="btn2"/>
@@ -125,9 +131,9 @@
         </ul>
       </div>
     </nav>
-  <br>
+　<br>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2  border-bottom"> 
+      <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2  border-bottom"> <!--mb-3  進行状況の下のライン-->
       <div id="smartwizard" class="sw-theme-arrows">
         <ul class="nav nav-tabs step-anchor">
          <li><a href="#step-1">1<br><small></small></a></li>
@@ -135,21 +141,23 @@
          <li><a href="#step-3">3<br><small></small></a></li>
          <li><a href="#step-4">4<br><small></small></a></li>
 	      <li><a href="#step-5">5<br><small></small></a></li>
-        <li class="active"><a href="#step-6">6<br><small></small></a></li>
+        <li><a href="#step-6">6<br><small></small></a></li>
+        <li class="active"><a href="#step-7">7<br><small></small></a></li>
         </ul>
       </div>
 
         <div class="btn-toolbar mb-2 mb-md-0">
           
         </div> 
-    </div>
+　　　</div>
 <br>
 <h2>予約が完了しました。</h2>
 <br>
-<p style="font-size:25px">来院時は<span style="color:red;">接種券番号</span>を受付にてご提示ください。</p>
+<p style="font-size:25px">来院時は<span style="color:red;">接種券番号</span><!--以下のQRコード-->を受付にてご提示ください。</p>
 <p style="font-size:20px; ">※<span style="color:red;">指定予約の方</span>は来院前に問診票の記入をお願いします。<br>
 接種日が近づいてまいりましたら「お知らせ」に通知いたします。</p>
 <br>
+<!--<img src="{{ asset('img/qrコード.png') }}"  >-->
 <br>
 <br>
 <br>
@@ -160,8 +168,10 @@
 
 
 
+
+
 <!------------------------------------------------------------------------------------------------------------------->
-      <!--<canvas id="myChart" width="900" height="380"></canvas>class="my-4 w-100"  -->
+      <!--<canvas id="myChart" width="900" height="380"></canvas>class="my-4 w-100"  少し下にスクロールできる-->
 
      
 
