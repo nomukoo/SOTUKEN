@@ -6,15 +6,15 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.79.0">
-    <title>予約カレンダー</title>
+    <title>地図</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
   　<link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
-    <link rel="stylesheet" href="{{  asset('css/y_calendar.css') }}" />
-    <link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
-    
+  <link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
+    <link rel="stylesheet" href="{{  asset('css/map.css') }}" />
 
     <!-- Bootstrap core CSS -->
+<link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
     <!-- Favicons -->
 <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
@@ -44,41 +44,7 @@
     
     <!-- Custom styles for this template -->
     <link href="/css/dashboard.css" rel="stylesheet">
-    <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-
-
-
-<!--カレンダー-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-  <style>
-    .ui-widget {
-    font-family: Arial,Helvetica,sans-serif;
-    font-size: 25px;
-    margin:10px;
-    width:50%
-    }
-    /* 日曜日のカラー設定 */
-td.ui-datepicker-week-end:first-child a.ui-state-default{
-  background-color: #ffecec;   /* 背景色を設定 */
-  color: #f00!important;       /* 文字色を設定 */
-}
-/* 土曜日のカラー設定 */
-td.ui-datepicker-week-end:last-child a.ui-state-default{
-  background-color: #eaeaff;   /* 背景色を設定 */
-  color: #00f!important;       /* 文字色を設定 */
-}
-/* ホバー時の動作 */
-td.ui-datepicker-week-end a.ui-state-hover{
-  opacity: 0.8;
-}
-/* 当日を示す色はそのまま */
-td.ui-datepicker-week-end a.ui-state-highlight{
-  background-color: #fffa90!important;
-}
-  </style>
-
+    <link href="/css/user.css" rel="stylesheet">
   </head>
   <body>
     
@@ -91,8 +57,8 @@ td.ui-datepicker-week-end a.ui-state-highlight{
       <form action="{{action('App\Http\Controllers\top2Controller@move')}}" method="get"  class="form"> 
                      @csrf
             <input type="submit" name="submit" value="ホーム" class="btn1" />
-      </form>
-      </a>
+            </form>
+        </a>
     </li>
     <li class="nav-link text-white" href="#">
     <form action="{{action('App\Http\Controllers\userloginController@move')}}" method="get"  class="form"> 
@@ -139,15 +105,6 @@ td.ui-datepicker-week-end a.ui-state-highlight{
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
-              <form action="{{action('App\Http\Controllers\m_editController@move')}}" method="POST"  class="form"> 
-           	 @csrf
-    		<input type="submit" name="submit" value="問診票編集" class="btn2"/>
-	      </form>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="shopping-cart"></span>
               <form action="{{action('App\Http\Controllers\mailController@move')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="お知らせ" class="btn2"/>
@@ -169,7 +126,6 @@ td.ui-datepicker-week-end a.ui-state-highlight{
 　<br>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2  border-bottom"> <!--mb-3  進行状況の下のライン-->
-
       <div id="smartwizard" class="sw-theme-arrows">
         <ul class="nav nav-tabs step-anchor">
          <li><a href="#step-1">1<br><small></small></a></li>
@@ -178,10 +134,8 @@ td.ui-datepicker-week-end a.ui-state-highlight{
         <li><a href="#step-4">4<br><small></small></a></li>
         <li><a href="#step-5">5<br><small></small></a></li>
         <li><a href="#step-6">6<br><small></small></a></li>
-        <li><a href="#step-7">7<br><small></small></a></li>
         </ul>
       </div>
-
 
         <div class="btn-toolbar mb-2 mb-md-0">
           
@@ -189,69 +143,69 @@ td.ui-datepicker-week-end a.ui-state-highlight{
 　　　</div>
 
 
-<!--<div class="container-calendar" align="left">
-          <h4 id="monthAndYear"></h4>
-          <div class="button-container-calendar">
-              <button id="previous" onclick="previous()">＜</button>
-              <button id="next" onclick="next()">＞</button>
-          </div>
-            
+<br>
+<!-- ローディング画面 
+<div id="loading">
+  <div class="spinner"></div>
+</div>
+-->
+<!-- コンテンツ部分 
+<div class="gallery">
+  <div class="item">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d210550.6462640296!2d132.2968747288369!3d34.45585771728846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x355a9908eef34fbb%3A0x7e4ce50cfc1f772!2z5bqD5bO255yM5bqD5bO25biC!5e0!3m2!1sja!2sjp!4v1636425161366!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  </div>
+</div>
+-->
 
-          <table class="table-calendar" id="calendar" data-lang="ja">
-            <thead id="thead-month"></thead>
-            <tbody id="calendar-body"></tbody>
-          </table>
-          
-          <div class="footer-container-calendar">
-              <label for="month">日付指定：</label>
-              <select id="month" onchange="jump()">
-                  <option value=0>1月</option>
-                  <option value=1>2月</option>
-                  <option value=2>3月</option>
-                  <option value=3>4月</option>
-                  <option value=4>5月</option>
-                  <option value=5>6月</option>
-                  <option value=6>7月</option>
-                  <option value=7>8月</option>
-                  <option value=8>9月</option>
-                  <option value=9>10月</option>
-                  <option value=10>11月</option>
-                  <option value=11>12月</option>
-              </select>
-              <select id="year" onchange="jump()"></select>
-          </div>
+
+
+    <div class="text-danger">
+        <h3>希望する病院のマーカーをクリックしてください</h3>
     </div>
+    
 
-    <script src="js/y_calendar.js" type="text/javascript"></script>
-  -->
 
-    <div id="datepicker" align="center">
-      <br>
-      <form action="{{action('App\Http\Controllers\y_hospitalController@move')}}" method="POST"  style="display:inline-flex;"> 
-           	 @csrf
-        <input type="text" id="date_val" name="date_val" placeholder="日付を選択してください" style="font-size:20px;" readonly>
-        <input type="reset" value="リセット">
-    		<input type="submit" name="submit" value="予約する" />
-	    </form>
+    <div id="map" style="height:600px; width:80%; ">
     </div>
-    <br>
-    <br>
+        <script>
+            // currentLocation.jsで使用する定数latに、controllerで定義した$latをいれて、currentLocation.jsに渡す
+            const lat = {{ $lat }};
+            // currentLocation.jsで使用する定数lngに、controllerで定義した$lngをいれて、currentLocation.jsに渡す
+            const lng = {{ $lng }};
+        </script>
+        {{--    上記の処理をしてから、googleMapを読み込まないとエラーが出てくる--}}
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="{{ asset('/js/setLocation.js') }}"></script>
+    <script src="{{ asset('/js/rensyu_map.js') }}"></script>
+  
+    <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=AIzaSyDiALKw8a6mIJMEoEyuKoiCsJG8lHayCXM&callback=initMap" async defer>
+    </script>
+
+
+
+
+
+  <br>
+  <br>
+    <input type="submit" name="submit" value="戻る" class="custom-btn btn-1" onClick="history.back()"/>
+<!--<form action="{{action('App\Http\Controllers\yoyaku_timeController@move')}}" method="post"  class="form"> 
+        @csrf
+        <input type="submit" name="submit" value="次へ" />
+</form>-->
+    
+
 <script>
-$(function() {
-    $("#datepicker").datepicker({
-        // 日付が選択された時、日付をテキストフィールドへセット
-        onSelect: function(dateText, inst) {
-                    $("#date_val").val(dateText)  
-                }
-    });
-});
-
-
+window.onload = function() {
+  const spinner = document.getElementById('loading');
+  spinner.classList.add('loaded');
+}
 </script>
-<script src="https://rawgit.com/jquery/jquery-ui/master/ui/i18n/datepicker-ja.js"></script>
+
+
+
 <!------------------------------------------------------------------------------------------------------------------->
       
-
      
 
 

@@ -1,3 +1,6 @@
+
+
+
 <!doctype html>
 <html lang="ja">
   <head>
@@ -6,12 +9,12 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.79.0">
-    <title>時間指定</title>
+    <title>予約完了</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
-  　<link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
+    <link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
     <link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
-    <link rel="stylesheet" href="{{  asset('css/yoyaku.css') }}" />
+    <link rel="stylesheet" href="{{  asset('css/delete.css') }}" />
 
     <!-- Bootstrap core CSS -->
 <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -104,15 +107,6 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
-              <form action="{{action('App\Http\Controllers\m_editController@move')}}" method="POST"  class="form"> 
-           	 @csrf
-    		<input type="submit" name="submit" value="問診票編集" class="btn2"/>
-	      </form>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="shopping-cart"></span>
               <form action="{{action('App\Http\Controllers\mailController@move')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="お知らせ" class="btn2"/>
@@ -131,77 +125,44 @@
         </ul>
       </div>
     </nav>
-　<br>
+  <br>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2  border-bottom"> <!--mb-3  進行状況の下のライン-->
+      <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2  border-bottom">
       <div id="smartwizard" class="sw-theme-arrows">
         <ul class="nav nav-tabs step-anchor">
          <li><a href="#step-1">1<br><small></small></a></li>
          <li><a href="#step-2">2<br><small></small></a></li>
-         <li class="active"><a href="#step-3">3<br><small></small></a></li>
-        <li><a href="#step-4">4<br><small></small></a></li>
-        <li><a href="#step-5">5<br><small></small></a></li>
+         <li><a href="#step-3">3<br><small></small></a></li>
+         <li><a href="#step-4">4<br><small></small></a></li>
+	      <li><a href="#step-5">5<br><small></small></a></li>
         <li><a href="#step-6">6<br><small></small></a></li>
-        <li><a href="#step-7">7<br><small></small></a></li>
+        <li class="active"><a href="#step-7">7<br><small></small></a></li>
         </ul>
       </div>
 
         <div class="btn-toolbar mb-2 mb-md-0">
           
         </div> 
-　　　</div>
-<p>指定場所：？？？</p>
-  <p>ご希望の時間帯をお選びください。</p>
-  <br>
-<form action="{{action('App\Http\Controllers\yoyaku_infoController@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="submit" value="9:00~" class="time "/>
-        </form>
-<form action="{{action('App\Http\Controllers\yoyaku_infoController@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="submit" value="10:00~" class="time "/>
-        </form>
-<form action="{{action('App\Http\Controllers\yoyaku_infoController@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="submit" value="11:00~" class="time " />
-        </form>
-<form action="{{action('App\Http\Controllers\yoyaku_infoController@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="submit" value="12:00~" class="time "/>
-        </form>
-<form action="{{action('App\Http\Controllers\yoyaku_infoController@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="submit" value="13:00~" class="time "/>
-        </form>
-<form action="{{action('App\Http\Controllers\yoyaku_infoController@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="submit" value="14:00~" class="time "/>
-        </form>
-<form action="{{action('App\Http\Controllers\yoyaku_infoController@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="submit" value="15:00~" class="time "/>
-        </form>
-<form action="{{action('App\Http\Controllers\yoyaku_infoController@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="submit" value="16:00~" class="time "/>
-        </form>
-<form action="{{action('App\Http\Controllers\yoyaku_infoController@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="submit" value="17:00~" class="time "/>
-        </form>
+    </div>
+<br>
+<h2>予約が完了しました。</h2>
+<br>
+<p style="font-size:25px">来院時は<span style="color:red;">接種券番号</span>を受付にてご提示ください。</p>
+<p style="font-size:20px; ">※<span style="color:red;">指定予約の方</span>は来院前に問診票の記入をお願いします。<br>
+接種日が近づいてまいりましたら「お知らせ」に通知いたします。</p>
 <br>
 <br>
 <br>
-<input type="submit" name="submit" value="戻る"  class="custom-btn btn-2" onClick="history.back()"/>
-
-
-
-
+<br>
+  <form action="{{action('App\Http\Controllers\top2Controller@move')}}" method="get"  class="form"> 
+        @csrf
+        <input type="submit" name="submit" value="ホームに戻る" class="custom-btn btn-3"/>
+</form>
 
 
 
 <!------------------------------------------------------------------------------------------------------------------->
-      <!--<canvas id="myChart" width="900" height="380"></canvas>class="my-4 w-100"  少し下にスクロールできる-->
+      <!--<canvas id="myChart" width="900" height="380"></canvas>class="my-4 w-100"  -->
 
      
 

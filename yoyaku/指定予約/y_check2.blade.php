@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.79.0">
-    <title>予約</title>
+    <title>ホーム_ユーザ側</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
   　<link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="{{  asset('css/yoyaku.css') }}" />
 
     <!-- Bootstrap core CSS -->
-<link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
     <!-- Favicons -->
 <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
@@ -44,6 +43,8 @@
     
     <!-- Custom styles for this template -->
     <link href="/css/dashboard.css" rel="stylesheet">
+    <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
   </head>
   <body>
     
@@ -79,17 +80,17 @@
               <span data-feather="file"></span>
               <form action="{{action('App\Http\Controllers\yoyakuController@move')}}" method="POST"  class="form"> 
             	@csrf
-    		<input type="submit" name="submit" value="予約" class="btn2"/>
-    	      </form>
+    		      <input type="submit" name="submit" value="予約" class="btn2" />
+    	        </form>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
               <form action="{{action('App\Http\Controllers\log2Controller@move')}}" method="POST"  class="form"> 
-           	 @csrf
-    		<input type="submit" name="submit" value="履歴" class="btn2"/>
-	      </form>
+           	  @csrf
+    		      <input type="submit" name="submit" value="履歴" class="btn2" />
+	            </form>
             </a>
           </li>
           <li class="nav-item">
@@ -119,6 +120,7 @@
 	      </form>
             </a>
           </li>
+    
         </ul>
       </div>
     </nav>
@@ -128,13 +130,13 @@
 
       <div id="smartwizard" class="sw-theme-arrows">
         <ul class="nav nav-tabs step-anchor">
-         <li class="active"><a href="#step-1">1<br><small></small></a></li>
+         <li><a href="#step-1">1<br><small></small></a></li>
          <li><a href="#step-2">2<br><small></small></a></li>
          <li><a href="#step-3">3<br><small></small></a></li>
-        <li><a href="#step-4">4<br><small></small></a></li>
-        <li><a href="#step-5">5<br><small></small></a></li>
-        <li><a href="#step-6">6<br><small></small></a></li>
-        <li><a href="#step-7">7<br><small></small></a></li>
+         <li><a href="#step-4">4<br><small></small></a></li>
+         <li><a href="#step-5">5<br><small></small></a></li>
+         <li class="active"><a href="#step-6">6<br><small></small></a></li>
+         <li><a href="#step-7">7<br><small></small></a></li>
         </ul>
       </div>
 
@@ -142,29 +144,51 @@
           
         </div> 
 　　　</div>
-<br>
-<p style="font-size:25px">「当日予約」または「指定予約」を選択してください。</p>
-<p>※「当日予約」：本日ワクチン接種をご希望の方
-  <br>※「指定予約」：ご希望の日時にワクチン接種をご希望の方
-</p>
-<br>
-<br>
-<form action="{{action('App\Http\Controllers\mapController@move')}}" method="POST"  class="form"> 
+<form action="{{action('App\Http\Controllers\yoyaku_ConpController@move')}}" method="post"> 
         @csrf
-        <input type="submit" name="submit" value="当日予約" class="custom-btn btn-1"/>
+
+
+
+<br>
+<p>以下の予定でよろしいですか？</P>
+    <br>
+    <div class="clskwe7b4eq">
+    <div class="tbl">
+      <table align="center">
+        <tr>
+          <th>指定日</th>
+          <td>{{ Session::get('date_val') }}</td>
+        </tr>
+        <tr>
+          <th>指定場所</th>
+          <td>{{ Session::get('hospital_name') }}</td>
+        </tr>
+        <tr>
+          <th>指定時間</th>
+          <td>{{ Session::get('time') }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+    
+<br>
+<br>
+<!--<input type="submit" name="submit" value="戻る" class="custom-btn btn-2" onClick="history.back()"/>-->
+
+        <input type="submit" name="submit" value="予約する" class="custom-btn btn-4_1"/>
 </form>
-<form action="{{action('App\Http\Controllers\y_calendarController@move')}}" method="POST"  class="form"> 
-        @csrf          
-         <input type="submit" name="submit" value="指定予約" class="custom-btn btn-2"/>
-</form>
-<br>
-<br>
-<br>
+
+
+
+
+
+
+
 
 
 
 <!------------------------------------------------------------------------------------------------------------------->
-      <!--<canvas id="myChart" width="900" height="380"></canvas>class="my-4 w-100"  少し下にスクロールできる-->
+    
 
      
 

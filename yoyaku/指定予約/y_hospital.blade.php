@@ -6,12 +6,12 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.79.0">
-    <title>ホーム_ユーザ側</title>
+    <title>病院選択</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
   　<link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
-  <link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
     <link rel="stylesheet" href="{{  asset('css/yoyaku.css') }}" />
+    <link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
 
     <!-- Bootstrap core CSS -->
 
@@ -57,14 +57,11 @@
       <form action="{{action('App\Http\Controllers\top2Controller@move')}}" method="get"  class="form"> 
                      @csrf
             <input type="submit" name="submit" value="ホーム" class="btn1" />
-            </form>
-        </a>
+      </form>
+      </a>
     </li>
-    <li class="nav-link text-white" href="#">
-    <form action="{{action('App\Http\Controllers\userloginController@move')}}" method="get"  class="form"> 
-                     @csrf
-            <input type="submit" name="submit" value="サインアウト" class="btn1" />
-            </form>
+    <li class="nav-item">
+      <a class="nav-link text-white"href="#">サインアウト</a>
     </li>
   </ul>
 </header>
@@ -80,17 +77,17 @@
               <span data-feather="file"></span>
               <form action="{{action('App\Http\Controllers\yoyakuController@move')}}" method="POST"  class="form"> 
             	@csrf
-    		      <input type="submit" name="submit" value="予約" class="btn2" />
-    	        </form>
+    		<input type="submit" name="submit" value="予約" class="btn2"/>
+    	      </form>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
               <form action="{{action('App\Http\Controllers\log2Controller@move')}}" method="POST"  class="form"> 
-           	  @csrf
-    		      <input type="submit" name="submit" value="履歴" class="btn2" />
-	            </form>
+           	 @csrf
+    		<input type="submit" name="submit" value="履歴" class="btn2"/>
+	      </form>
             </a>
           </li>
           <li class="nav-item">
@@ -99,15 +96,6 @@
               <form action="{{action('App\Http\Controllers\ticketController@move')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="接種券番号表示" class="btn2"/>
-	      </form>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="shopping-cart"></span>
-              <form action="{{action('App\Http\Controllers\m_editController@move')}}" method="POST"  class="form"> 
-           	 @csrf
-    		<input type="submit" name="submit" value="問診票編集" class="btn2"/>
 	      </form>
             </a>
           </li>
@@ -129,7 +117,6 @@
 	      </form>
             </a>
           </li>
-    
         </ul>
       </div>
     </nav>
@@ -137,15 +124,16 @@
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2  border-bottom"> <!--mb-3  進行状況の下のライン-->
 
+
       <div id="smartwizard" class="sw-theme-arrows">
         <ul class="nav nav-tabs step-anchor">
          <li><a href="#step-1">1<br><small></small></a></li>
          <li><a href="#step-2">2<br><small></small></a></li>
-         <li><a href="#step-3">3<br><small></small></a></li>
+         <li class="active"><a href="#step-3">3<br><small></small></a></li>
          <li><a href="#step-4">4<br><small></small></a></li>
          <li><a href="#step-5">5<br><small></small></a></li>
-         <li class="active"><a href="#step-6">6<br><small></small></a></li>
-         <li><a href="#step-7">7<br><small></small></a></li>
+         <li><a href="#step-6">6<br><small></small></a></li>
+         <li><a href="#step-6">7<br><small></small></a></li>
         </ul>
       </div>
 
@@ -154,40 +142,35 @@
         </div> 
 　　　</div>
 
+<h2>病院選択</h2>
 <br>
-<p>以下の予定でよろしいですか？</P>
-    <br>
-    <div class="clskwe7b4eq">
-    <div class="tbl">
-      <table align="center">
-        <tr>
-          <th>指定場所</th>
-          <td>???</td>
-        </tr>
-        <tr>
-          <th>指定日</th>
-          <td>???</td>
-        </tr>
-        <tr>
-          <th>指定時間</th>
-          <td>???</td>
-        </tr>
-      </table>
-    </div>
-  </div>
+
+
+
+<p>指定日：{{ Session::get('date_val') }}</p>
+
+<div class="hospital info">
+<table align="center">
+  <tbody>
+   
+  @foreach($hospitals as $member)
     
-<br>
-<br>
-<input type="submit" name="submit" value="戻る" class="custom-btn btn-2" onClick="history.back()"/>
-<form action="{{action('App\Http\Controllers\yoyaku_ConpController@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="submit" value="予約する" class="custom-btn btn-4_1"/>
-</form>
+    <tr>
+        <td><form action="{{action('App\Http\Controllers\yoyaku_time2Controller@move')}}" method="POST" > 
+           	  @csrf
+    		      <input type="submit" name="hospital_name" value="{{ $member->hospital_name }}" />
+	          </form>
+          </td>
+    
+        <td><a>{{ $member->hospital_tell }}</a></td>
+    
+        <td><a>{{ $member->hospital_address}}</a></td>
+    </tr>
+  @endforeach
 
-
-
-
-
+  </tbody>
+</table>
+</div>
 
 
 
@@ -196,8 +179,9 @@
 
 
 <!------------------------------------------------------------------------------------------------------------------->
+   
+        
     
-
      
 
 

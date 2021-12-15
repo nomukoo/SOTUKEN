@@ -6,15 +6,14 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.79.0">
-    <title>地図</title>
+    <title>予約者情報</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
   　<link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
-  <link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
-  <link rel="stylesheet" href="{{  asset('css/yoyaku.css') }}" />
+    <link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
+    <link rel="stylesheet" href="{{  asset('css/yoyaku.css') }}" />
 
     <!-- Bootstrap core CSS -->
-<link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
     <!-- Favicons -->
 <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
@@ -44,6 +43,19 @@
     
     <!-- Custom styles for this template -->
     <link href="/css/dashboard.css" rel="stylesheet">
+    <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="js/jquery.autoKana.js"></script>
+<script type="text/javascript">
+$(function() {
+    $.fn.autoKana('input[name="sei"] ', 'input[name="seikana"]', {katakana:true});
+});	
+$(function() {
+    $.fn.autoKana('input[name="mei"] ', 'input[name="meikana"]', {katakana:true});
+});
+</script>
   </head>
   <body>
     
@@ -73,7 +85,7 @@
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3">
           <br>
-        <ul class="nav flex-column">
+          <ul class="nav flex-column">
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="file"></span>
@@ -104,15 +116,6 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
-              <form action="{{action('App\Http\Controllers\m_editController@move')}}" method="POST"  class="form"> 
-           	 @csrf
-    		<input type="submit" name="submit" value="問診票編集" class="btn2"/>
-	      </form>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="shopping-cart"></span>
               <form action="{{action('App\Http\Controllers\mailController@move')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="お知らせ" class="btn2"/>
@@ -134,55 +137,86 @@
 　<br>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2  border-bottom"> <!--mb-3  進行状況の下のライン-->
+
       <div id="smartwizard" class="sw-theme-arrows">
         <ul class="nav nav-tabs step-anchor">
-         <li><a href="#step-1">1<br><small></small></a></li>
-         <li><a href="#step-2">2<br><small></small></a></li>
-         <li><a href="#step-3">3<br><small></small></a></li>
-        <li><a href="#step-4">4<br><small></small></a></li>
-        <li><a href="#step-5">5<br><small></small></a></li>
-        <li class="active"><a href="#step-6">6<br><small></small></a></li>
-        <li><a href="#step-7">7<br><small></small></a></li>
+            <li><a href="#step-1">1<br><small></small></a></li>
+            <li><a href="#step-2">2<br><small></small></a></li>
+            <li><a href="#step-3">3<br><small></small></a></li>
+            <li><a href="#step-4">4<br><small></small></a></li>
+            <li class="active"><a href="#step-5">5<br><small></small></a></li>
+            <li><a href="#step-6">6<br><small></small></a></li>
+            <li><a href="#step-7">7<br><small></small></a></li>
         </ul>
-      </div>
+    </div>
 
         <div class="btn-toolbar mb-2 mb-md-0">
           
         </div> 
 　　　</div>
+<h2>予約者情報</h2>
 <br>
-<p>以下の予定でよろしいですか？</P>
-    <br>
-    <div class="clskwe7b4eq">
-    <div class="tbl">
-      <table align="center">
-        <tr>
-          <th>指定場所</th>
-          <td>???</td>
-        </tr>
-        <tr>
-          <th>指定日</th>
-          <td>???</td>
-        </tr>
-        <tr>
-          <th>指定時間</th>
-          <td>???</td>
-        </tr>
-      </table>
-    </div>
-  </div>
-    
-<br>
-<br>
-<input type="submit" name="submit" value="戻る" class="custom-btn btn-2" onClick="history.back()"/>
-<form action="{{action('App\Http\Controllers\yoyaku_ConpController@move')}}" method="post"  class="form"> 
+
+<p>指定日：{{ Session::get('date_val') }}</p>
+<p>指定場所：{{ Session::get('hospital_name') }}</p>
+<p>指定時間：{{ Session::get('time') }}</p>
+
+<form action="{{action('App\Http\Controllers\y_check2Controller@move')}}" method="post" > 
         @csrf
-        <input type="submit" name="submit" value="予約する" class="custom-btn btn-4_1"/>
+<div class="clskwfslejl" align="center">
+    <div class="tbl">
+    <table>
+    <tr>
+      <th>接種券番号<span style="color:red">(必須)</span></th>
+      <td colspan="2"><input type="text" name="ticketnumber" placeholder="0123456789" maxlength="10" required></td>
+    </tr>
+    <tr>
+      <th rowspan="2">お名前<span style="color:red">(必須)</span></th>
+      <td><input type="text" name="sei" style="width: 100%" placeholder="姓" required></td>
+      <td><input type="text" name="mei" style="width: 100%" placeholder="名" required></td>
+    </tr>
+    <tr>
+      <td><input type="text" name="seikana" style="width: 100%" placeholder="セイ" required></td>
+      <td><input type="text" name="meikana" style="width: 100%" placeholder="メイ" required></td>
+    </tr>
+    <tr>
+      <th>生年月日<span style="color:red">(必須)</span></th>
+      <td colspan="2"><input type="text" name="year">
+      </td>
+    </tr>
+    <tr>
+      <th rowspan="2">住所<span style="color:red">(必須)</span></th>
+      <td colspan="2">〒<input type="text" name="address_num" style="width: 30%"  placeholder="000-0000" required></td>
+    </tr>
+    <tr>
+      <td colspan="2"><input type="text" name="address" >
+      </td>
+    </tr>
+    
+    <tr>
+      <th>電話番号<span style="color:red">(必須)</span></th>
+      <td colspan="2"><input type="tel" name="tel" placeholder="000-0000-0000" style="width: 100%" required ></td>
+    </tr>
+    
+    </table>
+    </div>
+</div>
+<br>
+<br>
+
+<!--<input type="submit" name="submit" value="戻る" class="custom-btn btn-2" onClick="history.back()"/>-->
+
+        <input type="submit" name="submit" value="次へ" class="custom-btn btn-2"/>
 </form>
+<br>
+<br>
+<br>
+
+
 
 
 <!------------------------------------------------------------------------------------------------------------------->
-      <!--<canvas id="myChart" width="900" height="380"></canvas>class="my-4 w-100"  少し下にスクロールできる-->
+      
 
      
 

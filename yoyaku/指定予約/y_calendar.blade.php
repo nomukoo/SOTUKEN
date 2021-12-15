@@ -6,15 +6,15 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.79.0">
-    <title>時間指定</title>
+    <title>予約カレンダー</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
   　<link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
+    <link rel="stylesheet" href="{{  asset('css/y_calendar.css') }}" />
     <link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
-    <link rel="stylesheet" href="{{  asset('css/yoyaku.css') }}" />
+    
 
     <!-- Bootstrap core CSS -->
-<link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
     <!-- Favicons -->
 <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
@@ -44,6 +44,41 @@
     
     <!-- Custom styles for this template -->
     <link href="/css/dashboard.css" rel="stylesheet">
+    <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+
+
+<!--カレンダー-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <style>
+    .ui-widget {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 25px;
+    margin:10px;
+    width:50%
+    }
+    /* 日曜日のカラー設定 */
+td.ui-datepicker-week-end:first-child a.ui-state-default{
+  background-color: #ffecec;   /* 背景色を設定 */
+  color: #f00!important;       /* 文字色を設定 */
+}
+/* 土曜日のカラー設定 */
+td.ui-datepicker-week-end:last-child a.ui-state-default{
+  background-color: #eaeaff;   /* 背景色を設定 */
+  color: #00f!important;       /* 文字色を設定 */
+}
+/* ホバー時の動作 */
+td.ui-datepicker-week-end a.ui-state-hover{
+  opacity: 0.8;
+}
+/* 当日を示す色はそのまま */
+td.ui-datepicker-week-end a.ui-state-highlight{
+  background-color: #fffa90!important;
+}
+  </style>
+
   </head>
   <body>
     
@@ -56,8 +91,8 @@
       <form action="{{action('App\Http\Controllers\top2Controller@move')}}" method="get"  class="form"> 
                      @csrf
             <input type="submit" name="submit" value="ホーム" class="btn1" />
-            </form>
-        </a>
+      </form>
+      </a>
     </li>
     <li class="nav-link text-white" href="#">
     <form action="{{action('App\Http\Controllers\userloginController@move')}}" method="get"  class="form"> 
@@ -104,15 +139,6 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
-              <form action="{{action('App\Http\Controllers\m_editController@move')}}" method="POST"  class="form"> 
-           	 @csrf
-    		<input type="submit" name="submit" value="問診票編集" class="btn2"/>
-	      </form>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="shopping-cart"></span>
               <form action="{{action('App\Http\Controllers\mailController@move')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="お知らせ" class="btn2"/>
@@ -134,68 +160,49 @@
 　<br>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2  border-bottom"> <!--mb-3  進行状況の下のライン-->
+
       <div id="smartwizard" class="sw-theme-arrows">
         <ul class="nav nav-tabs step-anchor">
          <li><a href="#step-1">1<br><small></small></a></li>
-         <li><a href="#step-2">2<br><small></small></a></li>
+         <li class="active"><a href="#step-2">2<br><small></small></a></li>
          <li><a href="#step-3">3<br><small></small></a></li>
-        <li class="active"><a href="#step-4">4<br><small></small></a></li>
+        <li><a href="#step-4">4<br><small></small></a></li>
         <li><a href="#step-5">5<br><small></small></a></li>
         <li><a href="#step-6">6<br><small></small></a></li>
         <li><a href="#step-7">7<br><small></small></a></li>
         </ul>
       </div>
 
+
         <div class="btn-toolbar mb-2 mb-md-0">
           
-        </div> 
+        </div>
 　　　</div>
-<br>
-<p>指定日：○○/○○/○○</p>
-<p>指定場所：○○病院</p>
-<br>
-<p>ご希望の時間帯をお選びください。</p>
-<br>
-<form action="{{action('App\Http\Controllers\yoyaku_info2Controller@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="submit" value="9:00~" class="time "/>
-        </form>
-<form action="{{action('App\Http\Controllers\yoyaku_info2Controller@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="submit" value="10:00~" class="time "/>
-        </form>
-<form action="{{action('App\Http\Controllers\yoyaku_info2Controller@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="submit" value="11:00~" class="time " />
-        </form>
-<form action="{{action('App\Http\Controllers\yoyaku_info2Controller@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="submit" value="12:00~" class="time "/>
-        </form>
-<form action="{{action('App\Http\Controllers\yoyaku_info2Controller@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="submit" value="13:00~" class="time "/>
-        </form>
-<form action="{{action('App\Http\Controllers\yoyaku_info2Controller@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="submit" value="14:00~" class="time "/>
-        </form>
-<form action="{{action('App\Http\Controllers\yoyaku_info2Controller@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="submit" value="15:00~" class="time "/>
-        </form>
-<form action="{{action('App\Http\Controllers\yoyaku_info2Controller@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="submit" value="16:00~" class="time "/>
-        </form>
-<form action="{{action('App\Http\Controllers\yoyaku_info2Controller@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="submit" value="17:00~" class="time "/>
-        </form>
-<br>
-<br>
-<br>
-<input type="submit" name="submit" value="戻る"  class="custom-btn btn-2" onClick="history.back()"/>
+
+
+
+
+
+    <div id="datepicker" align="center">
+      <br>
+      <form action="{{action('App\Http\Controllers\y_hospitalController@move')}}" method="POST"  style="display:inline-flex;"> 
+           	 @csrf
+        <input type="text" id="date_val" name="date_val" placeholder="日付を選択してください" style="font-size:20px;" readonly>
+        <input type="reset" value="リセット">
+    		<input type="submit" name="submit" value="予約する" />
+	    </form>
+    </div>
+    <br>
+    <br>
+<script>
+$(function() {
+    $("#datepicker").datepicker({
+        // 日付が選択された時、日付をテキストフィールドへセット
+        onSelect: function(dateText, inst) {
+                    $("#date_val").val(dateText)  
+                }
+    });
+});
 
 
 
@@ -203,8 +210,10 @@
 
 
 
+</script>
+<script src="https://rawgit.com/jquery/jquery-ui/master/ui/i18n/datepicker-ja.js"></script>
 <!------------------------------------------------------------------------------------------------------------------->
-      <!--<canvas id="myChart" width="900" height="380"></canvas>class="my-4 w-100"  少し下にスクロールできる-->
+      
 
      
 
