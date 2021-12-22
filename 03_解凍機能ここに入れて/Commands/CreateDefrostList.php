@@ -51,7 +51,6 @@ class CreateDefrostList extends Command
         ->distinct()
         ->get();
         foreach($target_hospital_list as $target){
-            echo '病院ターゲット'."\n";
             $yoyakus = DB::table('yoyakus');
             $people_by_wakuchin = $yoyakus
             ->selectRaw('wakuchin_ID, COUNT(*) AS number_of_people')
@@ -66,12 +65,11 @@ class CreateDefrostList extends Command
             $last_insert_id = $yotei->id;
             $group_id = 0;
             foreach($people_by_wakuchin as $rec){
-                echo 'ワクチンターゲット'."\n";
-                echo 'ワクチンID'.$rec->wakuchin_ID."\n";
                 $syringe_stocks = DB::table('syringe_stocks');
                 $syringes_nums = $syringe_stocks
-                ->selectRaw('syringe_stocks.syringe_ID,syringe_total,people_amp,reserve_inventory')
+                ->selectRaw('syringe_stocks.syringe_ID,syringe_total,people_amp,reserve_inventory,syringe.syringe_name')
                 ->join('use_ables','syringe_stocks.syringe_ID','=','use_ables.syringe_ID')
+                ->join('syringe','syringe_stocks.syringe_ID','=','syringe.syringe_ID')
                 ->where('syringe_stocks.hospital_ID','=', $target->hospital_ID)
                 ->where('wakuchin_ID','=',$rec->wakuchin_ID)
                 ->orderBy('people_amp','desc')
@@ -79,23 +77,61 @@ class CreateDefrostList extends Command
                 $number_of_people = $rec->number_of_people;
                 $need_vial_num = 0;
                 foreach($syringes_nums as $syringe){
-                    echo 'シリンジターゲット';
+                    
+                    $syringe_name = $syringe->syringe_name;
                     if($number_of_people <= ($syringe->syringe_total - $syringe->reserve_inventory)){
                         $need_vial_num += ceil($number_of_people / $syringe->people_amp);
-                        echo '充足時注射器'.$number_of_people."\n";
-                        echo '充足時バイアル'.$need_vial_num."\n";
                         $remainder = $syringe->people_amp - $number_of_people;
-                        $yotei_meisai = new Yotei_meisai;
-                        $yotei_meisai->yotei_ID = $last_insert_id;
-                        $yotei_meisai->wakuchin_ID = $rec->wakuchin_ID;
-                        $yotei_meisai->yotei_amount = $need_vial_num;
-                        $yotei_meisai->class_code = 1;
-                        $yotei_meisai->group_id = $group_id;
-                        $yotei_meisai->save();
+                        $wakuchin_stocks = DB::table('wakuchin_stocks');
+                        $target_wakuchin_stocks = $wakuchin_stocks
+                        ->join('lot','wakuchin_stocks.lot_number','=','lot.lot_number')
+                        ->join('wakuchin','wakuchin_stocks.wakuchin_ID','=','wakuchin.wakuchin_ID') 
+                        ->where('wakuchin_stocks.wakuchin_ID',$rec->wakuchin_ID)
+                        ->orderBy('lot_limit','asc')
+                        ->get();
+                        foreach($target_wakuchin_stocks as $stock){
+                            if(($stock->wakuchin_total - $stock->reserve_inventory) >= $need_vial_num){
+                                $yotei_meisai = new Yotei_meisai;
+                                $yotei_meisai->yotei_ID = $last_insert_id;
+                                $yotei_meisai->wakuchin_ID = $rec->wakuchin_ID;
+                                $yotei_meisai->wakuchin_name = $stock->wakuchin_name;
+                                $yotei_meisai->yotei_amount = $need_vial_num;
+                                $yotei_meisai->lot_number = $stock->lot_number;
+                                $yotei_meisai->class_code = 1;
+                                $yotei_meisai->group_id = $group_id;
+                                $yotei_meisai->save();
+                                $update_reserve_inventory = DB::table('wakuchin_stocks');
+                                $update_reserve_inventory
+                                ->where('wakuchin_ID',$rec->wakuchin_ID)
+                                ->where('lot_number',$stock->lot_number)
+                                ->update(['reserve_inventory' => $stock->reserve_inventory + $need_vial_num]);
+                                break;
+                            } else {
+                                $yotei_meisai = new Yotei_meisai;
+                                $yotei_meisai->yotei_ID = $last_insert_id;
+                                $yotei_meisai->wakuchin_ID = $rec->wakuchin_ID;
+                                $yotei_meisai->wakuchin_name = $stock->wakuchin_name;
+                                $yotei_meisai->yotei_amount = $stock->wakuchin_total;
+                                $yotei_meisai->lot_number = $stock->lot_number;
+                                $yotei_meisai->class_code = 1;
+                                $yotei_meisai->group_id = $group_id;
+                                $yotei_meisai->save();
+                                $update_reserve_inventory = DB::table('wakuchin_stocks');
+                                $update_reserve_inventory
+                                ->where('wakuchin_ID',$rec->wakuchin_ID)
+                                ->where('lot_number',$stock->lot_number)
+                                ->update(['reserve_inventory' => $stock->reserve_inventory + $stock->wakuchin_total]);
+                                $need_vial_num -= $stock->wakuchin_total;
+                            }
+                        }
+
+                        
                         $syringe_meisai = new Yotei_meisai;
                         $syringe_meisai->yotei_ID = $last_insert_id;
                         $syringe_meisai->wakuchin_ID = $syringe->syringe_ID;
                         $syringe_meisai->yotei_amount = $number_of_people;
+                        echo $syringe_name;
+                        $syringe_meisai->wakuchin_name = $syringe_name;
                         $syringe_meisai->class_code = 2;
                         $syringe_meisai->group_id = $group_id;
                         $syringe_meisai->save();
@@ -116,13 +152,13 @@ class CreateDefrostList extends Command
                     } else {
                         $need_vial_num += floor(($syringe->syringe_total - $syringe->reserve_inventory) / $syringe->people_amp);
                         $use_syringe_num = $need_vial_num * $syringe->people_amp;
-                        echo '不足時バイアル'.$need_vial_num."\n";
-                        echo '不足時注射器'.$use_syringe_num."\n";
                         if($use_syringe_num!= 0){
                             $yotei_meisai = new Yotei_meisai;
                             $yotei_meisai->yotei_ID = $last_insert_id;
                             $yotei_meisai->wakuchin_ID = $syringe->syringe_ID;
                             $yotei_meisai->yotei_amount = $use_syringe_num;
+                            echo $syringe_name;
+                            $yotei_meisai->wakuchin_name = $syringe_name;
                             $yotei_meisai->class_code = 2;
                             $yotei_meisai->group_id = $group_id;
                             $yotei_meisai->save();

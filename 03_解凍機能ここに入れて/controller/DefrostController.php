@@ -24,9 +24,9 @@ class DefrostController extends Controller
             ->whereDate('yotei_date',date('Y/m/d'))
             ->exists();
             if($result == true && $sts == 'exist'){
-                sleep(10);
+                sleep(4);
             } else if($result == false && $sts == 'none'){
-                sleep(10); 
+                sleep(4); 
             } else if($result == true && $sts == 'none'){
                 return response()->json('exist');
                 break;
@@ -44,7 +44,7 @@ class DefrostController extends Controller
         $data = json_decode($json, true); //デコード
         $yoteis = DB::table('yoteis');
         $result = $yoteis
-        ->selectRaw
+        ->selectRaw('yotei_meisais.wakuchin_name,lot_number,yotei_amount,group_id')
         ->join('yotei_meisais','yoteis.yotei_ID','=','yotei_meisais.yotei_ID')
         ->where('yoteis.hospital_ID','=',$data['hospital_ID'])
         ->whereDate('yotei_date',date('Y/m/d'))

@@ -20,8 +20,15 @@
           Object.keys(obj).forEach(function(key){
               let rec = obj[key];
               let insertText = '<tr>';
+              let currentKey = 0;
               Object.keys(rec).forEach(function(key){
-                   insertText += '<td scope="row" class="table-white border-dark">' + rec[key] + '</td>';
+                  if(key != 'group_id'){
+                  if(rec[key] != null){
+                    insertText += '<td scope="row" class="table-white border-dark">' + rec[key] + '</td>';
+                  } else {
+                    insertText += '<td scope="row" class="table-white border-dark">' + '―' + '</td>';
+                  }
+                }
               })
               insertText += '</tr>';
               $('tbody').append(insertText);
