@@ -1,0 +1,94 @@
+button {
+    margin: 20px;
+  }
+  .custom-btn {
+    width: 130px;
+    height: 40px;
+    color: #fff;
+    border-radius: 5px;
+    
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+     
+    outline: none;
+  }
+  
+.btn-1{
+  width:160px;
+  text-decoration: none;
+  background:#0DA7BA;
+  text-align:center;
+  color:#FFFFFF;
+  font-size:20px;
+  font-weight:bold;
+  border-radius:50px;
+  -webkit-border-radius:50px;
+  -moz-border-radius:50px;
+  
+}
+.btn-1:hover{
+  background:#19CBE0;
+  color:#FFFFFF;
+  box-shadow:none;
+}
+
+.form{
+    display:inline-flex;
+}
+
+p{
+  display: inline-flex;
+  font-size: 25px;
+}
+
+
+/* ローディング画面 */
+#loading {
+  width: 600px;
+  height: 450px;
+  transition: all 1s;
+  background-color: #0bd;
+  position: fixed;
+  top: 272px;
+  left: 945px;
+  z-index: 9999;
+}
+.spinner {
+  width: 100px;
+  height: 100px;
+  margin: 200px auto;
+  background-color: #fff;
+  border-radius: 100%;
+  animation: sk-scaleout 1.0s infinite ease-in-out;
+}
+/* ローディングアニメーション */
+@keyframes sk-scaleout {
+  0% {
+    transform: scale(0);
+  } 100% {
+    transform: scale(1.0);
+    opacity: 0;
+  }
+}
+ 
+/* コンテンツ部分の装飾 */
+.gallery {
+  display: grid;
+  gap: .5rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.loaded {
+  opacity: 0;
+  visibility: hidden;
+}
