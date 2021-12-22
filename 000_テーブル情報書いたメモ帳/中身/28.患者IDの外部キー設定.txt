@@ -1,0 +1,9 @@
+ALTER TABLE inoculation
+    ADD CONSTRAINT fk_patient_ID_1
+        FOREIGN KEY (patient_ID) REFERENCES patient (patient_ID)
+            ON UPDATE cascade ON DELETE cascade;
+
+ALTER TABLE yoyaku
+    ADD CONSTRAINT fk_patient_ID_2
+        FOREIGN KEY (patient_ID) REFERENCES patient (patient_ID)
+            ON UPDATE cascade ON DELETE cascade;

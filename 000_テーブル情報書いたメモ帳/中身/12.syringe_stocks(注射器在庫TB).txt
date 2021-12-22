@@ -1,0 +1,17 @@
+create table syringe_stocks (
+ s_stock_ID int PRIMARY KEY AUTO_INCREMENT,
+ syringe_ID varchar(64),
+ hospital_ID varchar(64),
+ syringe_total int,
+ UNIQUE(syringe_ID,hospital_ID)
+);
+
+
+insert into syringe_stock value(
+'S0001','H0003','500');
+
+insert into syringe_stock value(
+'S0002','H0002','333');
+
+insert into syringe_stock value(
+'S0003','H0001','210');

@@ -1,0 +1,7 @@
+create table hospital_kari (
+ hospital_ID varchar(64) primary key,
+ hospital_name varchar(64),
+ hospital_address varchar(64),
+ hospital_tell varchar(16),
+ hospital_idokeido varchar(60)
+);

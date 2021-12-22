@@ -1,0 +1,15 @@
+create table syukko (
+ syukko_ID int primary key AUTO_INCREMENT,
+ syukko_date timestamp,
+ staff_ID varchar(64),
+ hospital_ID varchar(64)
+);
+
+insert into syukko value(
+'1001','2021-05-27 10:30:00','kimura','H0002');
+
+insert into syukko value(
+'1002','2021-09-04 08:15:00','tanaka','H0001');
+
+insert into syukko value(
+'1003','2021-09-07 10:30:00','yamamoto','H0003');

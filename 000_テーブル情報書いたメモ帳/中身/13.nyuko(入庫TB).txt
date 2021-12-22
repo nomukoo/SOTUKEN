@@ -1,0 +1,20 @@
+create table nyukos (
+ nyuko_ID int primary key AUTO_INCREMENT,
+ nyuko_date timestamp,
+ staff_ID varchar(64),
+ hospital_ID varchar(64)
+);
+
+insert into nyuko value(
+'1001','2021-10-31 08:30:00','tanaka','H0001');
+
+insert into nyuko value(
+'1002','2021-11-01 08:20:30','kimura','H0002');
+
+insert into nyuko value(
+'1003','2021-12-03 09:30:00','yamamoto','H0003');
+
+insert into nyuko value(
+'1004','2021-12-04 09:30:00','kimura','H0002');
+
+
