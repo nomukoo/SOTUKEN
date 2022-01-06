@@ -1,0 +1,15 @@
+create table keiyaku (
+ keiyaku_ID int primary key auto_increment,
+ hospital_ID varchar(64),
+ keiyaku_start date,
+ keiyaku_fin date
+);
+
+insert into keiyaku value(
+'101','H0001','2020/11/8','2021/11/8');
+
+insert into keiyaku value(
+'102','H0002','2020/11/9','2021/11/9');
+
+insert into keiyaku value(
+'103','H0003','2020/12/25','2021/12/25');

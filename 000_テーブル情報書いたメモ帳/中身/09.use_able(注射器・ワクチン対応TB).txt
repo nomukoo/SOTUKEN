@@ -1,0 +1,18 @@
+create table use_ables (
+ syringe_ID varchar(64),
+ wakuchin_ID varchar(64),
+ people_amp int,
+ PRIMARY KEY(syringe_ID,wakuchin_ID)
+);
+
+insert into use_ables value(
+'S0001','W0001','5');
+
+insert into use_ables value(
+'S0002','W0001','6');
+
+insert into use_ables value(
+'S0003','W0001','7');
+
+insert into use_ables value(
+'S0004','W0003','5');

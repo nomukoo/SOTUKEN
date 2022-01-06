@@ -1,0 +1,20 @@
+create table s_meisai (
+ syukko_ID int,
+ s_meisai_ID int primary key AUTO_INCREMENT,
+ wakuchin_ID varchar(64),
+ syukko_amount int,
+ made_ID varchar(64),
+ lot_number varchar(6),
+ yotei_ID int,
+ yotei_meisai_ID int
+);
+
+insert into s_meisai value(
+'1001','1','W0002','7','000100','J02H6T','2001','1');
+
+insert into s_meisai value(
+'1002','2','W0001','5','000010','P58H4R','2002','2');
+
+insert into s_meisai value(
+'1003','3','W0003','10','000111','V52Z4L','2003','3');
+

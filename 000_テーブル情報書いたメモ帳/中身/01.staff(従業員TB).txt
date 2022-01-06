@@ -1,0 +1,30 @@
+create database zemi;
+
+use zemi
+
+create table staff (
+ staff_ID varchar(8) primary key,
+ staff_name varchar(64),
+ staff_password varchar(64),
+ login_status boolean,
+ hospital_ID varchar(64)
+);
+
+
+create table staff (
+ staff_ID varchar(8) primary key,
+ staff_name varchar(64),
+ staff_password varchar(64),
+ login_status boolean,
+ hospital_ID varchar(64)
+);
+
+insert into staff value(
+'tanaka','田中次郎','pass','1','H0001');
+
+insert into staff value(
+'kimura','木村将司','pass','0','H0002');
+
+insert into staff value(
+'yamamoto','山本花子','pass','0','H0003');
+

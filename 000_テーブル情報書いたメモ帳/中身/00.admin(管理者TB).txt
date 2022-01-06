@@ -1,0 +1,16 @@
+create table admin (
+ admin_ID varchar(10) primary key,
+ admin_name varchar(64),
+ admin_password varchar(64)
+);
+
+
+insert into admin value(
+'A0001','松山楓子','pass');
+
+insert into admin value(
+'A0002','山下鬱','pass');
+
+insert into admin value(
+'A0003','佐川健司','pass');
+

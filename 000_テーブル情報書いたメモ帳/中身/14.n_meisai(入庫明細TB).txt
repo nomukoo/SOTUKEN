@@ -1,0 +1,23 @@
+create table n_meisai (
+ nyuko_ID int NOT NULL,
+ n_meisai_ID int NOT NULL AUTO_INCREMENT,
+ wakuchin_ID varchar(64),
+ syringe_ID varchar(64),
+ nyuko_amount int,
+ made_ID varchar(64),
+ lot_number varchar(7),
+ PRIMARY KEY(n_meisai_ID, nyuko_ID)
+);
+
+insert into n_meisai value(
+'1001','1','W0003','null','250','000100','J10J5K');
+
+insert into n_meisai value(
+'1002','2','null','S001','400','000101','null');
+
+insert into n_meisai value(
+'1003','3','W0001','null','30','000001','K55A7Y');
+
+insert into n_meisai value(
+'1004','4','W0002','null','10','000010','F33G9G');
+

@@ -1,0 +1,9 @@
+ALTER TABLE syringe_stock
+    ADD CONSTRAINT fk_syringe_ID_1
+        FOREIGN KEY (syringe_ID) REFERENCES syringe (syringe_ID)
+            ON UPDATE cascade ON DELETE cascade;
+
+ALTER TABLE use_able
+    ADD CONSTRAINT fk_syringe_ID_2
+        FOREIGN KEY (syringe_ID) REFERENCES syringe (syringe_ID)
+            ON UPDATE cascade ON DELETE cascade;

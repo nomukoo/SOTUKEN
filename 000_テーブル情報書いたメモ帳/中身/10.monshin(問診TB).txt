@@ -1,0 +1,19 @@
+create table monshin (
+ monshin_ID int primary key auto_increment,
+ Q0001 varchar(10),
+ Q0002 varchar(64),
+ Q0003 varchar(64),
+ Q0004 varchar(64),
+ Q0005 varchar(64),
+ Q0006 varchar(16),
+ Q0007 varchar(16),
+ Q0008 varchar(64),
+ Q0009 varchar(16)
+);
+
+insert into monshin value(
+"5001","0123456789","山本","重国","ヤマモト","シゲクニ","2021-11-18","0000000","山の上","00000000");
+insert into monshin value(
+"5002","1234567890","中島","昭","ナカジマ","アキラ","2021-12-05","0000000","川の隅","00000000");
+insert into monshin value(
+"5003","2345678901","木本","愛","キモト","アイ","2021-12-18","0000000","どうぶつの森","00000000");

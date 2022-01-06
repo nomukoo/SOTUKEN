@@ -1,0 +1,29 @@
+ALTER TABLE n_meisai
+    ADD CONSTRAINT fk_nyuko_ID_1
+        FOREIGN KEY (nyuko_ID) REFERENCES nyuko (nyuko_ID)
+            ON UPDATE cascade ON DELETE cascade;
+
+ALTER TABLE s_meisai
+    ADD CONSTRAINT fk_syukko_ID_1
+        FOREIGN KEY (syukko_ID) REFERENCES syukko (syukko_ID)
+            ON UPDATE cascade ON DELETE cascade;
+
+ALTER TABLE yotei_meisai
+    ADD CONSTRAINT fk_yotei_ID_1
+        FOREIGN KEY (yotei_ID) REFERENCES yotei (yotei_ID)
+            ON UPDATE cascade ON DELETE cascade;
+
+ALTER TABLE s_meisai
+    ADD CONSTRAINT fk_yotei_ID_2
+        FOREIGN KEY (yotei_ID) REFERENCES yotei (yotei_ID)
+            ON UPDATE cascade ON DELETE cascade;
+
+ALTER TABLE s_meisai
+    ADD CONSTRAINT fk_yotei_meisai_ID_1
+        FOREIGN KEY (yotei_meisai_ID) REFERENCES yotei_meisai (yotei_meisai_ID)
+            ON UPDATE cascade ON DELETE cascade;
+
+ALTER TABLE yoyaku_meisai
+    ADD CONSTRAINT fk_yoyaku_ID_1
+        FOREIGN KEY (yoyaku_ID) REFERENCES yoyaku (yoyaku_ID)
+            ON UPDATE cascade ON DELETE cascade;

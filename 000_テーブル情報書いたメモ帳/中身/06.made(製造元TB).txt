@@ -1,0 +1,37 @@
+create table made (
+ made_ID varchar(64) primary key,
+ made_name varchar(64)
+);
+
+insert into made value(
+'000001','ファイザー');
+
+insert into made value(
+'000010','モデルナ');
+
+insert into made value(
+'000011','アストラゼネカ');
+
+insert into made value(
+'000100','ジョンソン＆ジョンソン');
+
+insert into made value(
+'000101','サノフィ');
+
+insert into made value(
+'000110','ノババックス');
+
+insert into made value(
+'000111','第一三共株式会社');
+
+insert into made value(
+'001000','田辺三菱製薬株式会社');
+
+insert into made value(
+'001001','ＫＭバイオロジクス株式会社');
+
+insert into made value(
+'001010','ＴｏｋｉｏＴＨＥＲＡホールディングス株式会社');
+
+
+
