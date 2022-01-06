@@ -6,12 +6,12 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.79.0">
-    <title>予約</title>
+    <title>地図</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
   　<link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
   <link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
-    <link rel="stylesheet" href="{{  asset('css/yoyaku.css') }}" />
+    <link rel="stylesheet" href="{{  asset('css/map.css') }}" />
 
     <!-- Bootstrap core CSS -->
 <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -44,16 +44,17 @@
     
     <!-- Custom styles for this template -->
     <link href="/css/dashboard.css" rel="stylesheet">
+    <link href="/css/user.css" rel="stylesheet">
   </head>
   <body>
     
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand1 col-md-3 col-lg-2 me-0 px-3 a1">ユーザ名</a>
+  <a class="navbar-brand1 col-md-3 col-lg-2 me-0 px-3 a1">{{ Session::get('userID') }}</a>
   
   <ul class="nav pull-right">
   <li class="nav-item">
       <a class="nav-link text-white" href="#">
-      <form action="{{action('App\Http\Controllers\top2Controller@move')}}" method="get"  class="form"> 
+      <form action="{{url('/home')}}" method="get"  class="form"> 
                      @csrf
             <input type="submit" name="submit" value="ホーム" class="btn1" />
             </form>
@@ -104,15 +105,6 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
-              <form action="{{action('App\Http\Controllers\m_editController@move')}}" method="POST"  class="form"> 
-           	 @csrf
-    		<input type="submit" name="submit" value="問診票編集" class="btn2"/>
-	      </form>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="shopping-cart"></span>
               <form action="{{action('App\Http\Controllers\mailController@move')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="お知らせ" class="btn2"/>
@@ -134,16 +126,14 @@
 　<br>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2  border-bottom"> <!--mb-3  進行状況の下のライン-->
-
       <div id="smartwizard" class="sw-theme-arrows">
         <ul class="nav nav-tabs step-anchor">
-         <li class="active"><a href="#step-1">1<br><small></small></a></li>
-         <li><a href="#step-2">2<br><small></small></a></li>
+         <li><a href="#step-1">1<br><small></small></a></li>
+         <li class="active"><a href="#step-2">2<br><small></small></a></li>
          <li><a href="#step-3">3<br><small></small></a></li>
         <li><a href="#step-4">4<br><small></small></a></li>
         <li><a href="#step-5">5<br><small></small></a></li>
         <li><a href="#step-6">6<br><small></small></a></li>
-        <li><a href="#step-7">7<br><small></small></a></li>
         </ul>
       </div>
 
@@ -151,30 +141,68 @@
           
         </div> 
 　　　</div>
+
+
 <br>
-<p style="font-size:25px">「当日予約」または「指定予約」を選択してください。</p>
-<p>※「当日予約」：本日ワクチン接種をご希望の方
-  <br>※「指定予約」：ご希望の日時にワクチン接種をご希望の方
-</p>
-<br>
-<br>
-<form action="{{action('App\Http\Controllers\mapController@move')}}" method="POST"  class="form"> 
-        @csrf
-        <input type="submit" name="submit" value="当日予約" class="custom-btn btn-1"/>
-</form>
-<form action="{{action('App\Http\Controllers\y_calendarController@move')}}" method="POST"  class="form"> 
-        @csrf          
-         <input type="submit" name="submit" value="指定予約" class="custom-btn btn-2"/>
-</form>
-<br>
-<br>
-<br>
+<!-- ローディング画面 
+<div id="loading">
+  <div class="spinner"></div>
+</div>
+-->
+<!-- コンテンツ部分 
+<div class="gallery">
+  <div class="item">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d210550.6462640296!2d132.2968747288369!3d34.45585771728846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x355a9908eef34fbb%3A0x7e4ce50cfc1f772!2z5bqD5bO255yM5bqD5bO25biC!5e0!3m2!1sja!2sjp!4v1636425161366!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  </div>
+</div>
+-->
+
+
+
+    <div class="text-danger">
+        <h3>希望する病院のマーカーをクリックしてください</h3>
+    </div>
+    
+
+
+    <div id="map" style="height:600px; width:80%; ">
+    </div>
+        <script>
+            // currentLocation.jsで使用する定数latに、controllerで定義した$latをいれて、currentLocation.jsに渡す
+            const lat = {{ $lat }};
+            // currentLocation.jsで使用する定数lngに、controllerで定義した$lngをいれて、currentLocation.jsに渡す
+            const lng = {{ $lng }};
+        </script>
+        {{--    上記の処理をしてから、googleMapを読み込まないとエラーが出てくる--}}
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="{{ asset('/js/setLocation.js') }}"></script>
+    <script src="{{ asset('/js/rensyu_map.js') }}"></script>
+  
+    <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=AIzaSyDiALKw8a6mIJMEoEyuKoiCsJG8lHayCXM&callback=initMap" async defer>
+    </script>
+
+
+
+
+
+  <br>
+  <br>
+    <input type="button" name="button" value="戻る" class="custom-btn btn-1" onClick="history.back()"/>
+
+    
+
+<script>
+window.onload = function() {
+  const spinner = document.getElementById('loading');
+  spinner.classList.add('loaded');
+}
+</script>
 
 
 
 <!------------------------------------------------------------------------------------------------------------------->
-      <!--<canvas id="myChart" width="900" height="380"></canvas>class="my-4 w-100"  少し下にスクロールできる-->
-
+      
      
 
 

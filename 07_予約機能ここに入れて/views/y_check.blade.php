@@ -6,12 +6,12 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.79.0">
-    <title>予約完了</title>
+    <title>地図</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
   　<link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
-  　<link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
-    <link rel="stylesheet" href="{{  asset('css/delete.css') }}" />
+  <link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
+  <link rel="stylesheet" href="{{  asset('css/yoyaku.css') }}" />
 
     <!-- Bootstrap core CSS -->
 <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -48,12 +48,12 @@
   <body>
     
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand1 col-md-3 col-lg-2 me-0 px-3 a1">ユーザ名</a>
+  <a class="navbar-brand1 col-md-3 col-lg-2 me-0 px-3 a1">{{ Session::get('userID') }}</a>
   
   <ul class="nav pull-right">
   <li class="nav-item">
       <a class="nav-link text-white" href="#">
-      <form action="{{action('App\Http\Controllers\top2Controller@move')}}" method="get"  class="form"> 
+      <form action="{{url('/home')}}" method="get"  class="form"> 
                      @csrf
             <input type="submit" name="submit" value="ホーム" class="btn1" />
             </form>
@@ -104,15 +104,6 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
-              <form action="{{action('App\Http\Controllers\m_editController@move')}}" method="POST"  class="form"> 
-           	 @csrf
-    		<input type="submit" name="submit" value="問診票編集" class="btn2"/>
-	      </form>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="shopping-cart"></span>
               <form action="{{action('App\Http\Controllers\mailController@move')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="お知らせ" class="btn2"/>
@@ -139,10 +130,9 @@
          <li><a href="#step-1">1<br><small></small></a></li>
          <li><a href="#step-2">2<br><small></small></a></li>
          <li><a href="#step-3">3<br><small></small></a></li>
-         <li><a href="#step-4">4<br><small></small></a></li>
-	      <li><a href="#step-5">5<br><small></small></a></li>
+        <li><a href="#step-4">4<br><small></small></a></li>
+        <li class="active"><a href="#step-5">5<br><small></small></a></li>
         <li><a href="#step-6">6<br><small></small></a></li>
-        <li class="active"><a href="#step-7">7<br><small></small></a></li>
         </ul>
       </div>
 
@@ -151,24 +141,38 @@
         </div> 
 　　　</div>
 <br>
-<h2>予約が完了しました。</h2>
+<p>以下の予定でよろしいですか？</P>
+    <br>
+    <div class="clskwe7b4eq">
+    <div class="tbl">
+      <table align="center">
+        <tr>
+          <th>指定日</th>
+          <td>{{ Session::get('day') }}</td>
+        </tr>
+        <tr>
+          <th>指定場所</th>
+          <td>{{ Session::get('hospital') }}</td>
+        </tr>
+        <tr>
+          <th>指定時間</th>
+          <td>{{ Session::get('time') }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+    
 <br>
-<p style="font-size:25px">来院時は<span style="color:red;">接種券番号</span><!--以下のQRコード-->を受付にてご提示ください。</p>
-<p style="font-size:20px; ">※<span style="color:red;">指定予約の方</span>は来院前に問診票の記入をお願いします。<br>
-接種日が近づいてまいりましたら「お知らせ」に通知いたします。</p>
 <br>
-<!--<img src="{{ asset('img/qrコード.png') }}"  >-->
-<br>
-<br>
-<br>
-  <form action="{{action('App\Http\Controllers\top2Controller@move')}}" method="get"  class="form"> 
+<input type="button" name="button" value="戻る" class="custom-btn btn-2" onClick="history.back()"/>
+<form action="{{action('App\Http\Controllers\y_conpController@move')}}" method="post"  class="form"> 
         @csrf
-        <input type="submit" name="submit" value="ホームに戻る" class="custom-btn btn-3"/>
+        <input type="submit" name="submit" value="予約する" class="custom-btn btn-4_1"/>
 </form>
 
-
-
-
+<script>
+history.forward();
+</script>
 
 <!------------------------------------------------------------------------------------------------------------------->
       <!--<canvas id="myChart" width="900" height="380"></canvas>class="my-4 w-100"  少し下にスクロールできる-->

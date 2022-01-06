@@ -1,0 +1,127 @@
+/**
+*ユーザログイン画面
+*/
+
+.form{
+  width: 400px;
+  margin: 0 auto;
+  text-align: left;
+  margin-top: 5em;
+}
+.form label{
+  display: block;
+  text-align: left;
+  color: rgb(0, 0, 0);
+  font-size: .875em;
+}
+  
+.form form .text-input{
+   overflow: hidden;  
+  margin-bottom: .875em;
+}
+    
+input[type="text"],
+  input[type="password"]{
+    width: 100%;
+    padding: 1em 0 12px;
+    padding-left: 0;
+    background: none;
+    color: rgb(0, 0, 0);
+    font-size: 1.2em;
+    font-weight: 400;
+    border: none;
+    border-bottom: 1px solid #999;
+}      
+
+/*Some sibling magic happens */
+input[type=password]:focus + .separator {
+  transform: scaleX(1) translateY(-2px);   
+  opacity: 1;
+}
+      
+.form form input[type="submit"]{
+  color: white;
+  background: #3599FF;
+  padding: 0em 4.4em;
+  font-size: 1.2em;
+  border:none;
+  border-radius: 10px;
+}
+  
+.separator {
+  height:3px;
+  width: 100%;
+  background: #68B3FF;
+  display: block;
+  transform: scaleX(0) translateY(-2px);
+  transform-origin: 50%;
+  opacity: 0;
+  transition: all .15s linear;
+}
+
+input[type="email"]{
+  border: none;
+  border-bottom: 1px solid #959494;
+  width:100%;
+  padding: 1em 0 12px;
+  font-size: 20px;
+}
+
+/**
+* Form Reset - remove focus highlighting
+*/
+
+* :focus {
+  outline-color: transparent;
+  outline-style: none;
+}
+
+body {
+  font-family: Roboto;
+  background: #ffffff;
+}
+body a {
+    color: #3599FF;
+    font-size: 1em;
+    text-decoration: none;
+}
+
+.form-bottom{
+  margin-top:1.25em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+p{
+  text-align: center;
+}
+.fieldPassword{
+  display:inline-flex;
+  border-width: thin;
+  border-style: solid;
+  width: 200px;
+  border:none;
+}
+.textPassword {
+  border: none; /* デフォルトの枠線を消す */
+}
+.eye{
+  font-weight: 600;
+    margin-top: 25px;
+}
+/*新規登録完了画面*/
+body{
+  text-align: center;
+}
+h2{
+  color:#3599FF;
+}
+
+.btn {
+  color: white;
+  background: #3599FF;
+  padding: 0em 4.4em;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 10px;
+}
