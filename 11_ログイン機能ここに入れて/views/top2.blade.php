@@ -6,13 +6,12 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.79.0">
-    <title>予約カレンダー</title>
+    <title>ホーム_ユーザ側</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
   　<link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
-    <link rel="stylesheet" href="{{  asset('css/y_calendar.css') }}" />
-    <link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
-    
+    <!--<link rel="stylesheet" href="{{  asset('css/calendar.css') }}" />-->
+    <link rel="stylesheet" href="{{  asset('css/top2.css') }}" />
 
     <!-- Bootstrap core CSS -->
 
@@ -46,53 +45,20 @@
     <link href="/css/dashboard.css" rel="stylesheet">
     <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
-
-
-<!--カレンダー-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-  <style>
-    .ui-widget {
-    font-family: Arial,Helvetica,sans-serif;
-    font-size: 25px;
-    margin:10px;
-    width:50%
-    }
-    /* 日曜日のカラー設定 */
-td.ui-datepicker-week-end:first-child a.ui-state-default{
-  background-color: #ffecec;   /* 背景色を設定 */
-  color: #f00!important;       /* 文字色を設定 */
-}
-/* 土曜日のカラー設定 */
-td.ui-datepicker-week-end:last-child a.ui-state-default{
-  background-color: #eaeaff;   /* 背景色を設定 */
-  color: #00f!important;       /* 文字色を設定 */
-}
-/* ホバー時の動作 */
-td.ui-datepicker-week-end a.ui-state-hover{
-  opacity: 0.8;
-}
-/* 当日を示す色はそのまま */
-td.ui-datepicker-week-end a.ui-state-highlight{
-  background-color: #fffa90!important;
-}
-  </style>
-
   </head>
   <body>
     
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand1 col-md-3 col-lg-2 me-0 px-3 a1">ユーザ名</a>
-  
+  <a class="navbar-brand1 col-md-3 col-lg-2 me-0 px-3 a1">{{ Session::get('userID') }}</a>
+
   <ul class="nav pull-right">
   <li class="nav-item">
       <a class="nav-link text-white" href="#">
-      <form action="{{action('App\Http\Controllers\top2Controller@move')}}" method="get"  class="form"> 
+      <form action="{{action('App\Http\Controllers\top2Controller@move')}}" method="post"  class="form"> 
                      @csrf
             <input type="submit" name="submit" value="ホーム" class="btn1" />
-      </form>
-      </a>
+            </form>
+        </a>
     </li>
     <li class="nav-link text-white" href="#">
     <form action="{{action('App\Http\Controllers\userloginController@move')}}" method="get"  class="form"> 
@@ -109,22 +75,22 @@ td.ui-datepicker-week-end a.ui-state-highlight{
       <div class="position-sticky pt-3">
           <br>
         <ul class="nav flex-column">
-          <li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="file"></span>
               <form action="{{action('App\Http\Controllers\yoyakuController@move')}}" method="POST"  class="form"> 
-            	@csrf
-    		<input type="submit" name="submit" value="予約" class="btn2"/>
-    	      </form>
+                     @csrf
+            <input type="submit" name="submit" value="予約" class="btn2" />
+            </form>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
               <form action="{{action('App\Http\Controllers\log2Controller@move')}}" method="POST"  class="form"> 
-           	 @csrf
-    		<input type="submit" name="submit" value="履歴" class="btn2"/>
-	      </form>
+           	  @csrf
+    		      <input type="submit" name="submit" value="履歴" class="btn2" />
+	            </form>
             </a>
           </li>
           <li class="nav-item">
@@ -133,15 +99,6 @@ td.ui-datepicker-week-end a.ui-state-highlight{
               <form action="{{action('App\Http\Controllers\ticketController@move')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="接種券番号表示" class="btn2"/>
-	      </form>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="shopping-cart"></span>
-              <form action="{{action('App\Http\Controllers\m_editController@move')}}" method="POST"  class="form"> 
-           	 @csrf
-    		<input type="submit" name="submit" value="問診票編集" class="btn2"/>
 	      </form>
             </a>
           </li>
@@ -163,25 +120,13 @@ td.ui-datepicker-week-end a.ui-state-highlight{
 	      </form>
             </a>
           </li>
+    
         </ul>
       </div>
     </nav>
 　<br>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2  border-bottom"> <!--mb-3  進行状況の下のライン-->
-
-      <div id="smartwizard" class="sw-theme-arrows">
-        <ul class="nav nav-tabs step-anchor">
-         <li><a href="#step-1">1<br><small></small></a></li>
-         <li class="active"><a href="#step-2">2<br><small></small></a></li>
-         <li><a href="#step-3">3<br><small></small></a></li>
-        <li><a href="#step-4">4<br><small></small></a></li>
-        <li><a href="#step-5">5<br><small></small></a></li>
-        <li><a href="#step-6">6<br><small></small></a></li>
-        <li><a href="#step-7">7<br><small></small></a></li>
-        </ul>
-      </div>
-
+      <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2  "> 
 
         <div class="btn-toolbar mb-2 mb-md-0">
           
@@ -189,17 +134,80 @@ td.ui-datepicker-week-end a.ui-state-highlight{
 　　　</div>
 
 
-<!--<div class="container-calendar" align="left">
+<br>
+<br>
+<div align="left">
+    
+   <form action="{{action('App\Http\Controllers\yoyakuController@move')}}" method="POST"  class="form_icon" > 
+           	 @csrf
+        <button type="submit" class="icon_btn" >
+        <img src="{{ asset('img/予約アイコン.png') }}" class="icon_img"><br>
+    		<input type="submit" name="submit" value="予約"class="icon_sbm">
+        </button>
+	</form> 
+
+    <form action="{{action('App\Http\Controllers\log2Controller@move')}}" method="POST"  class="form_icon"> 
+           	 @csrf
+        <button type="submit" class="icon_btn" >
+        <img src="{{ asset('img/履歴アイコン.png') }}"  class="icon_img"><br>
+    		<input type="submit" name="submit" value="履歴" class="icon_sbm">
+        </button>
+	  </form> 
+
+    <form action="{{action('App\Http\Controllers\ticketController@move')}}" method="POST"  class="form_icon"> 
+           	 @csrf
+        <button type="submit" class="icon_btn" >
+        <img src="{{ asset('img/スマホ.png') }}"  class="icon_img"><br>
+    		<input type="submit" name="submit" value="接種券番号表示" class="icon_sbm">
+        </button>
+	  </form> 
+
+</div>
+<br>
+<br>
+<br>
+<div align="left">   
+
+    <form action="{{action('App\Http\Controllers\mailController@move')}}" method="POST"  class="form_icon "  > 
+           	 @csrf
+        <button type="submit" class="icon_btn icon_badge" id="icon_badge" data-num="1">
+        <img src="{{ asset('img/お知らせ.png') }}" class="icon_img"><br>
+    		<input type="submit" name="submit" value="お知らせ"  class="icon_sbm">
+        </button>
+	  </form>
+
+    <form action="{{action('App\Http\Controllers\optionController@move')}}" method="POST"  class="form_icon"> 
+           	 @csrf
+        <button type="submit" class="icon_btn" >
+        <img src="{{ asset('img/設定.png') }}"  class="icon_img"><br>
+    		<input type="submit" name="submit" value="その他" class="icon_sbm">
+        </button>
+	  </form>
+</div>
+
+
+<br>
+<br>
+
+<div align="left">
+  通知件数の増減
+  <button id="plus">+1</button>
+  <button id="minus">-1</button>
+</div>
+
+
+
+<!--カレンダー-->
+<div class="container-calendar" align="right">
           <h4 id="monthAndYear"></h4>
           <div class="button-container-calendar">
-              <button id="previous" onclick="previous()">＜</button>
-              <button id="next" onclick="next()">＞</button>
+              <button id="previous" onclick="previous()">‹</button>
+              <button id="next" onclick="next()">›</button>
           </div>
-            
-
+          
           <table class="table-calendar" id="calendar" data-lang="ja">
-            <thead id="thead-month"></thead>
-            <tbody id="calendar-body"></tbody>
+              <thead id="thead-month"></thead>
+              <tbody id="calendar-body"></tbody>
           </table>
           
           <div class="footer-container-calendar">
@@ -222,33 +230,15 @@ td.ui-datepicker-week-end a.ui-state-highlight{
           </div>
     </div>
 
-    <script src="js/y_calendar.js" type="text/javascript"></script>
-  -->
+    <script src="js/calendar.js" type="text/javascript"></script>
 
-    <div id="datepicker" align="center">
-      <br>
-      <form action="{{action('App\Http\Controllers\y_hospitalController@move')}}" method="POST"  style="display:inline-flex;"> 
-           	 @csrf
-        <input type="text" id="date_val" name="date_val" placeholder="日付を選択してください" style="font-size:20px;" readonly>
-        <input type="reset" value="リセット">
-    		<input type="submit" name="submit" value="予約する" />
-	    </form>
-    </div>
-    <br>
-    <br>
+<!--通知件数-->
 <script>
-$(function() {
-    $("#datepicker").datepicker({
-        // 日付が選択された時、日付をテキストフィールドへセット
-        onSelect: function(dateText, inst) {
-                    $("#date_val").val(dateText)  
-                }
-    });
-});
+    const icon = document.getElementById('icon_badge');
 
-
+document.getElementById('plus').addEventListener('click', () => icon_badge.dataset.num++ );
+document.getElementById('minus').addEventListener('click', () => icon_badge.dataset.num > 0 && icon_badge.dataset.num-- );
 </script>
-<script src="https://rawgit.com/jquery/jquery-ui/master/ui/i18n/datepicker-ja.js"></script>
 <!------------------------------------------------------------------------------------------------------------------->
       
 

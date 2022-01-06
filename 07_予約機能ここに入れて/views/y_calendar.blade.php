@@ -6,12 +6,13 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.79.0">
-    <title>ホーム_ユーザ側</title>
+    <title>予約カレンダー</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
   　<link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
-  <link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
-    <link rel="stylesheet" href="{{  asset('css/yoyaku.css') }}" />
+    <link rel="stylesheet" href="{{  asset('css/y_calendar.css') }}" />
+    <link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
+    
 
     <!-- Bootstrap core CSS -->
 
@@ -45,20 +46,67 @@
     <link href="/css/dashboard.css" rel="stylesheet">
     <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
+
+
+<!--カレンダー-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+  <style>
+    .ui-widget {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 25px;
+    margin:10px;
+    width:50%
+    }
+    /* 日曜日のカラー設定 */
+td.ui-datepicker-week-end:first-child a.ui-state-default{
+  background-color: #ffecec;   /* 背景色を設定 */
+  color: #f00!important;       /* 文字色を設定 */
+}
+/* 土曜日のカラー設定 */
+td.ui-datepicker-week-end:last-child a.ui-state-default{
+  background-color: #eaeaff;   /* 背景色を設定 */
+  color: #00f!important;       /* 文字色を設定 */
+}
+/* ホバー時の動作 */
+td.ui-datepicker-week-end a.ui-state-hover{
+  opacity: 0.8;
+}
+/* 当日を示す色はそのまま */
+td.ui-datepicker-week-end a.ui-state-highlight{
+  background-color: #fffa90!important;
+}
+
+.ui-widget-content .ui-datepicker-today .ui-state-default{
+  opacity: 1 !important;
+  background:yellow;
+  border: 1px solid yellow;
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+    border: 1px solid #c5c5c5;
+    font-weight: normal;
+    background:#f6f6f6;
+    color: #000;
+}
+  </style>
+
   </head>
   <body>
     
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand1 col-md-3 col-lg-2 me-0 px-3 a1">ユーザ名</a>
+  <a class="navbar-brand1 col-md-3 col-lg-2 me-0 px-3 a1">{{ Session::get('userID') }}</a>
   
   <ul class="nav pull-right">
   <li class="nav-item">
       <a class="nav-link text-white" href="#">
-      <form action="{{action('App\Http\Controllers\top2Controller@move')}}" method="get"  class="form"> 
+      <form action="{{url('/home')}}" method="get"  class="form"> 
                      @csrf
             <input type="submit" name="submit" value="ホーム" class="btn1" />
-            </form>
-        </a>
+      </form>
+      </a>
     </li>
     <li class="nav-link text-white" href="#">
     <form action="{{action('App\Http\Controllers\userloginController@move')}}" method="get"  class="form"> 
@@ -80,17 +128,17 @@
               <span data-feather="file"></span>
               <form action="{{action('App\Http\Controllers\yoyakuController@move')}}" method="POST"  class="form"> 
             	@csrf
-    		      <input type="submit" name="submit" value="予約" class="btn2" />
-    	        </form>
+    		<input type="submit" name="submit" value="予約" class="btn2"/>
+    	      </form>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
               <form action="{{action('App\Http\Controllers\log2Controller@move')}}" method="POST"  class="form"> 
-           	  @csrf
-    		      <input type="submit" name="submit" value="履歴" class="btn2" />
-	            </form>
+           	 @csrf
+    		<input type="submit" name="submit" value="履歴" class="btn2"/>
+	      </form>
             </a>
           </li>
           <li class="nav-item">
@@ -99,15 +147,6 @@
               <form action="{{action('App\Http\Controllers\ticketController@move')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="接種券番号表示" class="btn2"/>
-	      </form>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="shopping-cart"></span>
-              <form action="{{action('App\Http\Controllers\m_editController@move')}}" method="POST"  class="form"> 
-           	 @csrf
-    		<input type="submit" name="submit" value="問診票編集" class="btn2"/>
 	      </form>
             </a>
           </li>
@@ -129,7 +168,6 @@
 	      </form>
             </a>
           </li>
-    
         </ul>
       </div>
     </nav>
@@ -140,63 +178,55 @@
       <div id="smartwizard" class="sw-theme-arrows">
         <ul class="nav nav-tabs step-anchor">
          <li><a href="#step-1">1<br><small></small></a></li>
-         <li><a href="#step-2">2<br><small></small></a></li>
+         <li class="active"><a href="#step-2">2<br><small></small></a></li>
          <li><a href="#step-3">3<br><small></small></a></li>
-         <li><a href="#step-4">4<br><small></small></a></li>
-         <li><a href="#step-5">5<br><small></small></a></li>
-         <li class="active"><a href="#step-6">6<br><small></small></a></li>
-         <li><a href="#step-7">7<br><small></small></a></li>
+        <li><a href="#step-4">4<br><small></small></a></li>
+        <li><a href="#step-5">5<br><small></small></a></li>
+        <li><a href="#step-6">6<br><small></small></a></li>
+        <li><a href="#step-7">7<br><small></small></a></li>
         </ul>
       </div>
 
+
         <div class="btn-toolbar mb-2 mb-md-0">
           
-        </div> 
+        </div>
 　　　</div>
 
-<br>
-<p>以下の予定でよろしいですか？</P>
-    <br>
-    <div class="clskwe7b4eq">
-    <div class="tbl">
-      <table align="center">
-        <tr>
-          <th>指定場所</th>
-          <td>???</td>
-        </tr>
-        <tr>
-          <th>指定日</th>
-          <td>???</td>
-        </tr>
-        <tr>
-          <th>指定時間</th>
-          <td>???</td>
-        </tr>
-      </table>
+
+
+
+
+    <div id="datepicker" align="center">
+      <br>
+      <form action="{{action('App\Http\Controllers\y_hospitalController@move')}}" method="POST"  style="display:inline-flex;"> 
+           	 @csrf
+        <input type="text" id="date_val" name="date_val" placeholder="日付を選択してください" style="font-size:20px;" readonly >
+        <input type="reset" value="リセット">
+    		<input type="submit" name="submit" value="予約する" />
+	    </form>
     </div>
-  </div>
+    <br>
+    <br>
+<script>
+$(function() {
+    $("#datepicker").datepicker({
+
+      minDate: 1,
+        // 日付が選択された時、日付をテキストフィールドへセット
+        onSelect: function(dateText, inst) {
+                    $("#date_val").val(dateText)  }
+    });
     
-<br>
-<br>
-<input type="submit" name="submit" value="戻る" class="custom-btn btn-2" onClick="history.back()"/>
-<form action="{{action('App\Http\Controllers\yoyaku_ConpController@move')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="submit" value="予約する" class="custom-btn btn-4_1"/>
-</form>
+});
 
 
+</script>
+<input type="button" name="button" value="戻る"  class="custom-btn btn-1"  onClick="history.back()"/>
 
-
-
-
-
-
-
-
-
-
+<script src="https://rawgit.com/jquery/jquery-ui/master/ui/i18n/datepicker-ja.js"></script>
 <!------------------------------------------------------------------------------------------------------------------->
-    
+      
 
      
 
