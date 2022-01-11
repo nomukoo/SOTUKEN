@@ -1,0 +1,12 @@
+create table hospital_kari (
+ hospital_ID varchar(64) primary key,
+ hospital_name varchar(64),
+ hospital_address varchar(64),
+ hospital_tell varchar(16),
+ hospital_idokeido varchar(60)
+);
+
+
+
+insert into hospital value(
+'H0011','広島厚生病院','広島県広島市南区仁保新町１丁目５−１３ 広島厚生病院（広島厚生会）','082-286-6111','34.3775660581257,132.49050001759176');

@@ -1,0 +1,32 @@
+create table kaitou(
+ defrost_ID int primary key AUTO_INCREMENT,
+ wakuchin_ID varchar(64) not null,
+ lot_number varchar(6) not null,
+ hospital_ID varchar(64) not null,
+ defrost_date date not null,
+ expair date not null,
+ defrost_total int not null,
+ UNIQUE (wakuchin_ID,lot_number,hospital_ID,defrost_date)
+);
+
+
+
+insert into kaitou value(0,'123456','123478','98274','2021-12-15','2021-12-17',1);
+
+insert into kaitou values(2,'12342','123543','982523','2021-12-15','2021-12-20',1);
+
+
+
+
+insert into kaitou value(0,'124356','12378','9174','2021-12-15','2022-12-18',1);
+
+insert into kaitou value(0,'763456','76478','94574','2021-12-15','2051-12-19',1);
+
+insert into kaitou value(0,'1986','12453','9844','2021-12-15','2002-12-18',1);
+
+
+insert into kaitou value(0,'95848','94504','9432','2021-12-15','2022-09-17',1);
+
+insert into kaitou value(0,'14326','16578','1234','2021-12-15','2029-02-05',1);
+
+

@@ -1,0 +1,9 @@
+ALTER TABLE nyuko
+    ADD CONSTRAINT fk_staff_ID_1
+        FOREIGN KEY (staff_ID) REFERENCES staff (staff_ID)
+            ON UPDATE cascade ON DELETE cascade;
+
+ALTER TABLE syukko
+    ADD CONSTRAINT fk_staff_ID_2
+        FOREIGN KEY (staff_ID) REFERENCES staff (staff_ID)
+            ON UPDATE cascade ON DELETE cascade;

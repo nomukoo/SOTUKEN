@@ -1,0 +1,24 @@
+create table wakuchin_stocks(
+ stock_ID int primary key AUTO_INCREMENT,
+ wakuchin_ID varchar(64),
+ hospital_ID varchar(64),
+ lot_number varchar(6),
+ wakuchin_total int,
+ UNIQUE (wakuchin_ID,hospital_ID,lot_number)
+);
+
+
+insert into wakuchin_stock value(
+'W0001','H0002','J10J5K','72');
+
+insert into wakuchin_stock value(
+'W0002','H0005','F33G9G','20');
+
+insert into wakuchin_stock value(
+'W0003','H0004','K55A7Y','48');
+
+Laravel Eloquentの仕様上ModelとTableの対応は名称をモデル側が
+Wakuchin_stock、Table側がwakuchin_stocksのような形でないと接続
+できないのでテーブル名称を変更しました。
+Eloquentの一部メソッドが複合主キーに対応していなかったので、主キー
+に自動採番のIDを追加し、以前の主キーは複合ユニークキーに変更しました。野村

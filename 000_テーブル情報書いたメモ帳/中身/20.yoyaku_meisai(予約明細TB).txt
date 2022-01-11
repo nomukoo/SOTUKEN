@@ -1,0 +1,68 @@
+create table yoyaku_meisais (
+ yoyaku_ID int not null,
+ yoyaku_meisai_ID int AUTO_INCREMENT,
+ wakuchin_ID varchar(64) NOT NULL,
+ monshin_ID int,
+ PRIMARY KEY(yoyaku_meisai_ID,yoyaku_ID)
+);
+
+
+insert into yoyaku_meisais value(
+'11','11','W0001',null);
+
+insert into yoyaku_meisais value(
+'12','12','W0002',null);
+
+insert into yoyaku_meisais value(
+'13','13','W0003',null);
+
+insert into yoyaku_meisais value(
+'14','14','W0003',null);
+
+insert into yoyaku_meisais value(
+'15','15','W0001',null);
+
+insert into yoyaku_meisais value(
+'16','16','W0002',null);
+
+insert into yoyaku_meisais value(
+'17','17','W0003',null);
+
+insert into yoyaku_meisais value(
+'18','18','W0003',null);
+
+insert into yoyaku_meisais value(
+'19','19','W0001',null);
+
+insert into yoyaku_meisais value(
+'20','20','W0002',null);
+
+insert into yoyaku_meisais value(
+'21','21','W0003',null);
+
+insert into yoyaku_meisais value(
+'22','22','W0003',null);
+
+insert into yoyaku_meisais value(
+'23','23','W0001',null);
+
+insert into yoyaku_meisais value(
+'24','24','W0002',null);
+
+insert into yoyaku_meisais value(
+'25','25','W0003',null);
+
+insert into yoyaku_meisais value(
+'26','26','W0003',null);
+
+insert into yoyaku_meisais value(
+'27','27','W0001',null);
+
+insert into yoyaku_meisais value(
+'28','28','W0002',null);
+
+insert into yoyaku_meisais value(
+'29','29','W0003',null);
+
+insert into yoyaku_meisais value(
+'30','30','W0003',null);

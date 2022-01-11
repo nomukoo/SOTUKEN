@@ -1,0 +1,17 @@
+create table syringe (
+ syringe_ID varchar(14) primary key,
+ syringe_name varchar(64)
+);
+
+
+insert into syringe value(
+'S0001','新型コロナウイルス用(通常タイプ)');
+
+insert into syringe value(
+'S0002','新型コロナウイルス用(ローデッド型)');
+
+insert into syringe value(
+'S0003','新型コロナウイルス用(完全一体型)');
+
+insert into syringe value(
+'S0004','ヒブワクチン用');

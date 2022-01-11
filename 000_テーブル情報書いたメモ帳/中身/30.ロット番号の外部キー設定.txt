@@ -1,0 +1,10 @@
+ALTER TABLE wakuchin_stock
+    ADD CONSTRAINT fk_lot_number_1
+        FOREIGN KEY (lot_number) REFERENCES lot (lot_number)
+            ON UPDATE cascade ON DELETE cascade;
+
+ALTER TABLE i_meisai
+    ADD CONSTRAINT fk_lot_number_4
+        FOREIGN KEY (lot_number) REFERENCES lot (lot_number)
+            ON UPDATE cascade ON DELETE cascade;
+

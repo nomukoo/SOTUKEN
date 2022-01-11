@@ -1,0 +1,10 @@
+ALTER TABLE n_meisai
+    ADD CONSTRAINT fk_made_ID_1
+        FOREIGN KEY (made_ID) REFERENCES made (made_ID)
+            ON UPDATE cascade ON DELETE cascade;
+
+ALTER TABLE s_meisai
+    ADD CONSTRAINT fk_made_ID_2
+        FOREIGN KEY (made_ID) REFERENCES made (made_ID)
+            ON UPDATE cascade ON DELETE cascade;
+

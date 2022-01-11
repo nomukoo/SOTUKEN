@@ -1,0 +1,19 @@
+create table yotei_meisais (
+ yotei_ID int,
+ yotei_meisai_ID int AUTO_INCREMENT,
+ wakuchin_ID varchar(64),
+ yotei_amount int,
+ class_code int,
+ group_id,
+ PRIMARY KEY(yotei_meisai_ID, yotei_ID)
+);
+
+insert into yotei_meisais value(
+'2001','1','W0002','2');
+
+insert into yotei_meisais value(
+'2002','2','W0004','7');
+
+insert into yotei_meisais value(
+'2003','3','W0005','5');
+

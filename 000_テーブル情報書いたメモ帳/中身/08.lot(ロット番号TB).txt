@@ -1,0 +1,23 @@
+create table lot (
+ lot_number varchar(6) primary key,
+ lot_made_date date,
+ lot_limit date
+);
+
+insert into lot value(
+'D52W2W','2019/10/28','2020/1/8');
+
+insert into lot value(
+'L55M6P','2020/02/1','2020/1/8');
+
+insert into lot value(
+'C85H5S','2020/10/28','2020/1/8');
+
+insert into lot value(
+'J10J5K','2020/10/28','2020/1/8');
+
+insert into lot value(
+'K55A7Y','2020/10/29','2020/11/25');
+
+insert into lot value(
+'F33G9G','2020/12/1','2021/1/25');

@@ -1,0 +1,71 @@
+create table yoyaku (
+ yoyaku_ID int primary key AUTO_INCREMENT,
+ yoyaku_date date,
+ yoyaku_time varchar(10),
+ patient_ID varchar(64),
+ hospital_Id varchar(64),
+ uketuke_flag boolean
+);
+
+
+insert into yoyaku value(
+'11','2021-12-25','10:00:00','P0011','hugahuga','0');
+
+insert into yoyaku value(
+'12','2021-12-17','10:01:00','P0012','hugahuga','0');
+
+insert into yoyaku value(
+'13','2021-12-25','10:02:00','P0013','hugahuga','0');
+
+insert into yoyaku value(
+'14','2021-12-25','10:03:00','P0014','hugahuga','0');
+
+insert into yoyaku value(
+'15','2021-12-25','10:04:00','P0015','hugahuga','0');
+
+insert into yoyaku value(
+'16','2021-12-25','10:05:00','P0016','hugahuga','0');
+
+insert into yoyaku value(
+'17','2021-12-25','10:06:00','P0017','hugahuga','0');
+
+insert into yoyaku value(
+'18','2021-12-25','10:08:00','P0018','hugahuga','0');
+
+insert into yoyaku value(
+'19','2021-12-25','10:09:00','P0019','hugahuga','0');
+
+insert into yoyaku value(
+'20','2021-12-25','10:10:00','P0020','hugahuga','0');
+
+insert into yoyaku value(
+'21','2021-12-25','10:11:00','P0021','hugahuga','0');
+
+insert into yoyaku value(
+'22','2021-12-25','10:12:00','P0022','hugahuga','0');
+
+insert into yoyaku value(
+'23','2021-12-25','10:13:00','P0023','hugahuga','0');
+
+insert into yoyaku value(
+'24','2021-12-25','10:14:00','P0024','hugahuga','0');
+
+insert into yoyaku value(
+'25','2021-12-25','10:15:00','P0025','hugahuga','0');
+
+insert into yoyaku value(
+'26','2021-12-25','10:16:00','P0026','hugahuga','0');
+
+insert into yoyaku value(
+'27','2021-12-25','10:17:00','P0027','hugahuga','0');
+
+insert into yoyaku value(
+'28','2021-12-25','10:18:00','P0028','hugahuga','0');
+
+insert into yoyaku value(
+'29','2021-12-25','10:19:00','P0029','hugahuga','0');
+
+insert into yoyaku value(
+'30','2021-12-25','10:20:00','P0030','hugahuga','0');
+
+

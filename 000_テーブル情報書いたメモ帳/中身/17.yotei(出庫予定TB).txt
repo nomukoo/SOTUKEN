@@ -1,0 +1,15 @@
+create table yoteis (
+ yotei_ID int primary key AUTO_INCREMENT,
+ yotei_date date,
+ hospital_ID varchar(64)
+);
+
+insert into yotei value(
+'2001','2021-11-18','H0002');
+
+insert into yotei value(
+'2002','2021-12-01','H0001');
+
+insert into yotei value(
+'2003','2021-12-02','H0001');
+

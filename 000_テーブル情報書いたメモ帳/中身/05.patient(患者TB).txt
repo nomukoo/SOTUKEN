@@ -1,0 +1,20 @@
+create table patient (
+ patient_ID varchar(64) primary key,
+ patient_password varchar(64),
+ patient_sei varchar(64),
+ patient_mei varchar(64),
+ patient_address varchar(64),
+ patient_tell varchar(16),
+ patient_email varchar(64),
+ patient_birth varchar(16)
+);
+
+insert into patient value(
+'P0001','pass','高橋','文子','広島市中区幟町7-1','082-223-3402','humihumi@docomo.ne.jp','1965-09-21');
+
+insert into patient value(
+'P0002','pass','芦田','勉','広島県広島市中区本通5-2','082-247-7011','asituto@gmail.com','1992-12-06');
+
+insert into patient value(
+'P0003','pass','浅川','崇','広島県広島市西区観音本町1丁目22-1','080-294-3652','asakawadesu@outlook.ne.jp','2000-07-29');
+

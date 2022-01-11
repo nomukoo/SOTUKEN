@@ -1,0 +1,15 @@
+create table wakuchin (
+ wakuchin_ID varchar(64) primary key,
+ wakuchin_name varchar(64)
+);
+
+
+insert into wakuchin value(
+'W0001','ファイザー社製');
+
+insert into wakuchin value(
+'W0002','モデルナ社製');
+
+insert into wakuchin value(
+'W0003','アストラゼネカ社製');
+

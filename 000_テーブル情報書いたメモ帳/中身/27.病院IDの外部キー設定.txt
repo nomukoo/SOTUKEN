@@ -1,0 +1,45 @@
+ALTER TABLE wakuchin_stock
+    ADD CONSTRAINT fk_hospital_ID_1
+        FOREIGN KEY (hospital_ID) REFERENCES hospital (hospital_ID)
+            ON UPDATE cascade ON DELETE cascade;
+
+ALTER TABLE syringe_stock
+    ADD CONSTRAINT fk_hospital_ID_2
+        FOREIGN KEY (hospital_ID) REFERENCES hospital (hospital_ID)
+            ON UPDATE cascade ON DELETE cascade;
+
+ALTER TABLE nyuko
+    ADD CONSTRAINT fk_hospital_ID_3
+        FOREIGN KEY (hospital_ID) REFERENCES hospital (hospital_ID)
+            ON UPDATE cascade ON DELETE cascade;
+
+ALTER TABLE syukko
+    ADD CONSTRAINT fk_hospital_ID_4
+        FOREIGN KEY (hospital_ID) REFERENCES hospital (hospital_ID)
+            ON UPDATE cascade ON DELETE cascade;
+
+ALTER TABLE staff
+    ADD CONSTRAINT fk_hospital_ID_5
+        FOREIGN KEY (hospital_ID) REFERENCES hospital (hospital_ID)
+            ON UPDATE cascade ON DELETE cascade;
+
+ALTER TABLE keiyaku
+    ADD CONSTRAINT fk_hospital_ID_6
+        FOREIGN KEY (hospital_ID) REFERENCES hospital (hospital_ID)
+            ON UPDATE cascade ON DELETE cascade;
+
+ALTER TABLE inoculation
+    ADD CONSTRAINT fk_hospital_ID_7
+        FOREIGN KEY (hospital_ID) REFERENCES hospital (hospital_ID)
+            ON UPDATE cascade ON DELETE cascade;
+
+ALTER TABLE yotei
+    ADD CONSTRAINT fk_hospital_ID_8
+        FOREIGN KEY (hospital_ID) REFERENCES hospital (hospital_ID)
+            ON UPDATE cascade ON DELETE cascade;
+
+ALTER TABLE yoyaku
+    ADD CONSTRAINT fk_hospital_ID_9
+        FOREIGN KEY (hospital_ID) REFERENCES hospital (hospital_ID)
+            ON UPDATE cascade ON DELETE cascade;
+

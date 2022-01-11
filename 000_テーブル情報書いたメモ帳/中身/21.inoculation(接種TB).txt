@@ -1,0 +1,18 @@
+create table inoculation (
+ ino_ID int primary key,
+ ino_date date,
+ patient_ID varchar(64),
+ hospital_ID varchar(64)
+);
+
+insert into inoculation value(
+"4001","2019-10-31","P0003","H0001");
+
+insert into inoculation value(
+"4002","2020-02-03","P0002","H0003");
+
+insert into inoculation value(
+"4003","2020-05-01","P0002","H0005");
+
+
+

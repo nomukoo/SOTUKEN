@@ -1,0 +1,16 @@
+create table i_meisai (
+ ino_ID varchar(64),
+ i_meisai_ID int primary key auto_increment,
+ wakuchin_ID varchar(64),
+ lot_number varchar(6)
+);
+
+insert into i_meisai value(
+"4001","1","W0002","D52W2W");
+
+insert into i_meisai value(
+"4002","2","W0003","L55M6P");
+
+insert into i_meisai value(
+"4003","3","W0001","C85H5S");
+
