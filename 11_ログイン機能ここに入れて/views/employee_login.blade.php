@@ -2,7 +2,7 @@
 <html lang="ja">
     <head>
         <meta charset="utf-8">
-        <title>ユーザログイン</title>
+        <title>従業員ログイン</title>
 
         <link rel="stylesheet" href="{{  asset('css/userlogin.css') }}" />
 
@@ -11,18 +11,18 @@
     <body>
 
 <div class="form">
-    <form action="{{url('/user_login')}}" method="post" >
+    <form action="{{url('/emp_login')}}" method="post" >
         @csrf
   <div class="text-input">
     <label for="userID">ID</label>
-    <input type="text" name="userID" id="userID" placeholder="" />
+    <input type="text" name="emp_ID" id="userID" placeholder="" />
     <span class="separator"> </span>
   </div>
 
     <div class="text-input">
       <label for="password">Password</label>
         <div class="fieldPassword">
-          <input type="password" name="password" id="textPassword" placeholder="" />
+          <input type="password" name="emp_password" id="textPassword" placeholder="" />
           <span id="buttonEye" class="fa fa-eye eye" onclick="pushHideButton()"></span>
         </div>
     </div>
@@ -58,7 +58,7 @@
       </div>
   </div>
 </form>
-      <form action="{{url('/user_login')}}" method="POST" class="form-bottom">
+      <form action="{{url('/emp_login')}}" method="POST" class="form-bottom">
            	 @csrf
     		<input type="submit" name="submit" value="新規会員登録" />
 	    </form>
