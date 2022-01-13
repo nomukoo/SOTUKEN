@@ -18,18 +18,22 @@ class DilutionController extends Controller
 }
 public function dilution_read(Request $request)
   {
-    $defrost_lists = Defrost::orderBy('expair','ASC')->get();
-    $today=Carbon::today();
-    $yoyaku_count=Yoyaku::whereDate('yoyaku_date', $today)->count();
+    $session_get = $request->session()->get('emp_Info');
+    $defrost_lists = Defrost::where('hospital_ID',$session_get['hospital_ID'])->orderBy('expair','ASC')->get();
+    $today=Carbon::now()->toDateString();
+    $yoyaku_count=Yoyaku::where('hospital_ID',$session_get['hospital_ID'])->whereDate('yoyaku_date', $today)->count();
 
-
+    echo $today;
+  
     return view('dilution_read' ,compact('defrost_lists','yoyaku_count'));
 }
 
 public function dilution_finish(Request $request)
   {
     $vial_quantity = $request->input('vial_quantity');
-    $defrost_list = Defrost::orderBy('expair','ASC')->get();
+    $session_get = $request->session()->get('emp_Info');
+
+    $defrost_list = Defrost::where('hospital_ID',$session_get['hospital_ID'])->orderBy('expair','ASC')->get();
     foreach($defrost_list as $defrost_lists){
       if($vial_quantity<$defrost_lists['defrost_total']&& $vial_quantity>0){
         $dilution =new Dilution();
@@ -62,7 +66,7 @@ public function dilution_finish(Request $request)
         $defrost->where('defrost_ID', $defrost_lists['defrost_ID'])->delete();
       }
     }
-    $dilution_list = Dilution::all();
+    $dilution_list = Dilution::where('hospital_ID',$session_get['hospital_ID'])->get();
     if(count($dilution_list)==0){
       return view('dilution_error');
     }else{
