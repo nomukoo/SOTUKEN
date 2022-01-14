@@ -13,6 +13,7 @@
       width: 100%;
       background-color: orange;
       overflow: hidden;
+      cursor: pointer;
     }
     
     /* バナー内コンテンツ */

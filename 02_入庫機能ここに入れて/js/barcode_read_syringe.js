@@ -1,4 +1,4 @@
-    let records = {};
+let records = {};
     let cnt = 0;
     let txt = '';
     let quantity = {};
@@ -13,18 +13,18 @@
             let command_log = {};
             /*分割*/
             rec['code'] = txt.substr(2,14);
-            rec['wakuchin_name'] = 'none';
+            rec['syringe_name'] = 'none';
             rec['expair'] = expairFormatter(txt.substr(18,6));
             rec['lot'] = txt.substr(26,7);
             rec['amount'] = 0;
             /*重複チェック*/
             if(duplicateCodeCheck(rec)){
-                get_vaccinedata(rec['code']).done(function(data){
+                get_syringedata(rec['code']).done(function(data){
                     var tmp = data;
                     if(tmp == 'undefined'){
                         alert('Error:現在の画面で読み取ることのできないバーコードです');
                     } else {
-                    rec['wakuchin_name'] = tmp['wakuchin_name'];
+                    rec['syringe_name'] = tmp['syringe_name'];
                     rec['amount'] = tmp['quantity'];
                     quantity[rec['code']] = tmp['quantity'];
                     records[cnt] = rec;
@@ -68,10 +68,10 @@
     }
 
     //ワクチン名称をサーバーから非同期で取り出す関数
-    function get_vaccinedata(code){
+    function get_syringedata(code){
         return $.ajax({
             type: 'Get',
-            url: '/get_vaccinedata',
+            url: '/get_syringedata',
             dataType: 'json',
             data: {
                 'code': code

@@ -1,7 +1,7 @@
 /*印刷処理用ネイティブアプリへのデータ送信処理*/
 (function(){
     var ws = new WebSocket("ws://localhost:9999");//WebSocket接続
-    ws.onopen = function(event){　
+    ws.onopen = function(event){
         ws.send(JSON.stringify(array));//接続成功直後にデータを送信
         
     }

@@ -44,6 +44,7 @@ class CreateDefrostList extends Command
      */
     public function handle()
     {   
+        echo '予定リスト生成開始';
         $yoyakus = DB::table('yoyakus');
         $target_hospital_list = $yoyakus //解凍リストが存在するすべての病院IDを取得 
         ->selectRaw('hospital_ID')
@@ -81,7 +82,7 @@ class CreateDefrostList extends Command
                     $syringe_name = $syringe->syringe_name;
                     if($number_of_people <= ($syringe->syringe_total - $syringe->reserve_inventory)){
                         $need_vial_num += ceil($number_of_people / $syringe->people_amp);
-                        $remainder = $syringe->people_amp - $number_of_people;
+                        $remainder = $syringe->people_amp * $need_vial_num - $number_of_people;
                         $wakuchin_stocks = DB::table('wakuchin_stocks');
                         $target_wakuchin_stocks = $wakuchin_stocks
                         ->join('lot','wakuchin_stocks.lot_number','=','lot.lot_number')
@@ -130,7 +131,6 @@ class CreateDefrostList extends Command
                         $syringe_meisai->yotei_ID = $last_insert_id;
                         $syringe_meisai->wakuchin_ID = $syringe->syringe_ID;
                         $syringe_meisai->yotei_amount = $number_of_people;
-                        echo $syringe_name;
                         $syringe_meisai->wakuchin_name = $syringe_name;
                         $syringe_meisai->class_code = 2;
                         $syringe_meisai->group_id = $group_id;
@@ -157,7 +157,6 @@ class CreateDefrostList extends Command
                             $yotei_meisai->yotei_ID = $last_insert_id;
                             $yotei_meisai->wakuchin_ID = $syringe->syringe_ID;
                             $yotei_meisai->yotei_amount = $use_syringe_num;
-                            echo $syringe_name;
                             $yotei_meisai->wakuchin_name = $syringe_name;
                             $yotei_meisai->class_code = 2;
                             $yotei_meisai->group_id = $group_id;
@@ -185,6 +184,6 @@ class CreateDefrostList extends Command
         }
 
         
-        
+        echo '予定リスト生成完了';
     }
 }

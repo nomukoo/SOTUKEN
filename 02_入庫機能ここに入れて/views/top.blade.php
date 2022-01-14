@@ -6,6 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.79.0">
+     <meta id="csrf-token" content="{{ csrf_token() }}">
     <title>ホーム_病院側</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
@@ -25,6 +26,8 @@
 <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon.ico">
 <meta name="theme-color" content="#7952b3">
 
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="{{ asset('js/comet.js') }}"></script>
 
     <style>
       .bd-placeholder-img {
@@ -40,31 +43,35 @@
         }
       }
     </style>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <!-- Custom styles for this template -->
 
   </head>
   <body>
-
+<?php 
+  $emp_info = session()->get('emp_Info');
+?>
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand1 col-md-3 col-lg-2 me-0 px-3 a1">○○病院</a>
-
+  <a class="navbar-brand1 col-md-3 col-lg-2 me-0 px-3 a1">ワクチン在庫管理システム</a>
   <ul class="nav pull-right">
   <li class="nav-item">
+  <a class="nav-link text-white"href="#">{{'ログイン中: '}}{{$emp_info['staff_name']}}</a>
+  </li>
+  <li class="nav-item">
       <a class="nav-link text-white" href="#">
-      <form action="{{url('/login')}}" method="get"  class="form">
+      <form action="{{url('/')}}" method="get"  class="form">
                      @csrf
             <input type="submit" name="submit" value="ホーム" class="btn1" />
       </form>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-white"href="#">サインアウト</a>
+      <a class="nav-link text-white"href="{{ url('/emp_logout')}}">サインアウト</a>
     </li>
   </ul>
-</header>
-
+    </header>
 <div class="container-fluid">
   <div class="row">
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
@@ -72,14 +79,14 @@
         <br>
         <br>
         <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file"></span>
-              <form action="{{action('WarehousingController@disp_read')}}" method="GET"  class="form">
-                     @csrf
-            <input type="submit" name="submit" value="入庫" class="btn2" />
-            </form>
-            </a>
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">入庫</a>
+          <span data-feather="shopping-cart"></span>
+            <div class="dropdown-menu" aria-labelledby="dropdown03">
+                <a class="dropdown-item" id="itm" href="/barcoderead">ワクチン入庫</a>
+                <a class="dropdown-item" id="itm" href="/barcode_read_syringe">注射器入庫</a>
+            </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
@@ -124,34 +131,14 @@
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 <!--バナー-->
-<?php
 
-$today = date("Y/m/d");
-$target_day = "2021/11/08";
-if(strtotime($today) === strtotime($target_day)){
-
-?>
 
     <div class="news-banner">
         <div class="news-banner__content">
-            <p>本日出庫予定のワクチンがあります。</p>
+            <p id='banner_text'>本日出庫予定のワクチンはありません。</p>
         </div>
     </div>
 
-<?php
-  } else {
-?>
-
-    <div class="news-banner">
-        <div class="news-banner__content">
-            <p>本日出庫予定はありません。</p>
-        </div>
-    </div>
-
-<?php
- }
-
-?>
         <div class="btn-toolbar mb-2 mb-md-0">
 
         </div>
@@ -203,7 +190,11 @@ if(strtotime($today) === strtotime($target_day)){
     </div>
 
     <script src="js/calendar.js" type="text/javascript"></script>
-
+    <script>
+      $(".news-banner").on('click',function(){
+        window.location.href = "/defrost_list";
+      });
+    </script>
 
 <!------------------------------------------------------------------------------------------>
       <canvas  id="myChart" width="900" height="280"></canvas>
@@ -213,7 +204,6 @@ if(strtotime($today) === strtotime($target_day)){
 
     <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
     <script src="{{ asset('/js/dashbord.js') }}"></script>
-
-      <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
   </body>
 </html>
