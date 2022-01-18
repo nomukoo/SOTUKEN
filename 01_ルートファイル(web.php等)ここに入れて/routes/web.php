@@ -57,3 +57,5 @@ Route::get('/barcode_read_syringe','WarehousingController@disp_read_syringe');
 Route::post('/warehousing_register_syringe','WarehousingController@register_syringe');
 
 Route::get('/warehousing_confirm_syringe', 'WarehousingController@disp_confirm_syringe');
+
+Route::get('/distinctionItem', 'DefrostController@distinctionItem');

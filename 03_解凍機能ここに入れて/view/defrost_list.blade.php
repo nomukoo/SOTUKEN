@@ -14,7 +14,7 @@
     
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="{{ asset('js/get_defrostList.js') }}"></script>
-
+    <script src="{{ asset('js/print_defrostlist.js') }}"></script>
    
 
 
@@ -44,15 +44,15 @@
     
     <!-- Custom styles for this template -->
     <link href="/css/defrost.css" rel="stylesheet">
+    <link href="/css/bounce.css" rel="stylesheet">
   </head>
   <body>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
 <div class="text-light ">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3">○○病院</a>
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3">ワクチン在庫管理システム</a>
     </div>
   <ul class="nav pull-right">
   <li class="nav-item">
@@ -132,7 +132,7 @@
     <p>予定
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h1">解凍予定リスト</h1>
+        <h1 class="h1">出庫予定リスト</h1>
         <div id="smartwizard" class="sw-theme-arrows">
         <ul class="nav nav-tabs step-anchor">
         <li class="active"><a>解凍一覧<br><small></small></a></li>
@@ -147,66 +147,44 @@
         </div>
     </div>
 
-
-    <script>
-
-$(function(){
-
-    //印刷
-$('.print-btn').on('click', function(){
-    var printPage = $(this).closest('.print-page').html();
-    $('body').append('<div id="print"></div>');
-    $('#print').append(printPage);
-    $('body > :not(#print)').addClass('print-off');
-    window.print();
-    $('#print').remove();
-    $('.print-off').removeClass('print-off');
-});
-
-   
-
-});
-</script>
-
-    
+    <h4>本日必要なワクチンとシリンジの対応及び数量は下表の通りです</h4>
     <div class="m-5">
     </div>
- 
     <div class="m-5">
     <div class="text-center">
 <div class="d-flex justify-content-center">
     <div class="wrapper">
 <div class="print-page">
     <table class="table table-bordered border-dark"  > 
-    
     <tbody>
     <tr>
+      <th scope="col"class="table-dark border-dark">商品コード</th>
       <th scope="col"class="table-dark border-dark" >品名</th>
       <th scope="col"class="table-dark border-dark">ロット番号</th>
-      <th scope="col"class="table-dark border-dark">解凍数(バイアル)</th>
+      <th scope="col"class="table-dark border-dark">数量</th>
     </tr>
     </tbody>
     </table>
     <div class="print-btn btn-info rounded-pill" style="width:200px" >印刷</div>
-
 </div>
 </div>
 </div>
 </div>
-
-
 <div class="m-5">
-    
-
 <form class="row g-15 needs-validation" novalidate>
 <div class="text-center">
 <div class="d-flex justify-content-center">
 <button class="btn btn-success rounded-pill" type="submit" style="width:200px" formaction="/defrost_read" > <h4>解凍登録</h4></button>
   </div>
 </div>
-    </form>
-    </div>
-    
-  
+    </form> 
+    <?php 
+          $emp_info = session()->get('emp_Info');
+          $json_emp_info = json_encode($emp_info);
+    ?>
+    <script>
+      let emp_info = JSON.parse('<?php echo $json_emp_info ?>');
+    </script>
+    <script src="{{ asset('js/print_defrostlist.js') }}"></script>
   </body>
 </html>

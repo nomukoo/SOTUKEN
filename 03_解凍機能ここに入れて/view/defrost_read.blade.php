@@ -55,7 +55,7 @@
 
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
 <div class="text-light ">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3">○○病院</a>
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3">ワクチン管理システム</a>
     </div>
   <ul class="nav pull-right">
   <li class="nav-item">
@@ -169,31 +169,13 @@
     <div class="m-5">
     <table class="table table-bordered border-dark"> 
     
-    <tbody >
+    <tbody id="confirm_num">
     <tr>
+      <th scope="col"class="table-dark border-dark">商品コード</th>
       <th scope="col"class="table-dark border-dark">品名</th>
       <th scope="col"class="table-dark border-dark">ロット番号</th>
       <th scope="col"class="table-dark border-dark">数量(バイアル)</th>
-     
-     
     </tr>
-  <tr>
-  <div class="col-md-4">
-  <td scope="row" class="table-white border-dark" >コミナティ筋注</td>
-  <td scope="row" class="table-white border-dark" >FK123456</td>
-  <td scope="row" class="table-white border-dark" style="width:500px">
-    <input type="text" class="form-control" id=""  style="width:300px" placeholder="解凍数を入力してください"pattern="^[0-9]+$" required>
-    <div class="invalid-feedback">
-      個数を入力してください
-    </div>
-    <div class="valid-feedback">
-      OK!
-    </div>
-    </div></td>
- 
-
-  
-
     </tbody>
 </table>
     </div>
@@ -217,9 +199,7 @@
   
 
 
-    
-    <script src="{{ asset('/js/defrost.js') }}"></script>
-
-
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="{{ asset('/js/defrost_barcode_read.js') }}"></script>
   </body>
 </html>

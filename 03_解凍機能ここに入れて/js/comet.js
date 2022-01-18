@@ -1,6 +1,6 @@
 window.addEventListener('load', function(){
     let sts = 'none';
-    let hospital_ID = 'hugahuga'
+    let hospital_ID = emp_info['hospital_ID'];
     get_defrost_info(hospital_ID,sts);
 });
 
@@ -21,7 +21,7 @@ function get_defrost_info(hospital_ID,sts){
         type: "POST",
         data: sendJsonData,
         dataType: "json",
-        timeout: 500000
+        timeout: 50000
     }).done(function(data){
         if(data == 'exist'){
             sts = data;
