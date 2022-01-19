@@ -60,7 +60,7 @@
         </a>
     </li>
     <li class="nav-link text-white" href="#">
-    <form action="{{action('App\Http\Controllers\userloginController@move')}}" method="get"  class="form"> 
+    <form action="{{url('/user_login')}}" method="get"  class="form"> 
                      @csrf
             <input type="submit" name="submit" value="サインアウト" class="btn1" />
             </form>
@@ -77,7 +77,7 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="file"></span>
-              <form action="{{action('App\Http\Controllers\yoyakuController@move')}}" method="POST"  class="form"> 
+              <form action="{{url('/user_login')}}" method="POST"  class="form"> 
             	@csrf
     		<input type="submit" name="submit" value="予約" class="btn2"/>
     	      </form>
@@ -86,7 +86,7 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
-              <form action="{{action('App\Http\Controllers\log2Controller@move')}}" method="POST"  class="form"> 
+              <form action="{{url('/user_login')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="履歴" class="btn2"/>
 	      </form>
@@ -95,7 +95,7 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
-              <form action="{{action('App\Http\Controllers\ticketController@move')}}" method="POST"  class="form"> 
+              <form action="{{url('/user_login')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="接種券番号表示" class="btn2"/>
 	      </form>
@@ -104,7 +104,7 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
-              <form action="{{action('App\Http\Controllers\mailController@move')}}" method="POST"  class="form"> 
+              <form action="{{url('/user_login')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="お知らせ" class="btn2"/>
 	      </form>
@@ -113,7 +113,7 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
-              <form action="{{action('App\Http\Controllers\optionController@move')}}" method="POST"  class="form"> 
+              <form action="{{url('/user_login')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="その他" class="btn2"/>
 	      </form>
@@ -154,39 +154,39 @@
 <br>
 <p>ご希望の時間帯をお選びください。</p>
 <br>
-<form action="{{action('App\Http\Controllers\yoyaku_info2Controller@move')}}" method="post"  class="form"> 
+<form action="{{url('/infos')}}" method="post"  class="form"> 
         @csrf
         <input type="submit" name="time" value="9:00~" class="time "/>
         </form>
-<form action="{{action('App\Http\Controllers\yoyaku_info2Controller@move')}}" method="post"  class="form"> 
+<form action="{{url('/infos')}}" method="post"  class="form"> 
         @csrf
         <input type="submit" name="time" value="10:00~" class="time "/>
         </form>
-<form action="{{action('App\Http\Controllers\yoyaku_info2Controller@move')}}" method="post"  class="form"> 
+<form action="{{url('/infos')}}" method="post"  class="form"> 
         @csrf
         <input type="submit" name="time" value="11:00~" class="time " />
         </form>
-<form action="{{action('App\Http\Controllers\yoyaku_info2Controller@move')}}" method="post"  class="form"> 
+<form action="{{url('/infos')}}" method="post"  class="form"> 
         @csrf
         <input type="submit" name="time" value="12:00~" class="time "/>
         </form>
-<form action="{{action('App\Http\Controllers\yoyaku_info2Controller@move')}}" method="post"  class="form"> 
+<form action="{{url('/infos')}}" method="post"  class="form"> 
         @csrf
         <input type="submit" name="time" value="13:00~" class="time "/>
         </form>
-<form action="{{action('App\Http\Controllers\yoyaku_info2Controller@move')}}" method="post"  class="form"> 
+<form action="{{url('/infos')}}" method="post"  class="form"> 
         @csrf
         <input type="submit" name="time" value="14:00~" class="time "/>
         </form>
-<form action="{{action('App\Http\Controllers\yoyaku_info2Controller@move')}}" method="post"  class="form"> 
+<form action="{{url('/infos')}}" method="post"  class="form"> 
         @csrf
         <input type="submit" name="time" value="15:00~" class="time "/>
         </form>
-<form action="{{action('App\Http\Controllers\yoyaku_info2Controller@move')}}" method="post"  class="form"> 
+<form action="{{url('/infos')}}" method="post"  class="form"> 
         @csrf
         <input type="submit" name="time" value="16:00~" class="time "/>
         </form>
-<form action="{{action('App\Http\Controllers\yoyaku_info2Controller@move')}}" method="post"  class="form"> 
+<form action="{{url('/infos')}}" method="post"  class="form"> 
         @csrf
         <input type="submit" name="time" value="17:00~" class="time "/>
         </form>

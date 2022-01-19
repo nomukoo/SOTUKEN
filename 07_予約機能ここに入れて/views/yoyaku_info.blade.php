@@ -72,7 +72,7 @@ $(function() {
         </a>
     </li>
     <li class="nav-link text-white" href="#">
-    <form action="{{action('App\Http\Controllers\userloginController@move')}}" method="get"  class="form"> 
+    <form action="{{url('/user_login')}}" method="get"  class="form"> 
                      @csrf
             <input type="submit" name="submit" value="サインアウト" class="btn1" />
             </form>
@@ -89,7 +89,7 @@ $(function() {
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="file"></span>
-              <form action="{{action('App\Http\Controllers\yoyakuController@move')}}" method="POST"  class="form"> 
+              <form action="{{url('/user_login')}}" method="POST"  class="form"> 
             	@csrf
     		<input type="submit" name="submit" value="予約" class="btn2"/>
     	      </form>
@@ -98,7 +98,7 @@ $(function() {
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
-              <form action="{{action('App\Http\Controllers\log2Controller@move')}}" method="POST"  class="form"> 
+              <form action="{{url('/user_login')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="履歴" class="btn2"/>
 	      </form>
@@ -107,7 +107,7 @@ $(function() {
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
-              <form action="{{action('App\Http\Controllers\ticketController@move')}}" method="POST"  class="form"> 
+              <form action="{{url('/user_login')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="接種券番号表示" class="btn2"/>
 	      </form>
@@ -116,7 +116,7 @@ $(function() {
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
-              <form action="{{action('App\Http\Controllers\mailController@move')}}" method="POST"  class="form"> 
+              <form action="{{url('/user_login')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="お知らせ" class="btn2"/>
 	      </form>
@@ -125,7 +125,7 @@ $(function() {
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
-              <form action="{{action('App\Http\Controllers\optionController@move')}}" method="POST"  class="form"> 
+              <form action="{{url('/user_login')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="その他" class="btn2"/>
 	      </form>
@@ -143,28 +143,29 @@ $(function() {
             <li><a href="#step-1">1<br><small></small></a></li>
             <li><a href="#step-2">2<br><small></small></a></li>
             <li><a href="#step-3">3<br><small></small></a></li>
-            <li class="active"><a href="#step-4">4<br><small></small></a></li>
-            <li><a href="#step-5">5<br><small></small></a></li>
+            <li><a href="#step-4">4<br><small></small></a></li>
+            <li class="active"><a href="#step-5">5<br><small></small></a></li>
             <li><a href="#step-6">6<br><small></small></a></li>
+            <li><a href="#step-7">7<br><small></small></a></li>
         </ul>
     </div>
 
         <div class="btn-toolbar mb-2 mb-md-0">
           
         </div> 
-      </div>
+　　　</div>
 <h2>予約者情報</h2>
 <br>
+<?php $today = date('Y/m/d');
+      $hospital = Session::get('today_hospital');?>
+<p>指定日：{{ $today }}</p>
+@foreach($hospital as $list)
+  <p>指定場所：{{  $list['hospital_name']}}</p>
+@endforeach
+<p>指定時間：{{ Session::get('today_time') }}</p>
 
-<form action="{{action('App\Http\Controllers\y_checkController@move')}}" method="post" > 
-  @csrf
- 
-
-<p><span align="center">指定日：</span><input type="text" name="day" value="<?php echo date('Y/m/d');?>" readonly style="border:none; outline: none; width: 12%; text-align: center;"></p>
-<p>指定場所：{{ Session::get('hospital') }}</p>
-<p>指定時間：{{ Session::get('time') }}</p>
-
-
+<form action="{{url('/today_check')}}" method="post" > 
+        @csrf
 <div class="clskwfslejl" align="center">
     <div class="tbl">
     <table>
@@ -191,9 +192,10 @@ $(function() {
       <td colspan="2">〒<input type="text" name="address_num" style="width: 30%"  placeholder="000-0000" required></td>
     </tr>
     <tr>
-      <td colspan="2"><input type="text" name="address" style="width:100%">
+      <td colspan="2"><input type="text" name="address" style="width: 100%">
       </td>
     </tr>
+    
     <tr>
       <th>電話番号<span style="color:red">(必須)</span></th>
       <td colspan="2"><input type="tel" name="tel" placeholder="000-0000-0000" style="width: 100%" required ></td>
@@ -214,18 +216,23 @@ $(function() {
                       <input type="text" name="wakuchin" style="width:100%" required>
       </td>
     </tr>
-    
     </table>
     </div>
 </div>
-<input type="button" name="button" value="戻る"  class="custom-btn btn-2" onClick="history.back()"/>
+<br>
+<br>
+
+<input type="button" name="button" value="戻る" class="custom-btn btn-2" onClick="history.back()"/>
 
         <input type="submit" name="submit" value="次へ" class="custom-btn btn-2"/>
 </form>
+<br>
+<br>
+<br>
 
 
 
-  
+
 <!------------------------------------------------------------------------------------------------------------------->
       
 
@@ -236,5 +243,6 @@ $(function() {
     <script src="{{ asset('/js/dashbord.js') }}"></script>
 
       <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
-  </body>
+</main>
+    </body>
 </html>

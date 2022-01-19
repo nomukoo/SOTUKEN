@@ -1,3 +1,6 @@
+
+
+
 <!doctype html>
 <html lang="ja">
   <head>
@@ -6,12 +9,12 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.79.0">
-    <title>地図</title>
+    <title>予約完了</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
-  　<link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
-  <link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
-    <link rel="stylesheet" href="{{  asset('css/map.css') }}" />
+    <link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
+    <link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
+    <link rel="stylesheet" href="{{  asset('css/delete.css') }}" />
 
     <!-- Bootstrap core CSS -->
 <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -44,7 +47,6 @@
     
     <!-- Custom styles for this template -->
     <link href="/css/dashboard.css" rel="stylesheet">
-    <link href="/css/user.css" rel="stylesheet">
   </head>
   <body>
     
@@ -61,7 +63,7 @@
         </a>
     </li>
     <li class="nav-link text-white" href="#">
-    <form action="{{action('App\Http\Controllers\userloginController@move')}}" method="get"  class="form"> 
+    <form action="{{url('/user_login')}}" method="get"  class="form"> 
                      @csrf
             <input type="submit" name="submit" value="サインアウト" class="btn1" />
             </form>
@@ -78,7 +80,7 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="file"></span>
-              <form action="{{action('App\Http\Controllers\yoyakuController@move')}}" method="POST"  class="form"> 
+              <form action="{{url('/user_login')}}" method="POST"  class="form"> 
             	@csrf
     		<input type="submit" name="submit" value="予約" class="btn2"/>
     	      </form>
@@ -87,7 +89,7 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
-              <form action="{{action('App\Http\Controllers\log2Controller@move')}}" method="POST"  class="form"> 
+              <form action="{{url('/user_login')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="履歴" class="btn2"/>
 	      </form>
@@ -96,7 +98,7 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
-              <form action="{{action('App\Http\Controllers\ticketController@move')}}" method="POST"  class="form"> 
+              <form action="{{url('/user_login')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="接種券番号表示" class="btn2"/>
 	      </form>
@@ -105,7 +107,7 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
-              <form action="{{action('App\Http\Controllers\mailController@move')}}" method="POST"  class="form"> 
+              <form action="{{url('/user_login')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="お知らせ" class="btn2"/>
 	      </form>
@@ -114,7 +116,7 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
-              <form action="{{action('App\Http\Controllers\optionController@move')}}" method="POST"  class="form"> 
+              <form action="{{url('/user_login')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="その他" class="btn2"/>
 	      </form>
@@ -123,87 +125,44 @@
         </ul>
       </div>
     </nav>
-　<br>
+  <br>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2  border-bottom"> <!--mb-3  進行状況の下のライン-->
+      <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2  border-bottom">
       <div id="smartwizard" class="sw-theme-arrows">
         <ul class="nav nav-tabs step-anchor">
          <li><a href="#step-1">1<br><small></small></a></li>
-         <li class="active"><a href="#step-2">2<br><small></small></a></li>
+         <li><a href="#step-2">2<br><small></small></a></li>
          <li><a href="#step-3">3<br><small></small></a></li>
-        <li><a href="#step-4">4<br><small></small></a></li>
-        <li><a href="#step-5">5<br><small></small></a></li>
+         <li><a href="#step-4">4<br><small></small></a></li>
+	      <li><a href="#step-5">5<br><small></small></a></li>
         <li><a href="#step-6">6<br><small></small></a></li>
+        <li class="active"><a href="#step-7">7<br><small></small></a></li>
         </ul>
       </div>
 
         <div class="btn-toolbar mb-2 mb-md-0">
           
         </div> 
-　　　</div>
-
-
+    </div>
+    
 <br>
-<!-- ローディング画面 
-<div id="loading">
-  <div class="spinner"></div>
-</div>
--->
-<!-- コンテンツ部分 
-<div class="gallery">
-  <div class="item">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d210550.6462640296!2d132.2968747288369!3d34.45585771728846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x355a9908eef34fbb%3A0x7e4ce50cfc1f772!2z5bqD5bO255yM5bqD5bO25biC!5e0!3m2!1sja!2sjp!4v1636425161366!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-  </div>
-</div>
--->
-
-
-
-    <div class="text-danger">
-        <h3>希望する病院のマーカーをクリックしてください</h3>
-    </div>
-    
-
-
-    <div id="map" style="height:600px; width:80%; ">
-    </div>
-        <script>
-            // currentLocation.jsで使用する定数latに、controllerで定義した$latをいれて、currentLocation.jsに渡す
-            const lat = {{ $lat }};
-            // currentLocation.jsで使用する定数lngに、controllerで定義した$lngをいれて、currentLocation.jsに渡す
-            const lng = {{ $lng }};
-        </script>
-        {{--    上記の処理をしてから、googleMapを読み込まないとエラーが出てくる--}}
-
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-    <script src="{{ asset('/js/setLocation.js') }}"></script>
-    <script src="{{ asset('/js/rensyu_map.js') }}"></script>
-  
-    <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=AIzaSyDiALKw8a6mIJMEoEyuKoiCsJG8lHayCXM&callback=initMap" async defer>
-    </script>
-
-
-
-
-
-  <br>
-  <br>
-    <input type="button" name="button" value="戻る" class="custom-btn btn-1" onClick="history.back()"/>
-
-    
-
-<script>
-window.onload = function() {
-  const spinner = document.getElementById('loading');
-  spinner.classList.add('loaded');
-}
-</script>
+<h2>予約が完了しました。</h2>
+<br>
+<p style="font-size:25px">来院時は<span style="color:red;">接種券番号</span>を受付にてご提示ください。</p>
+<p style="font-size:20px; ">※<span style="color:red;">指定予約の方</span>は来院前に問診票の記入をお願いします。<br>
+接種日が近づいてまいりましたら「お知らせ」に通知いたします。</p>
+<br>
+<br>
+<br>
+  <form action="{{url('/home')}}" method="get"  > 
+        @csrf
+        <input type="submit" name="submit" value="ホームに戻る" class="custom-btn btn-3"/>
+</form>
 
 
 
 <!------------------------------------------------------------------------------------------------------------------->
-      
-     
+
 
 
     <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
