@@ -1,0 +1,8 @@
+CREATE TABLE remainder(
+  remainder_ID int NOT NULL AUTO_INCREMENT,
+  hospital_ID varchar(64) COLLATE utf8mb4_bin DEFAULT NULL,
+  remainder_date date DEFAULT NULL,
+  quantity int DEFAULT NULL,
+  wakuchin_ID varchar(64) COLLATE utf8mb4_bin DEFAULT NULL,
+  PRIMARY KEY (remainder_ID)
+)
