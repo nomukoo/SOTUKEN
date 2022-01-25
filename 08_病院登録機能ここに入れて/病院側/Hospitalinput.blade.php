@@ -193,10 +193,21 @@
   </div>
 
   <div class="col-md-4">
-    <label for="hospital_idokeido" class="form-label">緯度・経度</label>
-    <input type="text" class="form-control" id="hospital_idokeido" pattern="\d{1,4}.\d{1,8},\d{1,4}.\d{1,8}" placeholder="例: 34.380846,132.454321"required>
+    <label for="hospital_ido" class="form-label">緯度</label>
+    <input type="text" class="form-control" id="hospital_ido" pattern="\d{1,4}.\d{1,8},\d{1,4}.\d{1,8}" placeholder="例: 34.380846"required>
     <div class="invalid-feedback">
-      緯度・経度を入力してください
+      緯度を入力してください
+    </div>
+    <div class="valid-feedback">
+      OK!
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <label for="hospital_keido" class="form-label">緯度</label>
+    <input type="text" class="form-control" id="hospital_keido" pattern="\d{1,4}.\d{1,8},\d{1,4}.\d{1,8}" placeholder="例: 132.454321"required>
+    <div class="invalid-feedback">
+      経度を入力してください
     </div>
     <div class="valid-feedback">
       OK!
