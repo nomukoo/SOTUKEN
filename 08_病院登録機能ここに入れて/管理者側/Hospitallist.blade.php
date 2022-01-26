@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.79.0">
-    <title>病院情報一覧画面</title>
+    <title>病院情報仮登録一覧画面</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -45,14 +45,12 @@
     
     <!-- Custom styles for this template -->
     <link href="/css/hospital.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
 
 
   </head>
   <body>
-  <script>
-bootbox.alert("未登録の病院があります!");
 
-</script>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -62,12 +60,22 @@ bootbox.alert("未登録の病院があります!");
 <div class="text-light ">
   <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3">管理者画面</a>
     </div>
-  <ul class="nav pull-right">
+    <ul class="nav pull-right">
   <li class="nav-item">
-      <a class="nav-link text-white" href="#">ホーム</a>
+      <a class="nav-link text-white" href="#">
+      <form action="{{url('/admini_top')}}" method="get"  class="form">
+                     @csrf
+            <input type="submit" name="submit" value="ホーム" class="btn1" />
+      </form>
+      </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-white"href="#">サインアウト</a>
+      <a class="nav-link text-white"href="#">
+      <form action="{{url('/top')}}" method="POST"  class="form">
+                     @csrf
+            <input type="submit" name="submit" value="サインアウト" class="btn1" />
+            </form>
+    </a>
     </li>
   </ul>
 </header>
@@ -75,38 +83,53 @@ bootbox.alert("未登録の病院があります!");
 
 <div class="container-fluid">
   <div class="row">
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+  <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3">
+        <br>
+        <br>
         <ul class="nav flex-column">
-        <h6 class="text-primary" style="padding:5px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-                </svg>
-                メニュー
-              </h6>
-         
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="bar-chart-2"></span>
-              病院登録
+            <a class="nav-link" >
+              <span data-feather="file"></span>
+              <form action="{{url('/hospitallist')}}" method="POST"  class="form">
+                     @csrf
+            <input type="submit" name="submit" value="病院登録" class="btn2" />
+            </form>
             </a>
           </li>
-
-       
-        
-      </div>
+    </div>
     </nav>
 
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h1">病院情報一覧画面</h1>
-        
+        <h1 class="h1">病院情報仮登録一覧画面</h1>
+        @if (!$hoapitals->isEmpty())
+    {{-- 記事データがDBにある場合の表示内容 --}}
+    <div class="text-primary">
+    申請されたデータがあります
+    </div>
+@else
+    {{-- 記事データがDBにない場合の表示内容 --}}
+    <div class="text-primary">
+    新規のデータはありません
+    </div>
+@endif
        
+<form action="{{url('/hospitalhome')}}" method="post">
+  @csrf
+<div class="text-center">
 
+    <div class="col-2">
+  <button class="btn btn-danger rounded-pill" type="submit" style="width:200px"> <h4>本登録済み一覧<h4></button>
+    </div>
+    </div>
+
+
+    </form>
         
         <div class="btn-toolbar mb-2 mb-md-0">
-          
+        
         </div>
     </div>
 
@@ -119,57 +142,49 @@ bootbox.alert("未登録の病院があります!");
       <th scope="col"class="table-dark border-dark">病院名</th>
       <th scope="col"class="table-dark border-dark">住所</th>
       <th scope="col"class="table-dark border-dark">電話番号</th>
-      <th scope="col"class="table-dark border-dark">緯度・経度</th>
-      <th scope="col"class="table-dark border-dark">削除・編集</th>
-    </tr>
-  <tr>
-  <td scope="row" class="table-white border-dark" >H0001</td>
-  <td scope="row" class="table-white border-dark" >広島県立病院</td>
-  <td scope="row" class="table-white border-dark" >広島県広島市南区宇品神田１丁目５−番５４号</td>
-  <td scope="row" class="table-white border-dark" >082-254-1818</td>
-  <td scope="row" class="table-white border-dark" >34.366952,132.466509</td>
-  <td scope="row" class="table-white border-dark" style="width:150px">
-  <button class="btn btn-white border border-primary" type="submit" style="width:60px" onclick="location.href='/hospitaledit'" >   <div class="text-primary">編集</div></button>
-  <button class="btn btn-white border border-danger" type="submit" style="width:60px" onclick="location.href='/hospitaldeleverifi'" >   <div class="text-danger">削除</div></button></td>
-    </tr>  
+      <th scope="col"class="table-dark border-dark">緯度</th>
+      <th scope="col"class="table-dark border-dark">経度</th>
 
-  <tr>
-  <td scope="row" class="table-white border-dark" >H0002</td>
-  <td scope="row" class="table-white border-dark" >広島県国立病院</td>
-  <td scope="row" class="table-white border-dark" >広島県広島市中区八丁堀１丁目５−番５４号</td>
-  <td scope="row" class="table-white border-dark" >082-244-1818</td>
-  <td scope="row" class="table-white border-dark" >34.364552,132.466509</td>
-  <td scope="row" class="table-white border-dark" style="width:150px"> 
-  <button class="btn btn-white border border-primary" type="submit" style="width:60px" onclick="location.href='/hospitaledit'" >   <div class="text-primary">編集</div></button>
-  <button class="btn btn-white border border-danger" type="submit" style="width:60px" onclick="location.href='/hospitaldeleverifi'" >   <div class="text-danger">削除</div></button></td>
+      
     </tr>
+    @foreach ($hoapitals as $hospital)
+  <tr>
+  <td input type="hidden" name="hospital_ID"  scope="row" class="table-white border-dark" >{{  $hospital->hospital_ID }}</td>
+
+  <td scope="row" class="table-white border-dark" >{{  $hospital->hospital_name  }}</td>
+  <td scope="row" class="table-white border-dark" >{{  $hospital->hospital_address  }}</td>
+  <td scope="row" class="table-white border-dark" >{{  $hospital->hospital_tell }}</td>
+  <td scope="row" class="table-white border-dark" >{{  $hospital->hospital_ido  }}</td>
+  <td scope="row" class="table-white border-dark" >{{  $hospital->hospital_keido  }}</td>
+
+ 
   
+    </tr>  
+    @endforeach
 
     </tbody>
 </table>
 
 <div class="m-5">
-    </div>
-
-<form class="row g-4 needs-validation" novalidate>
+</div>
+<div class="d-flex justify-content-center">
+<form action="{{url('/hospitalregiverifi')}}" method="post">
+  @csrf
 <div class="text-center">
 <div class="d-flex justify-content-center">
 
 
 
   
-<div class="col-2">
-  <button type="button" class="btn btn-danger rounded-pill " style="width:90px" onclick="history.back(-1)"><h4>戻る</h4></button>
-    </div>
+
     <div class="col-2">
-  <button class="btn btn-success rounded-pill" type="submit" style="width:150px" formaction="/hospitalregiverifi"> <h4>病院登録<h4></button>
+  <button class="btn btn-success rounded-pill" type="submit" style="width:150px"> <h4>本登録<h4></button>
     </div>
     </div>
 </div>
 
     </form>
-
-
+    </div>
     
 
     

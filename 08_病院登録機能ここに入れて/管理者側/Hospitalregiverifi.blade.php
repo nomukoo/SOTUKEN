@@ -40,6 +40,7 @@
 
     
     <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
     <link href="/css/hospital.css" rel="stylesheet">
   </head>
   <body>
@@ -51,12 +52,22 @@
 <div class="text-light ">
   <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3">管理者画面</a>
     </div>
-  <ul class="nav pull-right">
+    <ul class="nav pull-right">
   <li class="nav-item">
-      <a class="nav-link text-white" href="#">ホーム</a>
+      <a class="nav-link text-white" href="#">
+      <form action="{{url('/admini_top')}}" method="get"  class="form">
+                     @csrf
+            <input type="submit" name="submit" value="ホーム" class="btn1" />
+      </form>
+      </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-white"href="#">サインアウト</a>
+      <a class="nav-link text-white"href="#">
+      <form action="{{url('/top')}}" method="POST"  class="form">
+                     @csrf
+            <input type="submit" name="submit" value="サインアウト" class="btn1" />
+            </form>
+    </a>
     </li>
   </ul>
 </header>
@@ -65,23 +76,21 @@
 
 <div class="container-fluid">
   <div class="row">
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+  <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3">
+        <br>
+        <br>
         <ul class="nav flex-column">
-        <h6 class="text-primary" style="padding:5px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-                </svg>
-                メニュー
-              </h6>
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="bar-chart-2"></span>
-              病院登録
+            <a class="nav-link" >
+              <span data-feather="file"></span>
+              <form action="{{url('/hospitallist')}}" method="POST"  class="form">
+                     @csrf
+            <input type="submit" name="submit" value="病院登録" class="btn2" />
+            </form>
             </a>
           </li>
-        
-      </div>
+    </div>
     </nav>
 
 
@@ -111,17 +120,21 @@
       <th scope="col"class="table-dark border-dark">病院名</th>
       <th scope="col"class="table-dark border-dark">住所</th>
       <th scope="col"class="table-dark border-dark">電話番号</th>
-      <th scope="col"class="table-dark border-dark">緯度・経度</th>
+      <th scope="col"class="table-dark border-dark">緯度</th>
+      <th scope="col"class="table-dark border-dark">経度</th>
     </tr>
+    @foreach ($hospitals as $hospital)
   <tr>
-  <td scope="row" class="table-white border-dark" >...</td>
-  <td scope="row" class="table-white border-dark" >...</td>
-  <td scope="row" class="table-white border-dark" >...</td>
-  <td scope="row" class="table-white border-dark" >...</td>
-  <td scope="row" class="table-white border-dark" >...</td>
-  
-  
+  <td input type="hidden" name="hospital_ID"  scope="row" class="table-white border-dark" >{{  $hospital->hospital_ID }}</td>
 
+  <td scope="row" class="table-white border-dark" >{{  $hospital->hospital_name  }}</td>
+  <td scope="row" class="table-white border-dark" >{{  $hospital->hospital_address  }}</td>
+  <td scope="row" class="table-white border-dark" >{{  $hospital->hospital_tell }}</td>
+  <td scope="row" class="table-white border-dark" >{{  $hospital->hospital_ido  }}</td>
+  <td scope="row" class="table-white border-dark" >{{  $hospital->hospital_keido  }}</td>
+
+    </tr>  
+    @endforeach
     </tbody>
 </table>
 </div>
@@ -129,6 +142,8 @@
 
 <div class="m-5">
     </div>
+    <form action="{{url('/hospitalregifinish')}}" method="post">
+      @csrf
 <form class="row g-4 needs-validation" novalidate>
 <div class="text-center">
 <div class="d-flex justify-content-center">
@@ -139,10 +154,11 @@
 
   <button type="button" class="btn btn-danger rounded-pill " style="width:90px" onclick="history.back(-1)"><h4>戻る</h4></button></div>
   <div class="col-1">
-  <button class="btn btn-success rounded-pill" type="submit" style="width:90px" formaction="/hospitalregifinish"> <h4>確定</h4></button>
+  <button class="btn btn-success rounded-pill" type="submit" style="width:90px" > <h4>確定</h4></button>
 
 </div>
     </div>
+    </form>
     </form>
 </div>
     
