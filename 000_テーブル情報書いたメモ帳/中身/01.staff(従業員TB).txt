@@ -1,16 +1,3 @@
-create database zemi;
-
-use zemi
-
-create table staff (
- staff_ID varchar(8) primary key,
- staff_name varchar(64),
- staff_password varchar(64),
- login_status boolean,
- hospital_ID varchar(64)
-);
-
-
 create table staff (
  staff_ID varchar(8) primary key,
  staff_name varchar(64),
