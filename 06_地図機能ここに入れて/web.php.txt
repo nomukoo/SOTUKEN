@@ -1,0 +1,4 @@
+Route::get('/map/currentLocation', 'HospitalController@currentLocation');
+Route::post('/map/currentLocation', 'HospitalController@currentLocation');
+
+Route::post('/map_ajax', 'GmapController@getHospital');

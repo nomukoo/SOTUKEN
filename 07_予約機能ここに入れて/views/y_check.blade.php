@@ -6,15 +6,14 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.79.0">
-    <title>地図</title>
+    <title>ホーム_ユーザ側</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
   　<link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
   <link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
-  <link rel="stylesheet" href="{{  asset('css/yoyaku.css') }}" />
+    <link rel="stylesheet" href="{{  asset('css/yoyaku.css') }}" />
 
     <!-- Bootstrap core CSS -->
-<link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
     <!-- Favicons -->
 <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
@@ -44,6 +43,8 @@
     
     <!-- Custom styles for this template -->
     <link href="/css/dashboard.css" rel="stylesheet">
+    <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
   </head>
   <body>
     
@@ -60,7 +61,7 @@
         </a>
     </li>
     <li class="nav-link text-white" href="#">
-    <form action="{{action('App\Http\Controllers\userloginController@move')}}" method="get"  class="form"> 
+    <form action="{{url('/user_login')}}" method="get"  class="form"> 
                      @csrf
             <input type="submit" name="submit" value="サインアウト" class="btn1" />
             </form>
@@ -77,25 +78,25 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="file"></span>
-              <form action="{{action('App\Http\Controllers\yoyakuController@move')}}" method="POST"  class="form"> 
+              <form action="{{url('/user_login')}}" method="POST"  class="form"> 
             	@csrf
-    		<input type="submit" name="submit" value="予約" class="btn2"/>
-    	      </form>
+    		      <input type="submit" name="submit" value="予約" class="btn2" />
+    	        </form>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
-              <form action="{{action('App\Http\Controllers\log2Controller@move')}}" method="POST"  class="form"> 
-           	 @csrf
-    		<input type="submit" name="submit" value="履歴" class="btn2"/>
-	      </form>
+              <form action="{{url('/user_login')}}" method="POST"  class="form"> 
+           	  @csrf
+    		      <input type="submit" name="submit" value="履歴" class="btn2" />
+	            </form>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
-              <form action="{{action('App\Http\Controllers\ticketController@move')}}" method="POST"  class="form"> 
+              <form action="{{url('/user_login')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="接種券番号表示" class="btn2"/>
 	      </form>
@@ -104,7 +105,7 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
-              <form action="{{action('App\Http\Controllers\mailController@move')}}" method="POST"  class="form"> 
+              <form action="{{url('/user_login')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="お知らせ" class="btn2"/>
 	      </form>
@@ -113,26 +114,29 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
-              <form action="{{action('App\Http\Controllers\optionController@move')}}" method="POST"  class="form"> 
+              <form action="{{url('/user_login')}}" method="POST"  class="form"> 
            	 @csrf
     		<input type="submit" name="submit" value="その他" class="btn2"/>
 	      </form>
             </a>
           </li>
+    
         </ul>
       </div>
     </nav>
 　<br>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2  border-bottom"> <!--mb-3  進行状況の下のライン-->
+
       <div id="smartwizard" class="sw-theme-arrows">
         <ul class="nav nav-tabs step-anchor">
          <li><a href="#step-1">1<br><small></small></a></li>
          <li><a href="#step-2">2<br><small></small></a></li>
          <li><a href="#step-3">3<br><small></small></a></li>
-        <li><a href="#step-4">4<br><small></small></a></li>
-        <li class="active"><a href="#step-5">5<br><small></small></a></li>
-        <li><a href="#step-6">6<br><small></small></a></li>
+         <li><a href="#step-4">4<br><small></small></a></li>
+         <li><a href="#step-5">5<br><small></small></a></li>
+         <li class="active"><a href="#step-6">6<br><small></small></a></li>
+         <li><a href="#step-7">7<br><small></small></a></li>
         </ul>
       </div>
 
@@ -140,6 +144,12 @@
           
         </div> 
 　　　</div>
+<form action="{{url('/today_comp')}}" method="post"> 
+        @csrf
+
+        <?php $today = date('Y/m/d');
+      $hospital = Session::get('today_hospital');?>
+
 <br>
 <p>以下の予定でよろしいですか？</P>
     <br>
@@ -148,11 +158,13 @@
       <table align="center">
         <tr>
           <th>指定日</th>
-          <td>{{ Session::get('day') }}</td>
+          <td>{{ $today }}</td>
         </tr>
         <tr>
           <th>指定場所</th>
-          <td>{{ Session::get('hospital') }}</td>
+          @foreach($hospital as $list)
+          <td>{{ $list['hospital_name'] }}</td>
+          @endforeach
         </tr>
         <tr>
           <th>指定時間</th>
@@ -165,17 +177,23 @@
 <br>
 <br>
 <input type="button" name="button" value="戻る" class="custom-btn btn-2" onClick="history.back()"/>
-<form action="{{action('App\Http\Controllers\y_conpController@move')}}" method="post"  class="form"> 
-        @csrf
+
         <input type="submit" name="submit" value="予約する" class="custom-btn btn-4_1"/>
 </form>
+
+
+
 
 <script>
 history.forward();
 </script>
 
+
+
+
+
 <!------------------------------------------------------------------------------------------------------------------->
-      <!--<canvas id="myChart" width="900" height="380"></canvas>class="my-4 w-100"  少し下にスクロールできる-->
+    
 
      
 

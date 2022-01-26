@@ -1,3 +1,4 @@
+
 <?php
 
 namespace App\Http\Controllers;
@@ -48,7 +49,7 @@ public function hospitalregifinish(Request $request)
         $hospital->hospital_name = $list['hospital_name'];
         $hospital->hospital_address = $list['hospital_address'];
         $hospital->hospital_tell = $list['hospital_tell'];
-        $hospital->hospital_idokeido = $list['hospital_ido'];
+        $hospital->hospital_ido = $list['hospital_ido'];
         $hospital->hospital_keido = $list['hospital_keido'];
         $hospital->timestamps=false;
         $hospital->save();
@@ -74,7 +75,7 @@ public function hospitalregifinish(Request $request)
     
 }
 
-public function hospitaldeleverifi(Request $request)
+/*public function hospitaldeleverifi(Request $request)
   {
     
     $hospital_kari = new hospital_kari();
@@ -134,24 +135,12 @@ public function hospitaleditfinish()
   {
     return view('hospitaleditfinish');
 }
-
+*/
 
 public function hospitalregierror()
   {
     return view('hospitalregierror');
 }
-
-public function top()
-  {
-    return view('top');
-}
-
-
-
-public function create() {
-  return view('hospitalinput');
-}
-
 
 public function hospitalinputverifi(Request $request) {
 
@@ -198,8 +187,8 @@ public function hospitalinputfinish(Request $request) {
    $hospital_kari->hospital_name = $request->session()->get('hospital_name');
    $hospital_kari->hospital_address = $request->session()->get('hospital_address');
    $hospital_kari->hospital_tell = $request->session()->get('hospital_tell');
-   $hospital_kari->hospital_idokeido = $request->session()->get('hospital_ido');
-   $hospital_kari->hospital_idokeido = $request->session()->get('hospital_keido');
+   $hospital_kari->hospital_ido = $request->session()->get('hospital_ido');
+   $hospital_kari->hospital_keido = $request->session()->get('hospital_keido');
 
   $hospital_kari->timestamps=false;
   $hospital_kari->save();
@@ -212,19 +201,15 @@ public function hospitallist(Request $request)
     $hospital_kari = new hospital_kari();
     
     $hoapitals = hospital_kari::all();
-    return view('hospitallist' ,[
-      "hospitals" => $hoapitals
-  ]);
+    return view('Hospitallist',compact('hoapitals'));
 }
 
-public function hospitalhome(Request $request)
+public function reg_hospitallist(Request $request)
   {
     $hospital = new hospital();
     
     $hoapitals = hospital::all();
-    return view('hospitalhome' ,[
-      "hospitals" => $hoapitals
-  ]);
+    return view('reg_hospitallist',compact('hoapitals'));
 }
 
 
@@ -236,3 +221,4 @@ public function admini_top()
 
 
 }
+

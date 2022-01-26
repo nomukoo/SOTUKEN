@@ -1,0 +1,6 @@
+//廃棄機能
+Route::get('/PlannedDisposal', 'DisposalController@PlannedDisposal_get');
+Route::post('/PlannedDisposal', 'DisposalController@PlannedDisposal_get');
+
+Route::get('/Disposal/{id}/', 'DisposalController@Disposal');
+Route::post('/Disposal/{id}/', 'DisposalController@Disposal');
