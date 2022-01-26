@@ -177,7 +177,7 @@
     
     <div class="text-center">
     <div class="text-danger">
-    <h2 color="red">本日の必要なバイアル数</h2>
+    <h2 color="red">本日の必要なバイアル数{{$yoyaku_count}}</h2>
     </div>
     </div>
 
@@ -225,7 +225,7 @@
   
     <div class="col-md-4">
     <label for="validationCustom01" class="form-label">バイアル数入力</label>
-    <input type="text" class="form-control" name="vial_quantity"  style="width:300px" pattern="^[0-9]+$" required>
+    <input type="number" min="0" max="{{$yoyaku_count}}" class="form-control" name="vial_quantity"  style="width:300px" pattern="^[0-9]+$" required>
     <div class="invalid-feedback">
       個数を入力してください
     </div>

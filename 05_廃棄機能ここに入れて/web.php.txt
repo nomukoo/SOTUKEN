@@ -1,0 +1,15 @@
+//廃棄機能
+Route::get('disposal_list', 'DisposalController@disposal_list');
+Route::post('disposal_list', 'DisposalController@disposal_list');
+
+Route::get('disposal_read', 'DisposalController@disposal_read');
+Route::post('disposal_read', 'DisposalController@disposal_read');
+
+Route::get('disposal_confirm', 'DisposalController@disposal_confirm');
+Route::post('disposal_confirm', 'DisposalController@disposal_confirm');
+
+Route::get('disposal_finish', 'DisposalController@disposal_finish');
+Route::post('disposal_finish', 'DisposalController@disposal_finish');
+
+Route::get('disposal_error', 'DisposalController@disposal_error');
+Route::post('disposal_error', 'DisposalController@disposal_error');

@@ -1,0 +1,9 @@
+Route::get('dilution_read', 'DilutionController@dilution_read');
+Route::post('dilution_read', 'DilutionController@dilution_read');
+
+
+Route::get('dilution_finish', 'DilutionController@dilution_finish');
+Route::post('dilution_finish', 'DilutionController@dilution_finish');
+
+Route::get('dilution_error', 'DilutionController@dilution_error');
+Route::post('dilution_error', 'DilutionController@dilution_error');

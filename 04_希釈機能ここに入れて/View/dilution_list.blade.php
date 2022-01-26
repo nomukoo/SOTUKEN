@@ -39,6 +39,7 @@
 
     
     <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
     <link href="/css/dilution.css" rel="stylesheet">
   </head>
   <body>
@@ -50,12 +51,22 @@
 <div class="text-light ">
   <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3">○○病院</a>
     </div>
-  <ul class="nav pull-right">
+    <ul class="nav pull-right">
   <li class="nav-item">
-      <a class="nav-link text-white" href="#">ホーム</a>
+      <a class="nav-link text-white" href="#">
+      <form action="{{url('/top')}}" method="get"  class="form">
+                     @csrf
+            <input type="submit" name="submit" value="ホーム" class="btn1" />
+      </form>
+      </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-white"href="#">サインアウト</a>
+      <a class="nav-link text-white"href="#">
+      <form action="{{url('/top')}}" method="POST"  class="form">
+                     @csrf
+            <input type="submit" name="submit" value="サインアウト" class="btn1" />
+            </form>
+    </a>
     </li>
   </ul>
 </header>
@@ -64,65 +75,75 @@
 
 <div class="container-fluid">
   <div class="row">
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+  <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3">
+        <br>
+        <br>
         <ul class="nav flex-column">
-        <h6 class="text-primary" style="padding:5px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-                </svg>
-                メニュー
-              </h6>
           <li class="nav-item">
-
-<a class="nav-link" href="#">
-  <span data-feather="file"></span>
-  入庫
-</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="defrost_list">
-  <span data-feather="shopping-cart"></span>
-  解凍
-</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="dilution_list">
-  <span data-feather="users"></span>
-  希釈
-</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="disposal_list">
-  <span data-feather="users"></span>
-  ワクチン廃棄
-</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="shipping_list">
-  <span data-feather="users"></span>
-  出庫予定リスト
-</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="#">
-  <span data-feather="users"></span>
-  履歴
-</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="reception_read">
-  <span data-feather="users"></span>
-  受付
-</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="hospitalinput">
-  <span data-feather="users"></span>
-  病院登録
-</a>
-</li>
-        
+            <a class="nav-link" >
+              <span data-feather="file"></span>
+              <form action="{{url('/top')}}" method="POST"  class="form">
+                     @csrf
+            <input type="submit" name="submit" value="入庫" class="btn2" />
+            </form>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" >
+              <span data-feather="shopping-cart"></span>
+              <form action="{{url('/top')}}" method="POST"  class="form">
+                     @csrf
+                    <input type="submit" name="submit" value="解凍" class="btn2"/>
+            </form>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" >
+              <span data-feather="users"></span>
+              <form action="{{url('/top')}}" method="POST"  class="form">
+                     @csrf
+                    <input type="submit" name="submit" value="希釈" class="btn2"/>
+            </form>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              <span data-feather="bar-chart-2"></span>
+              <form action="{{url('/top')}}" method="get"  class="form">
+                     @csrf
+                    <input type="submit" name="submit" value="廃棄" class="btn2"/>
+            </form>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              <span data-feather="bar-chart-2"></span>
+              <form action="{{url('/top')}}" method="get"  class="form">
+                     @csrf
+                    <input type="submit" name="submit" value="出庫予定リスト" class="btn2"/>
+            </form>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              <span data-feather="bar-chart-2"></span>
+              <form action="{{url('/top')}}" method="get"  class="form">
+                     @csrf
+                    <input type="submit" name="submit" value="受付" class="btn2"/>
+            </form>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" >
+              <span data-feather="layers"></span>
+              <form action="{{url('/top')}}" method="get"  class="form">
+                     @csrf
+                    <input type="submit" name="submit" value="病院情報登録" class="btn2" />
+            </form>
+            </a>
+          </li>
+        </ul>
       </div>
     </nav>
 
@@ -131,9 +152,7 @@
         <h1 class="h1">希釈一覧画面</h1>
         <div id="smartwizard" class="sw-theme-arrows">
         <ul class="nav nav-tabs step-anchor">
-        <li class="active"><a>希釈一覧<br><small></small></a></li>
         <li ><a>希釈数登録<br><small></small></a></li>
-         <li ><a>希釈登録確認<br><small></small></a></li>
          <li ><a>希釈登録完了<br><small></small></a></li>
         </ul>
       </div>
@@ -183,21 +202,10 @@ $('.print-btn').on('click', function(){
       <th scope="col"class="table-dark border-dark">解凍数(バイアル)</th>
     </tr>
   <tr>
-  <td scope="row" class="table-white border-dark" >コミナティ筋注</td>
-  <td scope="row" class="table-white border-dark" >FK123456</td>
-  <td scope="row" class="table-white border-dark" >11/25</td>
-  <td scope="row" class="table-white border-dark" >10</td>
-    </tr>
-    <tr>
-  <td scope="row" class="table-white border-dark" >コミナティ筋注</td>
-  <td scope="row" class="table-white border-dark" >FK124567</td>
-  <td scope="row" class="table-white border-dark" >11/28</td>
-  <td scope="row" class="table-white border-dark" >30</td>
-<tr>
-  <td scope="row" class="table-white border-dark" >コミナティ筋注2</td>
-  <td scope="row" class="table-white border-dark" >FK124567</td>
-  <td scope="row" class="table-white border-dark" >11/29</td>
-  <td scope="row" class="table-white border-dark" >30</td>
+  <td scope="row" class="table-white border-dark" ></td>
+  <td scope="row" class="table-white border-dark" ></td>
+  <td scope="row" class="table-white border-dark" ></td>
+  <td scope="row" class="table-white border-dark" ></td>
     </tr>
     </tbody>
     </table>
@@ -217,10 +225,11 @@ $('.print-btn').on('click', function(){
 <div class="m-5">
     
 
-<form class="row g-15 needs-validation" novalidate>
+<form class="row g-15 needs-validation" action="{{url('/dilution_read')}}" method="post" novalidate>
+  @csrf
 <div class="text-center">
 <div class="d-flex justify-content-center">
-<button class="btn btn-success rounded-pill" type="submit" style="width:200px" formaction="/dilution_read" > <h4>希釈登録</h4></button>
+<button class="btn btn-success rounded-pill" type="submit" style="width:200px" > <h4>希釈登録</h4></button>
   </div>
 </div>
     </form>
