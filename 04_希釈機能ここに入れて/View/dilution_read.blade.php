@@ -49,108 +49,94 @@
 
   </head>
   <body>
-  
+  <?php 
+  $emp_info = session()->get('emp_Info');
+  $json_emp_info = json_encode($emp_info);
+?>
+
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-<div class="text-light ">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3">○○病院</a>
-    </div>
-    <ul class="nav pull-right">
+  <a class="navbar-brand1 col-md-3 col-lg-2 me-0 px-3 a1">ワクチン在庫管理システム</a>
+  <ul class="nav pull-right">
+  <li class="nav-item">
+  <a class="nav-link text-white"href="#">{{'ログイン中: '}}{{$emp_info['staff_name']}}</a>
+  </li>
   <li class="nav-item">
       <a class="nav-link text-white" href="#">
-      <form action="{{url('/top')}}" method="get"  class="form">
+      <form action="{{url('/')}}" method="get"  class="form">
                      @csrf
             <input type="submit" name="submit" value="ホーム" class="btn1" />
       </form>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-white"href="#">
-      <form action="{{url('/top')}}" method="POST"  class="form">
-                     @csrf
-            <input type="submit" name="submit" value="サインアウト" class="btn1" />
-            </form>
-    </a>
+      <a class="nav-link text-white"href="{{ url('/emp_logout')}}">サインアウト</a>
     </li>
   </ul>
-</header>
+    </header>
 
-
-<div class="container-fluid">
+    <div class="container-fluid">
   <div class="row">
-  <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3">
-        <br>
-        <br>
         <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link" >
-              <span data-feather="file"></span>
-              <form action="{{url('/top')}}" method="POST"  class="form">
-                     @csrf
-            <input type="submit" name="submit" value="入庫" class="btn2" />
-            </form>
-            </a>
+        <h6 class="text-primary" style="padding:5px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                </svg>
+                メニュー
+              </h6>
+<li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">入庫</a>
+          <span data-feather="shopping-cart"></span>
+            <div class="dropdown-menu" aria-labelledby="dropdown03">
+                <a class="dropdown-item" id="itm" href="/barcoderead">ワクチン入庫</a>
+                <a class="dropdown-item" id="itm" href="/barcode_read_syringe">注射器入庫</a>
+            </div>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" >
-              <span data-feather="shopping-cart"></span>
-              <form action="{{url('/top')}}" method="POST"  class="form">
-                     @csrf
-                    <input type="submit" name="submit" value="解凍" class="btn2"/>
-            </form>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" >
-              <span data-feather="users"></span>
-              <form action="{{url('/top')}}" method="POST"  class="form">
-                     @csrf
-                    <input type="submit" name="submit" value="希釈" class="btn2"/>
-            </form>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link">
-              <span data-feather="bar-chart-2"></span>
-              <form action="{{url('/top')}}" method="get"  class="form">
-                     @csrf
-                    <input type="submit" name="submit" value="廃棄" class="btn2"/>
-            </form>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link">
-              <span data-feather="bar-chart-2"></span>
-              <form action="{{url('/top')}}" method="get"  class="form">
-                     @csrf
-                    <input type="submit" name="submit" value="出庫予定リスト" class="btn2"/>
-            </form>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link">
-              <span data-feather="bar-chart-2"></span>
-              <form action="{{url('/top')}}" method="get"  class="form">
-                     @csrf
-                    <input type="submit" name="submit" value="受付" class="btn2"/>
-            </form>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" >
-              <span data-feather="layers"></span>
-              <form action="{{url('/top')}}" method="get"  class="form">
-                     @csrf
-                    <input type="submit" name="submit" value="病院情報登録" class="btn2" />
-            </form>
-            </a>
-          </li>
-        </ul>
+<li class="nav-item">
+<a class="nav-link" href="/defrost_read">
+  <span data-feather="shopping-cart"></span>
+  出庫登録
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="shipping_list">
+  <span data-feather="users"></span>
+  出庫予定閲覧
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/dilution_read">
+  <span data-feather="users"></span>
+  希釈登録
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/PlannedDisposal">
+  <span data-feather="users"></span>
+  廃棄登録
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/">
+  <span data-feather="users"></span>
+  在庫一覧
+</a>
+</li>
+@if (false)
+<li class="nav-item">
+<a class="nav-link" href="hospitalinput">
+  <span data-feather="users"></span>
+  従業員登録
+</a>
+</li>
+@endif    
       </div>
     </nav>
 

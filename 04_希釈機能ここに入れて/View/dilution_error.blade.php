@@ -43,23 +43,33 @@
     <link href="/css/dilution.css" rel="stylesheet">
   </head>
   <body>
+  <?php 
+  $emp_info = session()->get('emp_Info');
+  $json_emp_info = json_encode($emp_info);
+?>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-<div class="text-light ">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3">○○病院</a>
-    </div>
+  <a class="navbar-brand1 col-md-3 col-lg-2 me-0 px-3 a1">ワクチン在庫管理システム</a>
   <ul class="nav pull-right">
   <li class="nav-item">
-      <a class="nav-link text-white" href="#">ホーム</a>
+  <a class="nav-link text-white"href="#">{{'ログイン中: '}}{{$emp_info['staff_name']}}</a>
+  </li>
+  <li class="nav-item">
+      <a class="nav-link text-white" href="#">
+      <form action="{{url('/')}}" method="get"  class="form">
+                     @csrf
+            <input type="submit" name="submit" value="ホーム" class="btn1" />
+      </form>
+      </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-white"href="#">サインアウト</a>
+      <a class="nav-link text-white"href="{{ url('/emp_logout')}}">サインアウト</a>
     </li>
   </ul>
-</header>
+    </header>
 
 
 
@@ -74,56 +84,53 @@
                 </svg>
                 メニュー
               </h6>
-          <li class="nav-item">
-
-<a class="nav-link" href="#">
-  <span data-feather="file"></span>
-  入庫
-</a>
-</li>
+<li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">入庫</a>
+          <span data-feather="shopping-cart"></span>
+            <div class="dropdown-menu" aria-labelledby="dropdown03">
+                <a class="dropdown-item" id="itm" href="/barcoderead">ワクチン入庫</a>
+                <a class="dropdown-item" id="itm" href="/barcode_read_syringe">注射器入庫</a>
+            </div>
+          </li>
 <li class="nav-item">
-<a class="nav-link" href="defrost_list">
+<a class="nav-link" href="/defrost_read">
   <span data-feather="shopping-cart"></span>
-  解凍
-</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="dilution_list">
-  <span data-feather="users"></span>
-  希釈
-</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="disposal_list">
-  <span data-feather="users"></span>
-  ワクチン廃棄
+  出庫登録
 </a>
 </li>
 <li class="nav-item">
 <a class="nav-link" href="shipping_list">
   <span data-feather="users"></span>
-  出庫予定リスト
+  出庫予定閲覧
 </a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="#">
+<a class="nav-link" href="/dilution_read">
   <span data-feather="users"></span>
-  履歴
+  希釈登録
 </a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="reception_read">
+<a class="nav-link" href="/PlannedDisposal">
   <span data-feather="users"></span>
-  受付
+  廃棄登録
 </a>
 </li>
+<li class="nav-item">
+<a class="nav-link" href="/">
+  <span data-feather="users"></span>
+  在庫一覧
+</a>
+</li>
+@if (false)
 <li class="nav-item">
 <a class="nav-link" href="hospitalinput">
   <span data-feather="users"></span>
-  病院登録
+  従業員登録
 </a>
 </li>
-        
+@endif    
       </div>
     </nav>
 
