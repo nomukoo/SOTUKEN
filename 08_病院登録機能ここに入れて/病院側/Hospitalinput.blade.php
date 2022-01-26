@@ -40,6 +40,7 @@
 
     
     <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
     <link href="/css/hospital.css" rel="stylesheet">
   </head>
   <body>
@@ -51,12 +52,22 @@
 <div class="text-light ">
   <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3">○○病院</a>
     </div>
-  <ul class="nav pull-right">
+    <ul class="nav pull-right">
   <li class="nav-item">
-      <a class="nav-link text-white" href="#">ホーム</a>
+      <a class="nav-link text-white" href="#">
+      <form action="{{url('/top')}}" method="get"  class="form">
+                     @csrf
+            <input type="submit" name="submit" value="ホーム" class="btn1" />
+      </form>
+      </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-white"href="#">サインアウト</a>
+      <a class="nav-link text-white"href="#">
+      <form action="{{url('/top')}}" method="POST"  class="form">
+                     @csrf
+            <input type="submit" name="submit" value="サインアウト" class="btn1" />
+            </form>
+    </a>
     </li>
   </ul>
 </header>
@@ -65,66 +76,75 @@
 
 <div class="container-fluid">
   <div class="row">
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+  <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3">
+        <br>
+        <br>
         <ul class="nav flex-column">
-        <h6 class="text-primary" style="padding:5px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-                </svg>
-                メニュー
-              </h6>
           <li class="nav-item">
-
-<a class="nav-link" href="#">
-  <span data-feather="file"></span>
-  入庫
-</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="defrost_list">
-  <span data-feather="shopping-cart"></span>
-  解凍
-</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="dilution_list">
-  <span data-feather="users"></span>
-  希釈
-</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="disposal_list">
-  <span data-feather="users"></span>
-  ワクチン廃棄
-</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="shipping_list">
-  <span data-feather="users"></span>
-  出庫予定リスト
-</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="#">
-  <span data-feather="users"></span>
-  履歴
-</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="reception_read">
-  <span data-feather="users"></span>
-  受付
-</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="hospitalinput">
-  <span data-feather="users"></span>
-  病院登録
-</a>
-</li>
-
-
+            <a class="nav-link" >
+              <span data-feather="file"></span>
+              <form action="{{url('/top')}}" method="POST"  class="form">
+                     @csrf
+            <input type="submit" name="submit" value="入庫" class="btn2" />
+            </form>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" >
+              <span data-feather="shopping-cart"></span>
+              <form action="{{url('/top')}}" method="POST"  class="form">
+                     @csrf
+                    <input type="submit" name="submit" value="解凍" class="btn2"/>
+            </form>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" >
+              <span data-feather="users"></span>
+              <form action="{{url('/top')}}" method="POST"  class="form">
+                     @csrf
+                    <input type="submit" name="submit" value="希釈" class="btn2"/>
+            </form>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              <span data-feather="bar-chart-2"></span>
+              <form action="{{url('/top')}}" method="get"  class="form">
+                     @csrf
+                    <input type="submit" name="submit" value="廃棄" class="btn2"/>
+            </form>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              <span data-feather="bar-chart-2"></span>
+              <form action="{{url('/top')}}" method="get"  class="form">
+                     @csrf
+                    <input type="submit" name="submit" value="出庫予定リスト" class="btn2"/>
+            </form>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              <span data-feather="bar-chart-2"></span>
+              <form action="{{url('/top')}}" method="get"  class="form">
+                     @csrf
+                    <input type="submit" name="submit" value="受付" class="btn2"/>
+            </form>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" >
+              <span data-feather="layers"></span>
+              <form action="{{url('/top')}}" method="get"  class="form">
+                     @csrf
+                    <input type="submit" name="submit" value="病院情報登録" class="btn2" />
+            </form>
+            </a>
+          </li>
+        </ul>
       </div>
     </nav>
 
@@ -146,10 +166,12 @@
 
 
 
-    <form class="row g-4 needs-validation" novalidate>
+    <form action="{{url('/hospitalinputverifi')}}" method="post"  class="row g-4 needs-validation" novalidate>
+      @csrf
       <div class="col-md-4">
         <label for="hospital_ID" class="form-label">ID</label>
-        <input type="text" class="form-control" id="hospital_ID" pattern="^[0-9]+$" required>
+        <input type="text" class="form-control" name="hospital_ID" required>
+        <div class="col-sm-10"></div>
           <div class="invalid-feedback">
             IDを入力してください
           </div>
@@ -160,7 +182,7 @@
 
       <div class="col-md-4">
         <label for="hospital_name" class="form-label">病院名</label>
-        <input type="text" class="form-control" id="hospital_name"  required>
+        <input type="text" class="form-control" name="hospital_name"  required>
         <div class="invalid-feedback">
           病院名を入力してください
         </div>
@@ -172,7 +194,7 @@
   <div class="col-md-8">
     <label for="hospital_address" class="form-label">住所</label>
    
-      <input type="text" class="form-control" id="hospital_address" aria-describedby="inputGroupPrepend" required>
+      <input type="text" class="form-control" name="hospital_address" aria-describedby="inputGroupPrepend" required>
       <div class="invalid-feedback">
         住所を入力してください
       </div>
@@ -183,7 +205,7 @@
 
   <div class="col-md-4">
     <label for="hospital_tell" class="form-label">電話番号</label>
-    <input type="tel" class="form-control" id="hospital_tell" pattern="\d{2,4}-?\d{2,4}-?\d{3,4}" placeholder="例: ○○○-××××-○○○○" required>
+    <input type="tel" class="form-control" name="hospital_tell" pattern="\d{2,4}-?\d{2,4}-?\d{3,4}" placeholder="例: ○○○-××××-○○○○" required>
     <div class="invalid-feedback">
       電話番号を入力してください
     </div>
@@ -193,10 +215,20 @@
   </div>
 
   <div class="col-md-4">
-    <label for="hospital_idokeido" class="form-label">緯度・経度</label>
-    <input type="text" class="form-control" id="hospital_idokeido" pattern="\d{1,4}.\d{1,8},\d{1,4}.\d{1,8}" placeholder="例: 34.380846,132.454321"required>
+    <label for="hospital_idokeido" class="form-label">緯度</label>
+    <input type="text" class="form-control" name="hospital_ido" pattern="\d{1,4}.\d{1,8}" placeholder="例: 34.380846"required>
     <div class="invalid-feedback">
-      緯度・経度を入力してください
+      緯度を入力してください
+    </div>
+    <div class="valid-feedback">
+      OK!
+    </div>
+  </div>
+  <div class="col-md-4">
+    <label for="hospital_idokeido" class="form-label">経度</label>
+    <input type="text" class="form-control" name="hospital_keido" pattern="\d{1,4}.\d{1,8}" placeholder="例: 132.454321"required>
+    <div class="invalid-feedback">
+      経度を入力してください
     </div>
     <div class="valid-feedback">
       OK!
@@ -226,7 +258,7 @@
 
 <button type="button" class="btn btn-danger rounded-pill " style="width:90px" onclick="history.back(-1)"><h4>戻る</h4></button></div>
 <div class="col-1">
-<button class="btn btn-success rounded-pill" type="submit" style="width:90px" formaction="/hospitalinputverifi" > <h4>確認</h4></button>
+<button class="btn btn-success rounded-pill" type="submit" style="width:90px"  > <h4>確認</h4></button>
     </div>
     </div>
 </form>

@@ -23,7 +23,6 @@ public function dilution_read(Request $request)
     $today=Carbon::now()->toDateString();
     $yoyaku_count=Yoyaku::where('hospital_ID',$session_get['hospital_ID'])->whereDate('yoyaku_date', $today)->count();
 
-    echo $today;
   
     return view('dilution_read' ,compact('defrost_lists','yoyaku_count'));
 }
@@ -64,6 +63,8 @@ public function dilution_finish(Request $request)
         $dilution->save();
         $vial_quantity = $vial_quantity - $defrost_lists['defrost_total'];
         $defrost->where('defrost_ID', $defrost_lists['defrost_ID'])->delete();
+      }else{
+        return view('dilution_error');
       }
     }
     $dilution_list = Dilution::where('hospital_ID',$session_get['hospital_ID'])->get();

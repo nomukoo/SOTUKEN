@@ -1,0 +1,18 @@
+//ユーザー登録
+Route::get('/member_comfirm', 'Member_regController@member_comfirm');
+Route::post('/member_comfirm', 'Member_regController@member_comfirm');
+
+Route::get('/member_reg', 'Member_regController@member_reg');
+Route::post('/member_reg', 'Member_regController@member_reg');
+
+Route::get('/emp_comfirm', 'Member_regController@emp_comfirm');
+Route::post('/emp_comfirm', 'Member_regController@emp_comfirm');
+
+Route::get('/emp_reg', 'Member_regController@emp_reg');
+Route::post('/emp_reg', 'Member_regController@emp_reg');
+
+Route::get('/user_page', 'Member_regController@user_page');
+Route::post('/user_page', 'Member_regController@user_page');
+
+
+

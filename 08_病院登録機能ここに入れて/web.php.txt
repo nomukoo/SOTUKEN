@@ -1,0 +1,23 @@
+Route::get('/hospitalinput', 'HospitalregisterController@hospitalinput');
+Route::post('/hospitalinput', 'HospitalregisterController@hospitalinput');
+
+Route::get('hospitalinputverifi', 'HospitalregisterController@hospitalinputverifi');
+Route::post('hospitalinputverifi', 'HospitalregisterController@hospitalinputverifi');
+
+Route::get('hospitalinputfinish', 'HospitalregisterController@hospitalinputfinish');
+Route::post('hospitalinputfinish', 'HospitalregisterController@hospitalinputfinish');
+
+Route::get('hospitalinputerror', 'HospitalregisterController@hospitalinputerror');
+Route::post('hospitalinputerror', 'HospitalregisterController@hospitalinputerror');
+
+Route::get('hospitallist', 'HospitalregisterController@hospitallist');
+Route::post('hospitallist', 'HospitalregisterController@hospitallist');
+
+Route::get('hospitalregiverifi', 'HospitalregisterController@hospitalregiverifi');
+Route::post('hospitalregiverifi', 'HospitalregisterController@hospitalregiverifi');
+
+Route::get('hospitalregifinish', 'HospitalregisterController@hospitalregifinish');
+Route::post('hospitalregifinish', 'HospitalregisterController@hospitalregifinish');
+
+Route::get('hospitalregierror', 'HospitalregisterController@hospitalregierror');
+Route::post('hospitalregierror', 'HospitalregisterController@hospitalregierror');

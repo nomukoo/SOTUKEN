@@ -1,0 +1,35 @@
+//指定予約
+Route::get('/yoyaku', 'yoyakuController@move');
+Route::post('/yoyaku', 'yoyakuController@move');
+
+Route::get('/y_calendar', 'yoyakuController@y_calendar');
+Route::post('/y_calendar', 'yoyakuController@y_calendar');
+
+Route::get('/hospitals', 'yoyakuController@hospitals');
+Route::post('/hospitals', 'yoyakuController@hospitals');
+
+Route::get('/times', 'yoyakuController@times');
+Route::post('/times', 'yoyakuController@times');
+
+Route::get('/infos', 'yoyakuController@infos');
+Route::post('/infos', 'yoyakuController@infos');
+
+Route::get('/check', 'yoyakuController@check');
+Route::post('/check', 'yoyakuController@check');
+
+Route::get('/comp', 'yoyakuController@comp');
+Route::post('/comp', 'yoyakuController@comp');
+
+//当日予約
+Route::get('/reserve_hospital', 'yoyakuController@today_reserve_hospital');
+Route::post('/reserve_hospital', 'yoyakuController@today_reserve_hospital');
+
+Route::get('/today_infos', 'yoyakuController@today_infos');
+Route::post('/today_infos', 'yoyakuController@today_infos');
+
+Route::get('/today_check', 'yoyakuController@today_check');
+Route::post('/today_check', 'yoyakuController@today_check');
+
+Route::get('/today_comp', 'yoyakuController@today_comp');
+Route::post('/today_comp', 'yoyakuController@today_comp');
+

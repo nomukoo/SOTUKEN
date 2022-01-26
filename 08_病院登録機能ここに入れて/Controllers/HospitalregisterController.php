@@ -48,7 +48,8 @@ public function hospitalregifinish(Request $request)
         $hospital->hospital_name = $list['hospital_name'];
         $hospital->hospital_address = $list['hospital_address'];
         $hospital->hospital_tell = $list['hospital_tell'];
-        $hospital->hospital_idokeido = $list['hospital_idokeido'];
+        $hospital->hospital_ido = $list['hospital_ido'];
+        $hospital->hospital_keido = $list['hospital_keido'];
         $hospital->timestamps=false;
         $hospital->save();
         $hospital_kari->where('hospital_ID', $list['hospital_ID'])->delete();
@@ -66,13 +67,14 @@ public function hospitalregifinish(Request $request)
    $request->session()->forget('hospital_name');
    $request->session()->forget('hospital_address');
    $request->session()->forget('hospital_tell');
-   $request->session()->forget('hospital_idokeido');
+   $request->session()->forget('hospital_ido');
+   $request->session()->forget('hospital_keido');
 
 
     
 }
 
-public function hospitaldeleverifi(Request $request)
+/*public function hospitaldeleverifi(Request $request)
   {
     
     $hospital_kari = new hospital_kari();
@@ -94,7 +96,8 @@ public function hospitaldelefinish(Request $request)
     $request->session()->forget('hospital_name');
     $request->session()->forget('hospital_address');
     $request->session()->forget('hospital_tell');
-    $request->session()->forget('hospital_idokeido');
+    $request->session()->forget('hospital_ido');
+    $request->session()->forget('hospital_keido');
  
  
  
@@ -120,7 +123,9 @@ public function hospitaleditverifi(Request $request)
   $request->session()->put('hospital_name', $request->input('hospital_name'));
   $request->session()->put('hospital_address', $request->input('hospital_address'));
   $request->session()->put('hospital_tell', $request->input('hospital_tell'));
-  $request->session()->put('hospital_idokeido', $request->input('hospital_idokeido'));
+  $request->session()->put('hospital_ido', $request->input('hospital_ido'));
+  $request->session()->put('hospital_keido', $request->input('hospital_keido'));
+
   $hospital->timestamps=false;
     return view('hospitaleditverifi');
 }
@@ -129,24 +134,12 @@ public function hospitaleditfinish()
   {
     return view('hospitaleditfinish');
 }
-
+*/
 
 public function hospitalregierror()
   {
     return view('hospitalregierror');
 }
-
-public function top()
-  {
-    return view('top');
-}
-
-
-
-public function create() {
-  return view('hospitalinput');
-}
-
 
 public function hospitalinputverifi(Request $request) {
 
@@ -156,7 +149,9 @@ public function hospitalinputverifi(Request $request) {
   $request->session()->put('hospital_name', $request->input('hospital_name'));
   $request->session()->put('hospital_address', $request->input('hospital_address'));
   $request->session()->put('hospital_tell', $request->input('hospital_tell'));
-  $request->session()->put('hospital_idokeido', $request->input('hospital_idokeido'));
+  $request->session()->put('hospital_ido', $request->input('hospital_ido'));
+  $request->session()->put('hospital_keido', $request->input('hospital_keido'));
+
   $hospital_kari->timestamps=false;
   return view('hospitalinputverifi');
 }
@@ -176,7 +171,8 @@ public function hospitalinputfinish(Request $request) {
  $request->session()->forget('hospital_name');
  $request->session()->forget('hospital_address');
  $request->session()->forget('hospital_tell');
- $request->session()->forget('hospital_idokeido');
+ $request->session()->forget('hospital_ido');
+ $request->session()->forget('hospital_keido');
 
 
     return view('error_userhospital',$msg);
@@ -190,8 +186,9 @@ public function hospitalinputfinish(Request $request) {
    $hospital_kari->hospital_name = $request->session()->get('hospital_name');
    $hospital_kari->hospital_address = $request->session()->get('hospital_address');
    $hospital_kari->hospital_tell = $request->session()->get('hospital_tell');
-   $hospital_kari->hospital_idokeido = $request->session()->get('hospital_idokeido');
- 
+   $hospital_kari->hospital_ido = $request->session()->get('hospital_ido');
+   $hospital_kari->hospital_keido = $request->session()->get('hospital_keido');
+
   $hospital_kari->timestamps=false;
   $hospital_kari->save();
   return view('hospitalinputfinish');
@@ -203,19 +200,15 @@ public function hospitallist(Request $request)
     $hospital_kari = new hospital_kari();
     
     $hoapitals = hospital_kari::all();
-    return view('hospitallist' ,[
-      "hospitals" => $hoapitals
-  ]);
+    return view('Hospitallist',compact('hoapitals'));
 }
 
-public function hospitalhome(Request $request)
+public function reg_hospitallist(Request $request)
   {
     $hospital = new hospital();
     
     $hoapitals = hospital::all();
-    return view('hospitalhome' ,[
-      "hospitals" => $hoapitals
-  ]);
+    return view('reg_hospitallist',compact('hoapitals'));
 }
 
 

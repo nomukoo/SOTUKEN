@@ -9,7 +9,7 @@
         <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     </head>
     <body>
-
+    <h1 style="text-align:center;">ワクチン接種者ログイン</h1>
 <div class="form">
     <form action="{{url('/user_login')}}" method="post" >
         @csrf
@@ -33,7 +33,7 @@
 
 <br>
 <br>
-<form action="#">
+<form action="{{url('/member_comfirm')}}" method="POST" >
    <p>＊IDとPasswordをお持ちでない方はこちら＊</p>
   <div class="text-input">
     <label for="userID">ID(任意)</label>
@@ -53,17 +53,24 @@
   <div class="text-input">
     <label for="password">Password(確認)</label>
       <div class="fieldPassword">
-        <input type="password" name="password" id="textPassword2" placeholder="" />
+        <input type="password" name="password1" id="textPassword2" placeholder="" />
         <span id="buttonEye2" class="fa fa-eye  eye" onclick="pushHideButton2()"></span>
       </div>
   </div>
-</form>
-      <form action="{{url('/user_login')}}" method="POST" class="form-bottom">
            	 @csrf
     		<input type="submit" name="submit" value="新規会員登録" />
 	    </form>
-
+     <div class="class"> 
+    <form action="{{url('/emp_login')}}" method="get" >
+  <div class="text-input">
+    <span class="separator"> </span>
+  </div>
+  <input type="submit" name="submit" value="病院関係者はこちら" />
+</form>
 </div>
+</div>
+
+
 <br>
 <br>
 <br>
