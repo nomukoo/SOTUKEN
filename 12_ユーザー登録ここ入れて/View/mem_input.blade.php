@@ -1,3 +1,5 @@
+<!-- 病院情報入力画面 -->
+
 <!doctype html>
 <html lang="ja">
   <head>
@@ -6,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.79.0">
-    <title>希釈登録完了画面</title>
+    <title>従業員情報入力</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -38,19 +40,19 @@
 
     
     <!-- Custom styles for this template -->
-    <link href="/css/defrost.css" rel="stylesheet">
     <link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
+    <link href="/css/hospital.css" rel="stylesheet">
   </head>
   <body>
-  <?php 
-  $emp_info = session()->get('emp_Info');
-  $json_emp_info = json_encode($emp_info);
-?>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+<?php 
+  $emp_info = session()->get('emp_Info');
+  $json_emp_info = json_encode($emp_info);
+?>
+  <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
   <a class="navbar-brand1 col-md-3 col-lg-2 me-0 px-3 a1">ワクチン在庫管理システム</a>
   <ul class="nav pull-right">
   <li class="nav-item">
@@ -70,7 +72,7 @@
   </ul>
     </header>
 
-<div class="container-fluid">
+    <div class="container-fluid">
   <div class="row">
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3">
@@ -122,22 +124,25 @@
 </li>
 @if ($emp_info['role'] == '0')
 <li class="nav-item">
-<a class="nav-link" href="/mem_input">
+<a class="nav-link" href="hospitalinput">
   <span data-feather="users"></span>
   従業員登録
 </a>
 </li>
-@endif  
+@endif    
       </div>
     </nav>
 
+
+
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h1">希釈登録完了</h1>
+        <h1 class="h1">従業員情報入力画面</h1>
         <div id="smartwizard" class="sw-theme-arrows">
         <ul class="nav nav-tabs step-anchor">
-        <li ><a>希釈数入力<br><small></small></a></li>
-         <li class="active"><a>希釈登録完了<br><small></small></a></li>
+         <li class="active"><a>従業員情報入力<br><small></small></a></li>
+         <li ><a>入力確認<br><small></small></a></li>
+         <li><a>登録完了<br><small></small></a></li>
         </ul>
       </div>
         
@@ -146,81 +151,81 @@
         </div>
     </div>
 
-    <script>
 
-$(function(){
 
-    //印刷
-$('.print-btn').on('click', function(){
-    var printPage = $(this).closest('.print-page').html();
-    $('body').append('<div id="print"></div>');
-    $('#print').append(printPage);
-    $('body > :not(#print)').addClass('print-off');
-    window.print();
-    $('#print').remove();
-    $('.print-off').removeClass('print-off');
-});
+    <form action="{{url('/emp_comfirm')}}" method="post"  class="row g-4 needs-validation" novalidate>
+      @csrf
+      <div class="col-md-4">
+        <label for="emp_name" class="form-label">従業員名</label>
+        <input type="text" class="form-control" name="emp_name" required>
+        <div class="col-sm-10"></div>
+          <div class="invalid-feedback">
+            従業員名を入力してください
+          </div>
+          <div class="valid-feedback">
+            OK!
+          </div>
+        </div>
 
+      <div class="col-md-4">
+        <label for="password" class="form-label">従業員パスワード</label>
+        <input type="text" class="form-control" name="password"  required>
+        <div class="invalid-feedback">
+          従業員パスワードを入力してください
+        </div>
+        <div class="valid-feedback">
+           OK!
+        </div>
+
+
+        
+        <label for="password1" class="form-label"> 確認のためもう一度入力してください</label>
+        <input type="text" class="form-control" name="password1"  required>
+        <div class="invalid-feedback">
+          確認のためもう一度入力してください
+        </div>
+        <div class="valid-feedback">
+           OK!
+        </div>
+      
+
+  
+
+  
+
+  
+ 
+  <div class="col-12">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+      <label class="form-check-label" for="invalidCheck">
+        正しく入力できていればチェックしてください
+      </label>
+      <div class="invalid-feedback">
+        チェックできていません
+      </div>
+    </div>
+  </div>
+  <div class="m-5">
    
 
-});
-</script>
-    
-    <div class="m-5">
-    </div>
-
-    <div class="text-center">
-    <div class="text-primary">
-    <h1>希釈登録が完了しました</h1>
-    </div>
-    </div>
-
-  
-    <div class="text-center">
-      
-    <table class="table table-bordered border-dark" > 
-    
-    <tbody >
-    <tr>
-      <th scope="col"class="table-dark border-dark">ワクチンID</th>
-      <th scope="col"class="table-dark border-dark">ロット番号</th>
-      <th scope="col"class="table-dark border-dark">病院ID</th>
-      <th scope="col"class="table-dark border-dark">希釈日</th>
-      <th scope="col"class="table-dark border-dark">有効期限</th>
-      <th scope="col"class="table-dark border-dark">数量</th>
-    </tr>
-  @foreach($dilution_list as $dilution_lists)
-    <tr>
-      <td scope="row" class="table-white border-dark" >{{$dilution_lists->wakuchin_ID}}</td>
-      <td scope="row" class="table-white border-dark" >{{$dilution_lists->lot_number}}</td>
-      <td scope="row" class="table-white border-dark" >{{$dilution_lists->hospital_ID}}</td>
-      <td scope="row" class="table-white border-dark" >{{$dilution_lists->dilution_date}}</td>
-      <td scope="row" class="table-white border-dark" >{{$dilution_lists->expair}}</td>
-      <td scope="row" class="table-white border-dark" >{{$dilution_lists->dilution_total}}</td>
-    </tr>
-  @endforeach 
- 
-
-  
-
-    </tbody>
-</table>
-
 </div>
+<div class="d-flex justify-content-md-center">
+    
 
-    <div class="m-5">
-    </div>
-    <form class="row g-15 needs-validation" novalidate>
-<div class="text-center">
-<div class="d-flex justify-content-center">
 
-<button class="btn btn-outline-info rounded-pill" type="submit" style="width:250px" formaction="/dilution_list"> 希釈一覧画面に戻る</button>
-    </div>
-    <div class="print-btn btn-info rounded-pill" style="width:200px" >印刷</div>
-  </div>
+
+<button type="button" class="btn btn-danger rounded-pill " style="width:90px" onclick="history.back(-1)"><h4>戻る</h4></button>
+<div class="d-flex justify-content-md-center">
+<button type="submit" name="submit" value="登録" class="btn btn-success rounded-pill"style="width:90px"><h4>登録</h4></button>
 </div>
-    </form>
+</form>
+    
+    <script src="{{ asset('/js/hospitalregister.js') }}"></script>
 
+            
+    </div>      
+    </div>
+    </div>
   </body>
 </html>
-
