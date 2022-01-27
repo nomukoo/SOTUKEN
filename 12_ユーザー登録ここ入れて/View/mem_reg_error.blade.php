@@ -17,7 +17,7 @@
 
   <h1>{{$msg}}</h1>
   <div class="button_wrapper">
-    <form action="{{url('/user_login')}}" method="get" >
+    <form action="{{url('/user_page')}}" method="get" >
     <input type="submit" name="submit" value="ログインページへ"  />
     </form>
 </div>

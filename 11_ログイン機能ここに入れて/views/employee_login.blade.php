@@ -33,33 +33,12 @@
 
 <br>
 <br>
-<form action="{{url('/emp_comfirm')}}" method="POST" >
+<form action="{{url('/hospitalinput')}}" method="get" >
    <p>＊IDとPasswordをお持ちでない方はこちら＊</p>
-  <div class="text-input">
-    <label for="userID">ID(任意)</label>
-    <input type="text" name="empID" id="userID" placeholder="" />
-    <span class="separator"> </span>
-  </div>
-
-  <div class="text-input">
-    <label for="password">Password(任意)</label>
-      <div class="fieldPassword">
-        <input type="password" name="password" id="textPassword1" placeholder="" />
-        <span id="buttonEye1" class="fa fa-eye eye" onclick="pushHideButton1()"></span>
-      </div>
-  </div>
-
-
-  <div class="text-input">
-    <label for="password">Password(確認)</label>
-      <div class="fieldPassword">
-        <input type="password" name="password1" id="textPassword2" placeholder="" />
-        <span id="buttonEye2" class="fa fa-eye  eye" onclick="pushHideButton2()"></span>
-      </div>
-  </div>
+  
            	 @csrf
-    		<input type="submit" name="submit" value="新規会員登録" />
-	    </form>
+    <input type="submit" name="submit" value="新規病院登録" />
+	</form>
 
 </div>
 <br>

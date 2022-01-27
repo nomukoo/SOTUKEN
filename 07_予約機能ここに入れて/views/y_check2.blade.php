@@ -9,7 +9,7 @@
     <title>ホーム_ユーザ側</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
-  　<link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
+   <link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
   <link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
     <link rel="stylesheet" href="{{  asset('css/yoyaku.css') }}" />
 
@@ -48,20 +48,20 @@
   </head>
   <body>
     
-<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand1 col-md-3 col-lg-2 me-0 px-3 a1">{{ Session::get('userID') }}</a>
-  
+  <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand1 col-md-3 col-lg-2 me-0 px-3 a1">ユーザ名</a>
+
   <ul class="nav pull-right">
   <li class="nav-item">
       <a class="nav-link text-white" href="#">
-      <form action="{{url('/home')}}" method="get"  class="form"> 
+      <form action="{{url('/logout')}}" method="get"  class="form">
                      @csrf
             <input type="submit" name="submit" value="ホーム" class="btn1" />
             </form>
         </a>
     </li>
     <li class="nav-link text-white" href="#">
-    <form action="{{url('/user_login')}}" method="get"  class="form"> 
+    <form action="{{url('/user_logout')}}" method="get"  class="form">
                      @csrf
             <input type="submit" name="submit" value="サインアウト" class="btn1" />
             </form>
@@ -73,58 +73,30 @@
   <div class="row">
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3">
-          <br>
         <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file"></span>
-              <form action="{{url('/user_login')}}" method="POST"  class="form"> 
-            	@csrf
-    		      <input type="submit" name="submit" value="予約" class="btn2" />
-    	        </form>
+            <h6 class="text-primary" style="padding:5px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                </svg>
+              <i class="bi bi-list"></i>メニュー
+            </h6>
+        <li class="nav-item">
+
+            <a class="nav-link" href="/test/errorPrint">
+                <span data-feather="file"></span>
+                予約
             </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="shopping-cart"></span>
-              <form action="{{url('/user_login')}}" method="POST"  class="form"> 
-           	  @csrf
-    		      <input type="submit" name="submit" value="履歴" class="btn2" />
-	            </form>
-            </a>
-          </li>
+        </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
-              <form action="{{url('/user_login')}}" method="POST"  class="form"> 
-           	 @csrf
-    		<input type="submit" name="submit" value="接種券番号表示" class="btn2"/>
-	      </form>
+               履歴
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="shopping-cart"></span>
-              <form action="{{url('/user_login')}}" method="POST"  class="form"> 
-           	 @csrf
-    		<input type="submit" name="submit" value="お知らせ" class="btn2"/>
-	      </form>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="shopping-cart"></span>
-              <form action="{{url('/user_login')}}" method="POST"  class="form"> 
-           	 @csrf
-    		<input type="submit" name="submit" value="その他" class="btn2"/>
-	      </form>
-            </a>
-          </li>
-    
-        </ul>
-      </div>
-    </nav>
-　<br>
+        
+    </div>
+</nav>
+  <br>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2  border-bottom"> <!--mb-3  進行状況の下のライン-->
 
@@ -143,7 +115,7 @@
         <div class="btn-toolbar mb-2 mb-md-0">
           
         </div> 
-　　　</div>
+    </div>
 <form action="{{url('/comp')}}" method="post"> 
         @csrf
 

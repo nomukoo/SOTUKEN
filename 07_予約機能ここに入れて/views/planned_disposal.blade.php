@@ -6,17 +6,31 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.79.0">
-    <title>希釈登録完了画面</title>
+    <title>廃棄予定一覧画面</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-    
 
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <!-- Bootstrap core CSS -->
 <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.js" integrity="sha256-tcqPYPyxU+Fsv5sVdvnxLYJ7Jq9wWpi4twZbtZ0ubY8=" crossorigin="anonymous"></script>
+<script>
+        $(function(){
+        $(".btn-dell").click(function(){
+                if(confirm("本当に削除しますか？")){
+                }else{
+                    return false;
+                }
+            });
+        });
+    </script>
 
-  
 <meta name="theme-color" content="#7952b3">
 
 
@@ -28,7 +42,6 @@
         -moz-user-select: none;
         user-select: none;
       }
-
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
@@ -36,16 +49,20 @@
       }
     </style>
 
-    
+
     <!-- Custom styles for this template -->
-    <link href="/css/defrost.css" rel="stylesheet">
     <link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
+    <link href="/css/dilution.css" rel="stylesheet">
+
+
   </head>
   <body>
   <?php 
   $emp_info = session()->get('emp_Info');
   $json_emp_info = json_encode($emp_info);
 ?>
+
+
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -70,7 +87,8 @@
   </ul>
     </header>
 
-<div class="container-fluid">
+
+    <div class="container-fluid">
   <div class="row">
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3">
@@ -120,107 +138,98 @@
   在庫一覧
 </a>
 </li>
-@if ($emp_info['role'] == '0')
+@if (false)
 <li class="nav-item">
-<a class="nav-link" href="/mem_input">
+<a class="nav-link" href="hospitalinput">
   <span data-feather="users"></span>
   従業員登録
 </a>
 </li>
-@endif  
+@endif    
       </div>
     </nav>
 
+
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h1">希釈登録完了</h1>
+        <h1 class="h1">廃棄予定一覧</h1>
         <div id="smartwizard" class="sw-theme-arrows">
         <ul class="nav nav-tabs step-anchor">
-        <li ><a>希釈数入力<br><small></small></a></li>
-         <li class="active"><a>希釈登録完了<br><small></small></a></li>
+        <li class="active"><a>廃棄予定<br><small></small></a></li>
         </ul>
       </div>
-        
+
+
+
         <div class="btn-toolbar mb-2 mb-md-0">
-          
+
         </div>
     </div>
 
-    <script>
-
-$(function(){
-
-    //印刷
-$('.print-btn').on('click', function(){
-    var printPage = $(this).closest('.print-page').html();
-    $('body').append('<div id="print"></div>');
-    $('#print').append(printPage);
-    $('body > :not(#print)').addClass('print-off');
-    window.print();
-    $('#print').remove();
-    $('.print-off').removeClass('print-off');
-});
-
-   
-
-});
-</script>
-    
     <div class="m-5">
     </div>
 
     <div class="text-center">
-    <div class="text-primary">
-    <h1>希釈登録が完了しました</h1>
+    <div class="text-danger">
+    <h2 color="red">廃棄予定</h2>
     </div>
     </div>
+@if(!$DB_PlannedDisposal_get->isEmpty())
 
-  
+    <div class="m-5">
     <div class="text-center">
-      
-    <table class="table table-bordered border-dark" > 
-    
-    <tbody >
-    <tr>
-      <th scope="col"class="table-dark border-dark">ワクチンID</th>
-      <th scope="col"class="table-dark border-dark">ロット番号</th>
-      <th scope="col"class="table-dark border-dark">病院ID</th>
-      <th scope="col"class="table-dark border-dark">希釈日</th>
-      <th scope="col"class="table-dark border-dark">有効期限</th>
-      <th scope="col"class="table-dark border-dark">数量</th>
-    </tr>
-  @foreach($dilution_list as $dilution_lists)
-    <tr>
-      <td scope="row" class="table-white border-dark" >{{$dilution_lists->wakuchin_ID}}</td>
-      <td scope="row" class="table-white border-dark" >{{$dilution_lists->lot_number}}</td>
-      <td scope="row" class="table-white border-dark" >{{$dilution_lists->hospital_ID}}</td>
-      <td scope="row" class="table-white border-dark" >{{$dilution_lists->dilution_date}}</td>
-      <td scope="row" class="table-white border-dark" >{{$dilution_lists->expair}}</td>
-      <td scope="row" class="table-white border-dark" >{{$dilution_lists->dilution_total}}</td>
-    </tr>
-  @endforeach 
- 
+    <table class="table table-bordered border-dark" >
 
-  
+    <tbody>
+    <thead>
+        <tr>
+            <th>ロット番号</th>
+            <th>有効期限</th>
+            <th></th>
+        </tr>
+        </thead>
+     @foreach ($DB_PlannedDisposal_get as $list)
 
+            <tr>
+
+
+
+                <td>{{ $list ->  lot_number}}</td>
+                <td>{{ $list -> expair }}</td>
+                <td>
+                    <form action="/Disposal/{{$list->PlannedDisposal_ID}}" method="POST">
+                        @csrf
+                    <input type="submit" value="廃棄" class="btn btn-danger btn-sm btn-dell">
+                    </form>
+                </td>
+
+            </tr>
+            @endforeach
     </tbody>
 </table>
-
+ @else
+        <h3>廃棄予定のワクチンはありません</h3>
+   @endif
 </div>
 
-    <div class="m-5">
-    </div>
-    <form class="row g-15 needs-validation" novalidate>
-<div class="text-center">
-<div class="d-flex justify-content-center">
 
-<button class="btn btn-outline-info rounded-pill" type="submit" style="width:250px" formaction="/dilution_list"> 希釈一覧画面に戻る</button>
-    </div>
-    <div class="print-btn btn-info rounded-pill" style="width:200px" >印刷</div>
-  </div>
+<div class="m-5">
 </div>
-    </form>
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="{{ asset('/js/dilution.js') }}"></script>
+    <script src="{{ asset('/js/dilution_confirm.js') }}"></script>
+
 
   </body>
 </html>
-

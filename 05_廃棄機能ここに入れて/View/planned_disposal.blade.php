@@ -138,14 +138,14 @@
   在庫一覧
 </a>
 </li>
-@if (false)
+@if ($emp_info['role'] == '0')
 <li class="nav-item">
-<a class="nav-link" href="hospitalinput">
+<a class="nav-link" href="/mem_input">
   <span data-feather="users"></span>
   従業員登録
 </a>
 </li>
-@endif    
+@endif 
       </div>
     </nav>
 
