@@ -215,6 +215,7 @@
   </div>
 
   <div class="col-md-4">
+
     <label for="hospital_idokeido" class="form-label">緯度</label>
     <input type="text" class="form-control" name="hospital_ido" pattern="\d{1,4}.\d{1,8}" placeholder="例: 34.380846"required>
     <div class="invalid-feedback">
@@ -228,6 +229,7 @@
     <label for="hospital_idokeido" class="form-label">経度</label>
     <input type="text" class="form-control" name="hospital_keido" pattern="\d{1,4}.\d{1,8}" placeholder="例: 132.454321"required>
     <div class="invalid-feedback">
+
       経度を入力してください
     </div>
     <div class="valid-feedback">
