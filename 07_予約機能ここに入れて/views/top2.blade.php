@@ -6,15 +6,14 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.79.0">
-    <title>時間指定</title>
+    <title>ホーム_ユーザ側</title>
 
     <link rel="canonical" href="https://getbootstrap.jp/docs/5.0/examples/dashboard/">
-  <link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
-    <link rel="stylesheet" href="{{  asset('css/progressbar.css') }}" />
-    <link rel="stylesheet" href="{{  asset('css/yoyaku.css') }}" />
+    <link rel="stylesheet" href="{{  asset('css/dashboard.css') }}" />
+    <!--<link rel="stylesheet" href="{{  asset('css/calendar.css') }}" />-->
+    <link rel="stylesheet" href="{{  asset('css/top2.css') }}" />
 
     <!-- Bootstrap core CSS -->
-<link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
     <!-- Favicons -->
 <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
@@ -41,14 +40,15 @@
       }
     </style>
 
-    
+
     <!-- Custom styles for this template -->
     <link href="/css/dashboard.css" rel="stylesheet">
+    <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
   </head>
   <body>
-    
-  
-  <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
   <a class="navbar-brand1 col-md-3 col-lg-2 me-0 px-3 a1">ユーザ名</a>
 
   <ul class="nav pull-right">
@@ -96,87 +96,103 @@
         
     </div>
 </nav>
-　<br>
+ <br>
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2  border-bottom"> <!--mb-3  進行状況の下のライン-->
-      <div id="smartwizard" class="sw-theme-arrows">
-        <ul class="nav nav-tabs step-anchor">
-         <li><a href="#step-1">1<br><small></small></a></li>
-         <li><a href="#step-2">2<br><small></small></a></li>
-         <li><a href="#step-3">3<br><small></small></a></li>
-        <li class="active"><a href="#step-4">4<br><small></small></a></li>
-        <li><a href="#step-5">5<br><small></small></a></li>
-        <li><a href="#step-6">6<br><small></small></a></li>
-        <li><a href="#step-7">7<br><small></small></a></li>
-        </ul>
-      </div>
+      <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2  ">
 
         <div class="btn-toolbar mb-2 mb-md-0">
-          
-        </div> 
-　　　</div>
-<br>
 
+        </div>
+   </div>
 
-
-@foreach($hospital as $list)
-<p>指定場所：{{ $list['hospital_name'] }}</p>
-@endforeach
 
 <br>
-<p>ご希望の時間帯をお選びください。</p>
 <br>
-<form action="{{url('/today_infos')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="time" value="9:00~" class="time "/>
-        </form>
-<form action="{{url('/today_infos')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="time" value="10:00~" class="time "/>
-        </form>
-<form action="{{url('/today_infos')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="time" value="11:00~" class="time " />
-        </form>
-<form action="{{url('/today_infos')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="time" value="12:00~" class="time "/>
-        </form>
-<form action="{{url('/today_infos')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="time" value="13:00~" class="time "/>
-        </form>
-<form action="{{url('/today_infos')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="time" value="14:00~" class="time "/>
-        </form>
-<form action="{{url('/today_infos')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="time" value="15:00~" class="time "/>
-        </form>
-<form action="{{url('/today_infos')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="time" value="16:00~" class="time "/>
-        </form>
-<form action="{{url('/today_infos')}}" method="post"  class="form"> 
-        @csrf
-        <input type="submit" name="time" value="17:00~" class="time "/>
-        </form>
+<div align="left">
+
+   <form action="{{url('/yoyaku')}}" method="POST"  class="form_icon" >
+           	 @csrf
+        <button type="submit" class="icon_btn" >
+        <img src="{{ asset('img/予約アイコン.png') }}" class="icon_img"><br>
+    		<input type="submit" name="submit" value="予約"class="icon_sbm">
+        </button>
+	</form>
+
+    
+
+   
+
+</div>
 <br>
 <br>
 <br>
-<input type="button" name="button" value="戻る"  class="custom-btn btn-2" onClick="history.back()"/>
+<div align="left">
+
+
+<form action="{{url('/logout')}}" method="POST"  class="form_icon">
+           	 @csrf
+        <button type="submit" class="icon_btn" >
+        <img src="{{ asset('img/履歴アイコン.png') }}"  class="icon_img"><br>
+    		<input type="submit" name="submit" value="履歴" class="icon_sbm">
+        </button>
+	  </form>
+
+    
+</div>
+
+
+<br>
+<br>
 
 
 
 
+<!--カレンダー-->
+<div class="container-calendar" align="right">
+          <h4 id="monthAndYear"></h4>
+          <div class="button-container-calendar">
+              <button id="previous" onclick="previous()">‹</button>
+              <button id="next" onclick="next()">›</button>
+          </div>
 
+          <table class="table-calendar" id="calendar" data-lang="ja">
+              <thead id="thead-month"></thead>
+              <tbody id="calendar-body"></tbody>
+          </table>
 
+          <div class="footer-container-calendar">
+              <label for="month">日付指定：</label>
+              <select id="month" onchange="jump()">
+                  <option value=0>1月</option>
+                  <option value=1>2月</option>
+                  <option value=2>3月</option>
+                  <option value=3>4月</option>
+                  <option value=4>5月</option>
+                  <option value=5>6月</option>
+                  <option value=6>7月</option>
+                  <option value=7>8月</option>
+                  <option value=8>9月</option>
+                  <option value=9>10月</option>
+                  <option value=10>11月</option>
+                  <option value=11>12月</option>
+              </select>
+              <select id="year" onchange="jump()"></select>
+          </div>
+    </div>
 
+    <script src="js/calendar.js" type="text/javascript"></script>
+
+<!--通知件数-->
+<script>
+    const icon = document.getElementById('icon_badge');
+
+document.getElementById('plus').addEventListener('click', () => icon_badge.dataset.num++ );
+document.getElementById('minus').addEventListener('click', () => icon_badge.dataset.num > 0 && icon_badge.dataset.num-- );
+</script>
 <!------------------------------------------------------------------------------------------------------------------->
-      <!--<canvas id="myChart" width="900" height="380"></canvas>class="my-4 w-100"  少し下にスクロールできる-->
+      <canvas id="myChart" width="900" height="380"></canvas><!--class="my-4 w-100"  少し下にスクロールできる-->
 
-     
+
 
 
     <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
